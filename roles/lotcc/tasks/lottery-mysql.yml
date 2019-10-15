@@ -1,10 +1,10 @@
 ---
 # - name: command mysql_upgrade --force -uroot
 #   command: mysql_upgrade --force -u root
-- name: (template) scp tmp/lottery.sql.j2 /tmp/lottery.sql
+- name: (template) scp tmp/db_lotcc.sql.j2 /tmp/db_lotcc.sql
   template:
-    src: tmp/lottery.sql.j2
-    dest: /tmp/lottery.sql
+    src: tmp/db_lotcc.sql.j2
+    dest: /tmp/db_lotcc.sql
     owner: root
     group: root
     mode: 0776
@@ -12,8 +12,8 @@
   when: lottery_mysql is not undefined and lottery_mysql in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
 
 
-- name: (shell) mysql < /tmp/lottery.sql
-  shell: mysql < /tmp/lottery.sql
+- name: (shell) mysql < /tmp/db_lotcc.sql
+  shell: mysql < /tmp/db_lotcc.sql
   when: lottery_mysql is not undefined and lottery_mysql in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
 
 
