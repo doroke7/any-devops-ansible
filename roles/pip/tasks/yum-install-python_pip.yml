@@ -13,7 +13,17 @@
     name: python-pip
     state: absent
 
-- name: (yum) yum install python
+- name: "(yum) yum remove python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-pip python"
+  yum:
+    name: python-pip
+    state: absent
+
+- name: "(yum) yum install python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-pip python"
+  yum:
+    name: "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-pip"
+    state: latest
+
+- name: "(yum) yum install python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-pip"
   yum: 
     name:
       - python-pip
