@@ -27,9 +27,9 @@
     state: latest
   when: python_version == '3.4' or  python_version == '3.5' or  python_version == '3.6'
   
-- name: "(file) ln -sf /usr/bin/pip{{ python_version | default(3.6) }} /usr/bin/pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"  
+- name: "(file) ln -sf /usr/local/bin/pip{{ python_version | default(3.6) }} /usr/bin/pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"  
   file:
-    src: "/usr/bin/pip{{ python_version | default(3.6) }}"
+    src: "/usr/local/bin/pip{{ python_version | default(3.6) }}"
     dest: "/usr/bin/pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"
     state: link
     force: True
