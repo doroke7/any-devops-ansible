@@ -3,12 +3,12 @@
   yum: 
     name: https://centos7.iuscommunity.org/ius-release.rpm
 
-- name: "(yum) yum install python{{ python_version | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}u python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}u-devel"
+- name: "(yum) yum install python{{ python_version | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }} python{{ python_version | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}-pip python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}-devel"
   yum: 
     name:
-      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}u"
-      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}u-pip"
-      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}u-devel"
+      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"
+      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-pip"
+      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-devel"
     state: latest
   when: python_version == '3.4' or  python_version == '3.5' or  python_version == '3.6'
   #notify: debug yum install python
