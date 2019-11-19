@@ -107,10 +107,10 @@ join_buffer_size = 1M                                   # 联合查询操作所�
 read_buffer_size = 4M                                   # 读查询操作所能使用的缓冲区大小
 read_rnd_buffer_size = 16M                              # 设置进行随机读的时候所使用的缓冲区
 thread_stack = 192K                                     # 设置Mysql每个线程的堆栈大小，默认值足够大，可满足普通操作
-bulk_insert_buffer_size = 8M                            # 可以适当调整参数至16MB~32MB，建议8MB
+bulk_insert_buffer_size = ON8M                            # 可以适当调整参数至16MB~32MB，建议8MB
 tmp_table_size = 64M                                    # 设置内存临时表最大值
 max_heap_table_size = 64M                               # 独立的内存表所允许的最大容量
-
+big_tables = 
 ############################# [mysqld] 效能 - MyISAM 相关 #############################
 myisam_sort_buffer_size = 128M
 myisam_max_sort_file_size = 10G
