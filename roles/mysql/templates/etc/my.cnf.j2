@@ -18,7 +18,7 @@ no-auto-rehash                                            # 仅允许使用键�
 user = {{ MYSQL.SERVERS[i].CONNECTIONS[0]['USER'] }}
 password = {{ MYSQL.SERVERS[i].CONNECTIONS[0]['PASSWORD'] }}
 quick
-max_allowed_packet = 64M
+max_allowed_packet = 128M
 
 [isamchk]
 ######################### [isamchk] 基本设置 #########################
@@ -91,9 +91,8 @@ validate_password.number_count = 1
 {% endif %}
 
 ############################# [mysqld] 效能 - 一般容量相关 #############################
-max_allowed_packet = 64M
 open_files_limit = 1024                                 # 打开文件的最大个数，如果出现too mantopen files之类的就需要调整该值了
-max_allowed_packet = 8M                                 # 服务器一次能处理的最大的查询包的值
+max_allowed_packet = 128M                                 # 服务器一次能处理的最大的查询包的值
 # table_cache = 614                                     # 5.7 不作用, 表分配的内存，物理内存越大，设置就越大
 table_open_cache = 512                                  # 设置高速缓存表的数目
 thread_cache_size = 64                                  # 服务器线程缓存数，与内存大小有关(建议大于3G设置为64)
