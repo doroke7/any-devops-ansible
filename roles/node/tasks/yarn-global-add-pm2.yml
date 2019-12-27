@@ -4,6 +4,12 @@
 #   command: "yarn global remove pm2"
 - name: "(command) yarn global add pm2"
   command: "yarn global add pm2"
+- name: "(command) pm2 install pm2-logrotate"
+  command: "pm2 install pm2-logrotate"
+- name: "(command) pm2 set pm2-logrotate:max_size 512MB"
+  command: "pm2 set pm2-logrotate:max_size 512MB"
+- name: "(command) pm2 set pm2-logrotate:retain 10"
+  command: "pm2 set pm2-logrotate:retain 10"
   # notify: 
 
   # notify: 
