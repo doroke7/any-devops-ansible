@@ -1,0 +1,7 @@
+---
+- name: (shell) pip2 --version
+  shell: pip2 --version
+  register: s_pip2_version
+- name: (debug) s_pip2_version
+  debug: 
+    msg: "{{ s_pip2_version }}"

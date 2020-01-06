@@ -1,0 +1,20 @@
+---
+
+- name: (yum) yum insatll ius-release.rpm
+  yum: 
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+    
+- name: (yum) yum install epel-release
+  yum:
+    name: epel-release
+    state: present
+
+- name: (yum) yum install tesseract
+  yum:
+    name: tesseract
+    state: present
+	
+- name: (yum) yum install leptonica-devel tesseract-devel
+  yum:
+    name: leptonica-devel tesseract-devel
+    state: present
