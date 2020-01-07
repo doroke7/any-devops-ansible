@@ -13,6 +13,11 @@
   yum:
     name: tesseract
     state: present
+
+- name: (yum) yum install gcc-c++
+  yum:
+    name: gcc-c++
+    state: present
 	
 - name: (yum) yum install leptonica-devel tesseract-devel
   yum:
