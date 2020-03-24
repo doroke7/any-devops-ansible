@@ -8,7 +8,7 @@
   command: "pm2 install pm2-logrotate"
 - name: "(command) pm2 set pm2-logrotate:max_size 10MB"
   command: "pm2 set pm2-logrotate:max_size 10MB"
- - name: "(command) pm2 set pm2-logrotate:compress true"
+- name: "(command) pm2 set pm2-logrotate:compress true"
   command: "pm2 set pm2-logrotate:compress true"
 - name: "(command) pm2 set pm2-logrotate:retain 200"
   command: "pm2 set pm2-logrotate:retain 200"
