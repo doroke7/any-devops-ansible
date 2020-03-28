@@ -10,6 +10,7 @@
   become: true
   vars_files:
     - ./../group_vars/python.fea.yml
+    - ./../group_vars/supervisor.fea.yml
     - ./../group_vars/timedatectl.fea.yml
   pre_tasks:
     - name: "本地 feature 环境，Python 安装开始"
@@ -29,6 +30,8 @@
   become: true
   vars_files:
     - ./../group_vars/python.dev.yml
+    - ./../group_vars/supervisor.dev.yml
+    - ./../group_vars/timedatectl.dev.yml
   pre_tasks:
     - name: "开发 develop 环境，Python 安装开始"
       shell: echo 'playbook python starts'

@@ -1,0 +1,6 @@
+---
+- name: (pip) pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }} uninstall -y supervisor
+  shell: "pip3 uninstall -y supervisor"
+  ignore_errors: True
+- name: (pip) pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }} install supervisor
+  shell: "pip3 install supervisor"
