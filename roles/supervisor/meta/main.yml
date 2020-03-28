@@ -1,4 +1,0 @@
----  
-dependencies:
-  - { role: selinux }
-  - { role: pip, python_version: '3.6' }
