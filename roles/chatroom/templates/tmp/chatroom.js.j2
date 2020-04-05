@@ -47,7 +47,7 @@ db.getCollection("rooms").insert([
 	},
 	{
 		_id: ObjectId("5d0b60bf1071cc7c0c58ca29"),
-		addedTime: ISODate("2019-06-20T10:31:12.455Z"),
+		addedTime: ISODate("2019-06-20T10:31:12.455Z"),   // 里面 存的 是 UTC +0 UNIX micro TIME
 		editedTime: ISODate("2019-06-20T10:31:12.455Z"),
 		removedTime: null,
 		name: "聊天室 B",
@@ -86,7 +86,7 @@ db.getCollection("users").createIndex({
 // ----------------------------
 db.getCollection("users").insert([ {
     _id: ObjectId("5d28a89daf0fd03ce4004343"),
-    url: "user/admin.png",
+    url: "/users/5d28a89daf0fd03ce4004343/url/admin.png",
     name: "admin",
     type: 0,
     nickname: "管理者",
@@ -101,7 +101,7 @@ db.getCollection("users").insert([ {
 } ]);
 db.getCollection("users").insert([ {
     _id: ObjectId("5d28a8f1af0fd03ce4004344"),
-    url: "user/system.png",
+    url: "/users/5d28a8f1af0fd03ce4004344/url/system.png",
     name: "system",
     nickname: "系统",
     password: "013c332c2e2da7a025074d5ca903900bbd73ab8f",
