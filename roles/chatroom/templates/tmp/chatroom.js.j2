@@ -40,8 +40,10 @@ db.getCollection("rooms").insert([
 		editedTime: ISODate("2019-06-20T10:31:12.455Z"),
 		removedTime: null,
 		name: "聊天室 A",
+		description: "我们是专门彩票的群",
 		messagers: [ ],
 		messages: [ ],
+		count: 0,
 		icon: "/rooms/5d0b60bf1071cc7c0c58ca27/icon/pets.jpg",
 		__v: NumberInt("0")
 	},
@@ -51,8 +53,10 @@ db.getCollection("rooms").insert([
 		editedTime: ISODate("2019-06-20T10:31:12.455Z"),
 		removedTime: null,
 		name: "聊天室 B",
+		description: "我们是专门聊色情的群",
 		messagers: [ ],
 		messages: [ ],
+		count: 0,
 		icon: "/rooms/5d0b60bf1071cc7c0c58ca29/icon/love.png",
 		__v: NumberInt("0")
 	}
@@ -94,6 +98,7 @@ db.getCollection("users").insert([ {
     experience: 0,
     level: 100,
     role: "ADMIN",
+	rooms: [],
     addedTime: "2019-07-12 15:33:07.895",
     editedTime: "2019-07-12 15:33:07.895",
     notBeforeTime: "2019-07-12 15:33:07.895",
@@ -107,6 +112,7 @@ db.getCollection("users").insert([ {
     password: "013c332c2e2da7a025074d5ca903900bbd73ab8f",
     level: 100,
     role: "SYSTEM",
+	rooms: [],
     experience: 0,
     addedTime: "2019-07-12 15:33:07.895",
     editedTime: "2019-07-12 15:33:07.895",
