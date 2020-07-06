@@ -55,6 +55,14 @@ server {
         proxy_pass {{ LOCATION['PROXY_PASS'] }};
         proxy_redirect off;
         {% endif %}
+		
+		fastcgi_connect_timeout 900;
+		fastcgi_read_timeout 900;
+		fastcgi_send_timeout 900;
+		fastcgi_buffer_size 64k;
+		fastcgi_buffers   4 32k;
+		fastcgi_busy_buffers_size 64k;
+		fastcgi_temp_file_write_size 64k;
         
         {% if LOCATION['FASTCGI_PASS'] is defined %}
         fastcgi_pass {{ LOCATION['FASTCGI_PASS'] }};
