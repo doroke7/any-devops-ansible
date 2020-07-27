@@ -1,105 +1,87 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : fea(10.0.0.11)
- Source Server Type    : MySQL
- Source Server Version : 50726
- Source Host           : localhost:3306
- Source Schema         : chatroom
-
- Target Server Type    : MySQL
- Target Server Version : 50726
- File Encoding         : 65001
-
- Date: 16/07/2019 20:24:07
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for admin
--- ----------------------------
-
-CREATE DATABASE IF NOT EXISTS `chatroom`;
-
-USE `chatroom`;
-/*
- Navicat Premium Data Transfer
-
- Source Server         : fea(10.0.0.11)
+ Source Server         : 127.0.0.1
  Source Server Type    : MySQL
  Source Server Version : 50727
- Source Host           : localhost:3306
+ Source Host           : 127.0.0.1:3306
  Source Schema         : chatroom
 
  Target Server Type    : MySQL
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 07/08/2019 18:40:49
+ Date: 27/07/2020 10:17:14
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for admin
+-- Table structure for administrator_authorizations
 -- ----------------------------
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
-  `nickname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
-  `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
-  `salt` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码盐',
-  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '头像',
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '电子邮箱',
-  `loginfailure` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '失败次数',
-  `logintime` int(10) NULL DEFAULT NULL COMMENT '登录时间',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
-  `updatetime` int(10) NULL DEFAULT NULL COMMENT '更新时间',
-  `token` varchar(59) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'Session标识',
-  `status` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Compact;
+DROP TABLE IF EXISTS `administrator_authorizations`;
+CREATE TABLE `administrator_authorizations`  (
+  `administrator_authorization_id` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `route` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `methods` set('GET','POST','PUT','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
+  `administrator_group_id` int(12) NOT NULL,
+  `status` tinyint(1) NULL DEFAULT NULL,
+  `added_time` datetime(0) NULL DEFAULT NULL,
+  `edited_time` datetime(0) NULL DEFAULT NULL,
+  `removed_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_authorization_id`) USING BTREE,
+  UNIQUE INDEX `administrator_group_id_route`(`administrator_group_id`, `route`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of admin
+-- Records of administrator_authorizations
 -- ----------------------------
-INSERT INTO `admin` VALUES (1, 'admin', 'Admin', '075eaec83636846f51c152f29b98a2fd', 's4f3', '/assets/img/avatar.png', 'admin@fastadmin.net', 0, 1561456844, 1492186163, 1561456844, '2975a4e7-1dfb-42f6-ae92-589fcd7273eb', 'normal');
+INSERT INTO `administrator_authorizations` VALUES (1, '/admin/resource/room', 'GET,POST,PUT,DELETE', 1, 1, '2019-08-14 15:29:06', '2019-08-14 15:29:06', NULL);
+INSERT INTO `administrator_authorizations` VALUES (2, '/admin/resource/word', 'DELETE', 1, 1, NULL, NULL, NULL);
 
 -- ----------------------------
--- Table structure for admin_log
+-- Table structure for administrator_groups
 -- ----------------------------
-DROP TABLE IF EXISTS `admin_log`;
-CREATE TABLE `admin_log`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `admin_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '管理员ID',
-  `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '管理员名字',
-  `url` varchar(1500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '操作页面',
-  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '日志标题',
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '内容',
-  `ip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'IP',
-  `useragent` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'User-Agent',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `name`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员日志表' ROW_FORMAT = Compact;
+DROP TABLE IF EXISTS `administrator_groups`;
+CREATE TABLE `administrator_groups`  (
+  `administrator_group_id` int(12) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '状态',
+  `added_time` datetime(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+  `edited_time` datetime(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+  `removed_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of admin_log
+-- Records of administrator_groups
 -- ----------------------------
-INSERT INTO `admin_log` VALUES (1, 0, 'Unknown', '/admin/index/login.html', '', '{\"__token__\":\"872c3c0679313e2947e1f884d0ba3afb\",\"username\":\"admin\",\"captcha\":\"G8PW\",\"keeplogin\":\"1\"}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561456834);
-INSERT INTO `admin_log` VALUES (2, 1, 'admin', '/admin/index/login.html', '登录', '{\"__token__\":\"ac6fe17ea8471b305591e4cf8accdb92\",\"username\":\"admin\",\"captcha\":\"MVQX\",\"keeplogin\":\"1\"}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561456844);
-INSERT INTO `admin_log` VALUES (3, 1, 'admin', '/admin/category/selectpage', '', '{\"searchTable\":\"tbl\",\"searchKey\":\"id\",\"searchValue\":\"12,13\",\"orderBy\":[[\"name\",\"ASC\"]],\"showField\":\"name\",\"keyField\":\"id\",\"keyValue\":\"12,13\",\"searchField\":[\"name\"]}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561544246);
-INSERT INTO `admin_log` VALUES (4, 1, 'admin', '/admin/category/selectpage', '', '{\"searchTable\":\"tbl\",\"searchKey\":\"id\",\"searchValue\":\"12\",\"orderBy\":[[\"name\",\"ASC\"]],\"showField\":\"name\",\"keyField\":\"id\",\"keyValue\":\"12\",\"searchField\":[\"name\"]}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561544246);
-INSERT INTO `admin_log` VALUES (5, 1, 'admin', '/admin/ajax/upload', '', '{\"name\":\"a70ee061f201db99f27e3ba8f9b38e23.png\"}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561545471);
-INSERT INTO `admin_log` VALUES (6, 1, 'admin', '/admin/ajax/upload', '', '{\"name\":\"golang-go-cute-squirrel-baby-programming-mouse-sticker-prints.jpg\"}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561546089);
-INSERT INTO `admin_log` VALUES (7, 1, 'admin', '/admin/ajax/upload', '', '{\"name\":\"Cambodia-pic-WEB-min.jpg\"}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561546129);
-INSERT INTO `admin_log` VALUES (8, 1, 'admin', '/admin/user/user/edit/ids/1?dialog=1', '会员管理 会员管理 编辑', '{\"dialog\":\"1\",\"row\":{\"group_id\":\"1\",\"username\":\"admin\",\"nickname\":\"admin\",\"password\":\"c13f62012fd6a8fdf06b3452a94430e5\",\"salt\":\"rpR6Bv\",\"email\":\"admin@163.com\",\"mobile\":\"13888888888\",\"avatar\":\"\\/assets\\/img\\/qrcode.png\",\"level\":\"0\",\"gender\":\"0\",\"birthday\":\"2017-04-15\",\"bio\":\"aaaa\",\"money\":\"0.00\",\"score\":\"0\",\"successions\":\"1\",\"maxsuccessions\":\"1\",\"prevtime\":\"2018-01-17 14:28:12\",\"logintime\":\"2018-01-17 14:46:54\",\"loginip\":\"127.0.0.1\",\"loginfailure\":\"0\",\"joinip\":\"127.0.0.1\",\"jointime\":\"2017-04-06 14:50:18\",\"token\":\"aaaaa\",\"status\":\"sss\",\"verification\":\"1224\"},\"ids\":\"1\"}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561546143);
-INSERT INTO `admin_log` VALUES (9, 1, 'admin', '/admin/word/add?dialog=1', 'Word 添加', '{\"dialog\":\"1\",\"row\":{\"from\":\"fuck\",\"to\":\"f***\",\"type\":\"replace\"}}', '10.0.2.2', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36', 1561556742);
+INSERT INTO `administrator_groups` VALUES (1, '超级部门', 0, NULL, NULL, NULL);
+INSERT INTO `administrator_groups` VALUES (2, '技術部', 0, NULL, NULL, NULL);
+INSERT INTO `administrator_groups` VALUES (3, '人事部', 0, NULL, NULL, NULL);
+INSERT INTO `administrator_groups` VALUES (4, '空部门', 0, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for administrator_to_administrator_group
+-- ----------------------------
+DROP TABLE IF EXISTS `administrator_to_administrator_group`;
+CREATE TABLE `administrator_to_administrator_group`  (
+  `administrator_id` int(12) UNSIGNED NOT NULL,
+  `administrator_group_id` int(12) UNSIGNED NOT NULL,
+  `added_time` datetime(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '创建时间',
+  `edited_time` datetime(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
+  `removed_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_id`, `administrator_group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of administrator_to_administrator_group
+-- ----------------------------
+INSERT INTO `administrator_to_administrator_group` VALUES (1, 1, NULL, NULL, NULL);
+INSERT INTO `administrator_to_administrator_group` VALUES (1, 4, NULL, NULL, NULL);
+INSERT INTO `administrator_to_administrator_group` VALUES (2, 1, NULL, NULL, NULL);
+INSERT INTO `administrator_to_administrator_group` VALUES (2, 2, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for administrators
@@ -124,83 +106,7 @@ CREATE TABLE `administrators`  (
 -- Records of administrators
 -- ----------------------------
 INSERT INTO `administrators` VALUES (1, 'admin', '管理者', 'e45a4f1b101e1e609e258f799a5f40fcb0d8f4e4', 'user/1564820023-6c1af0a78b6233d1e03a3ee09efc6515268d5867.png', '', 1, '2019-08-07 07:50:33.710568', '2019-08-07 07:50:33.710568', NULL);
-
--- ----------------------------
--- Table structure for adminstrator_to_department
--- ----------------------------
-DROP TABLE IF EXISTS `adminstrator_to_department`;
-CREATE TABLE `adminstrator_to_department`  (
-  `administrator_id` int(12) UNSIGNED NOT NULL,
-  `department_id` int(12) UNSIGNED NOT NULL,
-  PRIMARY KEY (`administrator_id`, `department_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of adminstrator_to_department
--- ----------------------------
-INSERT INTO `adminstrator_to_department` VALUES (1, 1);
-
--- ----------------------------
--- Table structure for authorizations
--- ----------------------------
-DROP TABLE IF EXISTS `authorizations`;
-CREATE TABLE `authorizations`  (
-  `authorization_id` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `route` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `methods` set('GET','POST','PUT','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
-  `deparment_id` int(12) NOT NULL,
-  `status` tinyint(1) NULL DEFAULT NULL,
-  `added_time` datetime(0) NULL DEFAULT NULL,
-  `edited_time` datetime(0) NULL DEFAULT NULL,
-  `removed_time` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`authorization_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of authorizations
--- ----------------------------
-INSERT INTO `authorizations` VALUES (1, '/room', 'GET,POST,PUT,DELETE', 1, 1, '2019-08-14 15:29:06', '2019-08-14 15:29:06', NULL);
-
-
--- ----------------------------
--- Table structure for config
--- ----------------------------
-DROP TABLE IF EXISTS `config`;
-CREATE TABLE `config`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '变量名',
-  `group` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '分组',
-  `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '变量标题',
-  `tip` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '变量描述',
-  `type` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '类型:string,text,int,bool,array,datetime,date,file',
-  `value` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '变量值',
-  `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '变量字典数据',
-  `rule` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '验证规则',
-  `extend` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '扩展属性',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统配置' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of config
--- ----------------------------
-INSERT INTO `config` VALUES (1, 'name', 'basic', 'Site name', '请填写站点名称', 'string', 'FastAdmin', '', 'required', '');
-INSERT INTO `config` VALUES (2, 'beian', 'basic', 'Beian', '粤ICP备15000000号-1', 'string', '', '', '', '');
-INSERT INTO `config` VALUES (3, 'cdnurl', 'basic', 'Cdn url', '如果静态资源使用第三方云储存请配置该值', 'string', '', '', '', '');
-INSERT INTO `config` VALUES (4, 'version', 'basic', 'Version', '如果静态资源有变动请重新配置该值', 'string', '1.0.1', '', 'required', '');
-INSERT INTO `config` VALUES (5, 'timezone', 'basic', 'Timezone', '', 'string', 'Asia/Shanghai', '', 'required', '');
-INSERT INTO `config` VALUES (6, 'forbiddenip', 'basic', 'Forbidden ip', '一行一条记录', 'text', '', '', '', '');
-INSERT INTO `config` VALUES (7, 'languages', 'basic', 'Languages', '', 'array', '{\"backend\":\"zh-cn\",\"frontend\":\"zh-cn\"}', '', 'required', '');
-INSERT INTO `config` VALUES (8, 'fixedpage', 'basic', 'Fixed page', '请尽量输入左侧菜单栏存在的链接', 'string', 'dashboard', '', 'required', '');
-INSERT INTO `config` VALUES (9, 'categorytype', 'dictionary', 'Category type', '', 'array', '{\"default\":\"Default\",\"page\":\"Page\",\"article\":\"Article\",\"test\":\"Test\"}', '', '', '');
-INSERT INTO `config` VALUES (10, 'configgroup', 'dictionary', 'Config group', '', 'array', '{\"basic\":\"Basic\",\"email\":\"Email\",\"dictionary\":\"Dictionary\",\"user\":\"User\",\"example\":\"Example\"}', '', '', '');
-INSERT INTO `config` VALUES (11, 'mail_type', 'email', 'Mail type', '选择邮件发送方式', 'select', '1', '[\"Please select\",\"SMTP\",\"Mail\"]', '', '');
-INSERT INTO `config` VALUES (12, 'mail_smtp_host', 'email', 'Mail smtp host', '错误的配置发送邮件会导致服务器超时', 'string', 'smtp.qq.com', '', '', '');
-INSERT INTO `config` VALUES (13, 'mail_smtp_port', 'email', 'Mail smtp port', '(不加密默认25,SSL默认465,TLS默认587)', 'string', '465', '', '', '');
-INSERT INTO `config` VALUES (14, 'mail_smtp_user', 'email', 'Mail smtp user', '（填写完整用户名）', 'string', '10000', '', '', '');
-INSERT INTO `config` VALUES (15, 'mail_smtp_pass', 'email', 'Mail smtp password', '（填写您的密码）', 'string', 'password', '', '', '');
-INSERT INTO `config` VALUES (16, 'mail_verify_type', 'email', 'Mail vertify type', '（SMTP验证方式[推荐SSL]）', 'select', '2', '[\"None\",\"TLS\",\"SSL\"]', '', '');
-INSERT INTO `config` VALUES (17, 'mail_from', 'email', 'Mail from', '', 'string', '10000@qq.com', '', '', '');
+INSERT INTO `administrators` VALUES (2, 'jim', '吉姆', '', '', '', 1, '2020-07-26 00:07:29.152495', '2020-07-26 00:07:29.152495', NULL);
 
 -- ----------------------------
 -- Table structure for configs
@@ -220,36 +126,6 @@ CREATE TABLE `configs`  (
 INSERT INTO `configs` VALUES (1, 'betMoney', '0');
 INSERT INTO `configs` VALUES (2, 'chargeMoney', '0');
 INSERT INTO `configs` VALUES (3, 'day', '2');
-
--- ----------------------------
--- Table structure for departments
--- ----------------------------
-DROP TABLE IF EXISTS `departments`;
-CREATE TABLE `departments`  (
-  `department_id` int(12) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`department_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of departments
--- ----------------------------
-INSERT INTO `departments` VALUES (1, '超级部门');
-
--- ----------------------------
--- Table structure for ems
--- ----------------------------
-DROP TABLE IF EXISTS `ems`;
-CREATE TABLE `ems`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `event` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '事件',
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮箱',
-  `code` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '验证码',
-  `times` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '验证次数',
-  `ip` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'IP',
-  `createtime` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '邮箱验证码表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for room_users
@@ -272,150 +148,6 @@ CREATE TABLE `rooms`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for sms
--- ----------------------------
-DROP TABLE IF EXISTS `sms`;
-CREATE TABLE `sms`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `event` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '事件',
-  `mobile` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '手机号',
-  `code` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '验证码',
-  `times` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '验证次数',
-  `ip` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'IP',
-  `createtime` int(10) UNSIGNED NULL DEFAULT 0 COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '短信验证码表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `group_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '组别ID',
-  `username` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
-  `nickname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
-  `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
-  `salt` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码盐',
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '电子邮箱',
-  `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '手机号',
-  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '头像',
-  `level` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '等级',
-  `gender` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '性别',
-  `birthday` date NULL DEFAULT NULL COMMENT '生日',
-  `bio` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '格言',
-  `money` decimal(10, 2) UNSIGNED NOT NULL DEFAULT 0.00 COMMENT '余额',
-  `score` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '积分',
-  `successions` int(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '连续登录天数',
-  `maxsuccessions` int(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '最大连续登录天数',
-  `prevtime` int(10) NULL DEFAULT NULL COMMENT '上次登录时间',
-  `logintime` int(10) NULL DEFAULT NULL COMMENT '登录时间',
-  `loginip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '登录IP',
-  `loginfailure` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '失败次数',
-  `joinip` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '加入IP',
-  `jointime` int(10) NULL DEFAULT NULL COMMENT '加入时间',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
-  `updatetime` int(10) NULL DEFAULT NULL COMMENT '更新时间',
-  `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'Token',
-  `status` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '状态',
-  `verification` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '验证',
-  `style` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `username`(`username`) USING BTREE,
-  INDEX `email`(`email`) USING BTREE,
-  INDEX `mobile`(`mobile`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 1, 'admin', 'admin', 'c13f62012fd6a8fdf06b3452a94430e5', 'rpR6Bv', 'admin@163.com', '13888888888', '/assets/img/qrcode.png', 0, 0, '2017-04-15', 'aaaa', 0.00, 0, 1, 1, 1516170492, 1516171614, '127.0.0.1', 0, '127.0.0.1', 1491461418, 0, 1561546143, 'aaaaa', 'sss', '1224', NULL);
-INSERT INTO `user` VALUES (2, 1, 'system', '系统', '', '', 'system@164.com', '', '', 0, 0, NULL, '', 0.00, 0, 1, 1, NULL, NULL, '', 0, '', NULL, NULL, NULL, '', 'none', '', NULL);
-
--- ----------------------------
--- Table structure for user_group
--- ----------------------------
-DROP TABLE IF EXISTS `user_group`;
-CREATE TABLE `user_group`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '组名',
-  `rules` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '权限节点',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '添加时间',
-  `updatetime` int(10) NULL DEFAULT NULL COMMENT '更新时间',
-  `status` enum('normal','hidden') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员组表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user_group
--- ----------------------------
-INSERT INTO `user_group` VALUES (1, '默认组', '1,2,3,4,5,6,7,8,9,10,11,12', 1515386468, 1516168298, 'normal');
-
--- ----------------------------
--- Table structure for user_money_log
--- ----------------------------
-DROP TABLE IF EXISTS `user_money_log`;
-CREATE TABLE `user_money_log`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '会员ID',
-  `money` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '变更余额',
-  `before` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '变更前余额',
-  `after` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '变更后余额',
-  `memo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员余额变动表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for user_rule
--- ----------------------------
-DROP TABLE IF EXISTS `user_rule`;
-CREATE TABLE `user_rule`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `pid` int(10) NULL DEFAULT NULL COMMENT '父ID',
-  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '标题',
-  `remark` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
-  `ismenu` tinyint(1) NULL DEFAULT NULL COMMENT '是否菜单',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
-  `updatetime` int(10) NULL DEFAULT NULL COMMENT '更新时间',
-  `weigh` int(10) NULL DEFAULT 0 COMMENT '权重',
-  `status` enum('normal','hidden') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员规则表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of user_rule
--- ----------------------------
-INSERT INTO `user_rule` VALUES (1, 0, 'index', '前台', '', 1, 1516168079, 1516168079, 1, 'normal');
-INSERT INTO `user_rule` VALUES (2, 0, 'api', 'API接口', '', 1, 1516168062, 1516168062, 2, 'normal');
-INSERT INTO `user_rule` VALUES (3, 1, 'user', '会员模块', '', 1, 1515386221, 1516168103, 12, 'normal');
-INSERT INTO `user_rule` VALUES (4, 2, 'user', '会员模块', '', 1, 1515386221, 1516168092, 11, 'normal');
-INSERT INTO `user_rule` VALUES (5, 3, 'index/user/login', '登录', '', 0, 1515386247, 1515386247, 5, 'normal');
-INSERT INTO `user_rule` VALUES (6, 3, 'index/user/register', '注册', '', 0, 1515386262, 1516015236, 7, 'normal');
-INSERT INTO `user_rule` VALUES (7, 3, 'index/user/index', '会员中心', '', 0, 1516015012, 1516015012, 9, 'normal');
-INSERT INTO `user_rule` VALUES (8, 3, 'index/user/profile', '个人资料', '', 0, 1516015012, 1516015012, 4, 'normal');
-INSERT INTO `user_rule` VALUES (9, 4, 'api/user/login', '登录', '', 0, 1515386247, 1515386247, 6, 'normal');
-INSERT INTO `user_rule` VALUES (10, 4, 'api/user/register', '注册', '', 0, 1515386262, 1516015236, 8, 'normal');
-INSERT INTO `user_rule` VALUES (11, 4, 'api/user/index', '会员中心', '', 0, 1516015012, 1516015012, 10, 'normal');
-INSERT INTO `user_rule` VALUES (12, 4, 'api/user/profile', '个人资料', '', 0, 1516015012, 1516015012, 3, 'normal');
-
--- ----------------------------
--- Table structure for user_score_log
--- ----------------------------
-DROP TABLE IF EXISTS `user_score_log`;
-CREATE TABLE `user_score_log`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '会员ID',
-  `score` int(10) NOT NULL DEFAULT 0 COMMENT '变更积分',
-  `before` int(10) NOT NULL DEFAULT 0 COMMENT '变更前积分',
-  `after` int(10) NOT NULL DEFAULT 0 COMMENT '变更后积分',
-  `memo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员积分变动表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for user_statuses
@@ -442,42 +174,6 @@ INSERT INTO `user_statuses` VALUES (2, 'system', 1, 0, '1', '2019-07-18 19:42:38
 INSERT INTO `user_statuses` VALUES (16, '5104', 1, 0, '1', '2019-07-09 15:00:41', '2019-07-09 15:00:41', NULL);
 INSERT INTO `user_statuses` VALUES (17, '5160', 1, 0, '1', '2019-07-13 05:33:26', '2019-07-13 05:33:26', NULL);
 INSERT INTO `user_statuses` VALUES (18, '5097', 1, 0, '1', '2019-07-13 06:57:49', '2019-07-13 06:57:49', NULL);
-
--- ----------------------------
--- Table structure for user_token
--- ----------------------------
-DROP TABLE IF EXISTS `user_token`;
-CREATE TABLE `user_token`  (
-  `token` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Token',
-  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '会员ID',
-  `createtime` int(10) NULL DEFAULT NULL COMMENT '创建时间',
-  `expiretime` int(10) NULL DEFAULT NULL COMMENT '过期时间',
-  PRIMARY KEY (`token`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员Token表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Table structure for version
--- ----------------------------
-DROP TABLE IF EXISTS `version`;
-CREATE TABLE `version`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `oldversion` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '旧版本号',
-  `newversion` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '新版本号',
-  `packagesize` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '包大小',
-  `content` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '升级内容',
-  `downloadurl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '下载地址',
-  `enforce` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '强制更新',
-  `createtime` int(10) NOT NULL DEFAULT 0 COMMENT '创建时间',
-  `updatetime` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新时间',
-  `weigh` int(10) NOT NULL DEFAULT 0 COMMENT '权重',
-  `status` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '状态',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '版本表' ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of version
--- ----------------------------
-INSERT INTO `version` VALUES (1, '1.1.1,2', '1.2.1', '20M', '更新内容', 'https://www.fastadmin.net/download.html', 1, 1520425318, 0, 0, 'normal');
 
 -- ----------------------------
 -- Table structure for words
