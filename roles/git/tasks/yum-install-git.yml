@@ -8,10 +8,10 @@
     name: epel-release
     state: present
 
-- name: (yum) yum insatll ius-release.rpm
+- name: (yum) yum insatll https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
   yum: 
-    name: https://centos7.iuscommunity.org/ius-release.rpm
-- name: (yum) yum install git2u
+    name: https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm
+- name: (yum) yum install git
   yum:
-    name: git2u
+    name: git
   # notify: debug yum install git
