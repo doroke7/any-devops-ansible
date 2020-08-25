@@ -4,6 +4,28 @@
     state: absent
     path: "{{ item }}"
   with_fileglob: '/etc/nginx/conf.d/*.conf'
+  
+  
+- name: mkdir /etc/nginx/vhosts
+  file:
+    path: /etc/nginx/vhosts
+    state: directory
+    mode: 0755
+
+- name: mkdir /etc/nginx/frameworks
+  file:
+    path: /etc/nginx/frameworks
+    state: directory
+    mode: 0755
+
+- name: (template) scp etc/nginx/frameworks/*.conf /etc/nginx/frameworks/*.conf
+  template:
+    src: "{{ item }}"
+    dest: /etc/nginx/frameworks/{{ item | basename }}
+    mode: 0755
+  with_fileglob: "./etc/nginx/frameworks/*.conf"
+  # 读取的 是 files 目录下
+
 - name: (template) scp etc/nginx/nginx.conf.j2 /etc/nginx/nginx.conf
   template:
     src: etc/nginx/nginx.conf.j2
@@ -12,4 +34,5 @@
     group: root
     mode: 0776
     backup: no
-    # validate: nginx -t -c %s
+  # 读取的 是 templates 目录下
+
