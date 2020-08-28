@@ -1,8 +1,8 @@
 ---
-- name: (template) scp etc/nginx/conf.d/default.conf.j2 /etc/nginx/conf.d/*.conf
+- name: (template) scp etc/nginx/vhosts/default.conf.j2 /etc/nginx/vhosts/*.conf
   template:
-    src: etc/nginx/conf.d/default.conf.j2
-    dest: "/etc/nginx/conf.d/{{ CONF['SERVER_NAME'] }}.conf"
+    src: etc/nginx/vhosts/default.conf.j2
+    dest: "/etc/nginx/vhosts/{{ CONF['SERVER_NAME'] }}.conf"
     owner: root
     group: root
     mode: 0776
