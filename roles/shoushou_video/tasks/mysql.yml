@@ -1,20 +1,20 @@
 ---
 # - name: command mysql_upgrade --force -uroot
 #   command: mysql_upgrade --force -u root
-- name: (template) scp tmp/lottery.sql.j2 /tmp/lottery.sql
+- name: (template) scp tmp/shoushou_video.sql.j2 /tmp/shoushou_video.sql
   template:
-    src: tmp/lottery.sql.j2
-    dest: /tmp/lottery.sql
+    src: tmp/shoushou_video.sql.j2
+    dest: /tmp/shoushou_video.sql
     owner: root
     group: root
     mode: 0776
     backup: no
-  when: lottery_mysql is not undefined and lottery_mysql in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
+  when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
 
 
-- name: (shell) mysql < /tmp/lottery.sql
-  shell: mysql < /tmp/lottery.sql
-  when: lottery_mysql is not undefined and lottery_mysql in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
+- name: (shell) mysql < /tmp/shoushou_video.sql
+  shell: mysql < /tmp/shoushou_video.sql
+  when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
 
 
 - name: (template) scp tmp/grant.sql.j2 /tmp/grant.sql
@@ -24,10 +24,10 @@
     owner: vagrant
     group: vagrant
     mode: 0755
-  when: lottery_mysql is not undefined and lottery_mysql in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
+  when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
 
     
 - name: "(shell) mysql --user='root' --password='mysql_pass_cli' --force < /tmp/grant.sql"
   shell: "mysql --user='root' --password='mysql_pass_cli' --force < /tmp/grant.sql"
-  when: lottery_mysql is not undefined and lottery_mysql in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
+  when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
   

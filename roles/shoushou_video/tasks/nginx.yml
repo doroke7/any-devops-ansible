@@ -17,3 +17,5 @@
   service:
     name: nginx
     state: restarted
+  when: nginx is not undefined and nginx in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
+  
