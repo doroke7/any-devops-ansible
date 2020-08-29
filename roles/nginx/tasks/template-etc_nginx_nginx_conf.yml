@@ -26,6 +26,15 @@
   with_fileglob: "./etc/nginx/frameworks/*.conf"
   # 读取的 是 files 目录下
 
+
+- name: (template) scp etc/nginx/conf.d/*.conf /etc/nginx/conf.d/*.conf
+  template:
+    src: "{{ item }}"
+    dest: /etc/nginx/conf.d/{{ item | basename }}
+    mode: 0755
+  with_fileglob: "./etc/nginx/conf.d/*.conf"
+  # 读取的 是 files 目录下
+
 - name: (template) scp etc/nginx/nginx.conf.j2 /etc/nginx/nginx.conf
   template:
     src: etc/nginx/nginx.conf.j2

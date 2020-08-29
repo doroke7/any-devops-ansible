@@ -1,0 +1,20 @@
+---
+- name: Install feature shoushou_video
+  hosts: fea-shoushou_video
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.fea.yml
+  pre_tasks:
+    - name: "本地 feature 环境，nginx 安装开始"
+      shell: echo 'playbook nginx starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        nginx: true
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，shoushou_video 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
