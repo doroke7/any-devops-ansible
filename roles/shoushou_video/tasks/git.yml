@@ -1,0 +1,22 @@
+---
+- name: "(git) git clone git@gitlab.com:dalvik009/shoushou_video_php.git /var/www/shoushou_video_php"
+  git:
+    repo: 'git@gitlab.com:dalvik009/shoushou_video_php.git'
+    dest: "/var/www/shoushou_video_php"
+    version: "{{ 'develop' if branch is not defined or branch in ['fea', 'feature'] else branch }}"
+    # version: "{{ 'master' }}"
+    clone: yes
+    update: yes
+    accept_hostkey: yes
+    force: yes
+  become: no # 使用 vagrant:vagrant git clone 下来， 不使用 root git clone
+  
+  
+# - name: (template) scp var/www/lottery-service_resource_backend-lumen/.env.j2 /var/www/lottery-service_resource_backend-lumen/.env
+#   template:
+#     src: var/www/lottery-service_resource_backend-lumen/.env.j2
+#     dest: /var/www/lottery-service_resource_backend-lumen/.env
+#     owner: root
+#     group: root
+#     mode: 0776
+#     backup: no   

@@ -40,3 +40,23 @@
     - name: "本地 feature 环境，mysql 安装开始"
       shell: echo 'playbook mysql ends'
       
+- name: Install feature shoushou_video
+  hosts: fea-shoushou_video
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.fea.yml
+  pre_tasks:
+    - name: "本地 feature 环境，采用 GIT 同步代码 安装开始"
+      shell: echo 'playbook git starts'
+  roles:
+    - role: shoushou_video
+      vars: 
+        bra: fea
+        git: true
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，采用 GIT 同步代码 安装开始"
+      shell: echo 'playbook git ends'
+      
