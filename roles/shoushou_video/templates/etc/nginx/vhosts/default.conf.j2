@@ -41,6 +41,10 @@ server {
             rewrite  "^/share/([a-z0-9_]{1,32})$" /agent/public/admin/download/index?agent=$1 last;
             break;
         }
+        
+        # rewrite  "^/(.*).html$"  /$1/index.html  last;
+        # rewrite  "^/(.*/)(.*).html$"  /$1/$2/index.html  last;
+        
     }
 
     location ~ \.php(.*)$ {
