@@ -17,7 +17,6 @@ no-auto-rehash                                            # 仅允许使用键�
 ######################### [mysqldump] 基本设置 #########################
 user = {{ MYSQL.SERVERS[i].CONNECTIONS[0]['USER'] }}
 password = {{ MYSQL.SERVERS[i].CONNECTIONS[0]['PASSWORD'] }}
-quick
 max_allowed_packet = 128M
 
 [isamchk]
@@ -59,7 +58,7 @@ pid-file = /var/run/mysqld/mysqld.pid
 sql_mode='ONLY_FULL_GROUP_BY,NO_AUTO_VALUE_ON_ZERO,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES'
 
 {# 先 and 后 or #}
-{% if (mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') and mysql_skip == True %}
+{% if (mysql_version == '5.6' or mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') and mysql_skip == True %}
 # mysql 5.7 以後版本, 預設有安全密碼
 skip-grant-tables = 1
 skip-networking = 1
@@ -145,11 +144,15 @@ innodb_file_format=Barracuda
 innodb_support_xa=0
 innodb_buffer_pool_dump_at_shutdown = 1
 innodb_buffer_pool_load_at_startup = 1
+
+{% if mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1' %}
 # innodb_undo_tablespaces=4                             # 5.7 不作用
 innodb_undo_logs=2048
 innodb_purge_rseg_truncate_frequency=512
 innodb_max_undo_log_size=2G
 innodb_undo_log_truncate=1
+{% endif %}
+
 
 ############################# [mysqld] 效能 - 连接相关 #############################
 bind-address = {{ MYSQL.SERVERS[i].BIND_ADDRESS }}
