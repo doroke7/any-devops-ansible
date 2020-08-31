@@ -34,10 +34,10 @@
       vars: 
         bra: fea
         mysql: true
-        mysql_version: '5.7'
+        mysql_version: '5.6'
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
-    - name: "本地 feature 环境，mysql 安装开始"
+    - name: "本地 feature 环境，mysql 安装完毕"
       shell: echo 'playbook mysql ends'
       
 - name: Install feature shoushou_video

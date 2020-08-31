@@ -10,7 +10,9 @@
     accept_hostkey: yes
     force: yes
   become: no # 使用 vagrant:vagrant git clone 下来， 不使用 root git clone
-  
+  ignore_errors: True # Because this shell will not response, that ansible will determine it as error
+  when: git is not undefined and git in ['yes', '1', 1, true, True, 'true', 'True', 'git']
+
   
 # - name: (template) scp var/www/lottery-service_resource_backend-lumen/.env.j2 /var/www/lottery-service_resource_backend-lumen/.env
 #   template:
