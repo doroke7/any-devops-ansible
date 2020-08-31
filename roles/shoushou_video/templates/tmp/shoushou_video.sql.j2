@@ -24,6 +24,8 @@ USE `shoushou_video`;
 -- ----------------------------
 -- Table structure for cmf_admin_menu
 -- ----------------------------
+## 后台 >> 系统设置 >> 后台菜单 
+
 DROP TABLE IF EXISTS `cmf_admin_menu`;
 CREATE TABLE `cmf_admin_menu` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -2258,6 +2260,7 @@ CREATE TABLE `cmf_online_record` (
 -- ----------------------------
 -- Table structure for cmf_option
 -- ----------------------------
+## 后台 >> 文件存储 （其中的 一笔数据 storage 那个）
 DROP TABLE IF EXISTS `cmf_option`;
 CREATE TABLE `cmf_option` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -2721,7 +2724,7 @@ CREATE TABLE `cmf_slide` (
 -- ----------------------------
 -- Records of cmf_slide
 -- ----------------------------
-## 后台  >> 
+## 后台  >> 轮播图管理
 BEGIN;
 INSERT INTO `cmf_slide` VALUES (1, 1, 0, '首页推荐顶部轮播', '');
 INSERT INTO `cmf_slide` VALUES (2, 1, 1568167110, '消息幻灯（暂无页面）', '');
