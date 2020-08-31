@@ -32,7 +32,13 @@ server {
         expires max;
         log_not_found off;
     }
-	
+    
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
+    add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+
+
     location / {
         if (!-e $request_filename) {
             rewrite  "^/admin/public/(.*)$"  /admin/public/index.php/$1  last;
@@ -43,7 +49,7 @@ server {
         }
         
         # rewrite  "^/(.*).html$"  /$1/index.html  last;
-        # rewrite  "^/(.*/)(.*).html$"  /$1/$2/index.html  last;
+        # rewrite  "^/((.*\/)+)(.*).html$"  /$1/$2/index.html  last;
         
     }
 
