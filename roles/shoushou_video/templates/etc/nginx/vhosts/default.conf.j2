@@ -39,20 +39,33 @@ server {
     }
     
 
+    location /admin {
+        # 对于 admin 界面 提供 IP 限制
+        allow {{ VHOST['ALLOW'] | default('10.0.2.2') }};
+        deny all;
 
-    location / {
         if (!-e $request_filename) {
             rewrite  "^/admin/public/(.*)$"  /admin/public/index.php/$1  last;
+            break;
+        }
+
+    }
+
+
+    location / {
+
+        if (!-e $request_filename) {
             rewrite  "^/mapi/public/(.*)$"  /mapi/public/index.php/$1  last;
             rewrite  "^/agent/public/(.*)$"  /agent/public/index.php/$1  last;
             rewrite  "^/share/([a-z0-9_]{1,32})$" /agent/public/admin/download/index?agent=$1 last;
             break;
         }
-        
+
         # rewrite  "^/(.*).html$"  /$1/index.html  last;
         # rewrite  "^/((.*\/)+)(.*).html$"  /$1/$2/index.html  last;
-        
+
     }
+
 
     location ~ \.php(.*)$ {
         include conf.d/php{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}.conf;

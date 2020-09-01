@@ -6,6 +6,7 @@ NGINX:
       SERVER_NAME: 'fea.hdalvik.club www.fea.hdalvik.club'
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
+      ALLOW: '10.0.2.2'
       
 
 MYSQL:
