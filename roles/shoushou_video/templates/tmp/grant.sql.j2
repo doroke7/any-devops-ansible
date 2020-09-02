@@ -1,6 +1,6 @@
 ###
 {% set i = groups[bra ~ '-mysql'].index(inventory_hostname) %}
-#{i}
+#i = {{ i }}            i 为 ansible host 文件 里面 的 序列 从 0 开始
 
 # 這類DCL語句也是記錄為STATEMENT格式。
 # grant 語句默認的db是replcrash，

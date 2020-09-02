@@ -3,16 +3,23 @@
   git:
     repo: 'git@gitlab.com:dalvik009/shoushou_video_php.git'
     dest: "/var/www/shoushou_video_php"
-    version: "{{ 'develop' if branch is not defined or branch in ['fea', 'feature'] else branch }}"
+    version: "{{ 'develop' if branch is not defined or branch in ['fea', 'feature', 'dev', 'develop'] else 'release' if branch in ['rel', 'release'] else 'master' if branch in ['mas', 'master'] else 'develop'}}"
     # version: "{{ 'master' }}"
     clone: yes
     update: yes
     accept_hostkey: yes
     force: yes
   become: no # 使用 vagrant:vagrant git clone 下来， 不使用 root git clone
-  ignore_errors: True # Because this shell will not response, that ansible will determine it as error
   when: git is not undefined and git in ['yes', '1', 1, true, True, 'true', 'True', 'git']
 
+
+- name: 'chmod -R 777 /var/www/shoushou_video_php'
+  file:
+    path: /var/www/shoushou_video_php
+    owner: root
+    group: root
+    recurse: yes
+    mode: '0777'
   
 # - name: (template) scp var/www/lottery-service_resource_backend-lumen/.env.j2 /var/www/lottery-service_resource_backend-lumen/.env
 #   template:

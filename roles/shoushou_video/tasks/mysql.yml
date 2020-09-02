@@ -1,6 +1,6 @@
 ---
-# - name: command mysql_upgrade --force -uroot
-#   command: mysql_upgrade --force -u root
+- name: (command) mysql_upgrade --force -uroot
+  command: mysql_upgrade --force -u root
 - name: (template) scp tmp/shoushou_video.sql.j2 /tmp/shoushou_video.sql
   template:
     src: tmp/shoushou_video.sql.j2
