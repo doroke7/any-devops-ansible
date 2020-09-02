@@ -5,8 +5,8 @@
   template:
     src: tmp/grant.sql.j2
     dest: /tmp/grant.sql
-    owner: vagrant
-    group: vagrant
+    owner: root
+    group: root
     mode: 0755
 - name: "(shell) mysql --user='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }}' --password='' --force < /tmp/grant.sql"
   shell: "mysql --user='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }}' --password='' --force < /tmp/grant.sql"
