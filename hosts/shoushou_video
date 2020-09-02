@@ -122,7 +122,15 @@
 [dev-php]
 47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
 
+[dev-memcached]
+47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
 
+
+[dev-redis]
+47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
+
+[dev-mysql]
+47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
 
 
 
