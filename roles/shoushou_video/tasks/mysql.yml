@@ -21,8 +21,8 @@
   template:
     src: tmp/grant.sql.j2
     dest: /tmp/grant.sql
-    owner: vagrant
-    group: vagrant
+    owner: root
+    group: root
     mode: 0755
   when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
 
