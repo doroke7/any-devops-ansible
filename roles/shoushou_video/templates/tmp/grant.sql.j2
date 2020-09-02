@@ -9,6 +9,7 @@
 USE mysql;
 
 {% for CONNECTION in MYSQL.SERVERS[i].CONNECTIONS %}
+# fatal: [47.242.59.96]: FAILED! => {"changed": false, "msg": "ValueError: u'47.242.59.96' is not in list"}
 
 {% for HOST in CONNECTION.HOSTS %}
 #################################################################################################################################################################
