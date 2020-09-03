@@ -44,11 +44,14 @@ server {
         allow {{ VHOST['ALLOW'] | default('10.0.2.2') }};
         deny all;
 
+
         if (!-e $request_filename) {
             rewrite  "^/admin/public/(.*)$"  /admin/public/index.php/$1  last;
             break;
         }
 
+        # last  [rewrite UIR]，然后对当前重写的新URI在rewrite指令集上[重新查找]。
+        # break [rewrite URI]，并 [不在重新查找 Nginx 路由]。 也就是只有改变 uri, 路由没变， PHP 控制器也没变
     }
 
 
