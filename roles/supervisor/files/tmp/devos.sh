@@ -1,0 +1,1 @@
+# 可以把 Nginx 分成 三个维度  vhosts 不同的域名, rewrites 不同的 框架, cond.f 不同的 基本配置 如 fastcgi
