@@ -40,7 +40,7 @@ server {
     
 
     location /admin {
-        # 对于 admin 界面 提供 IP 限制
+        # Deny admin for customers instead of officers
         allow {{ VHOST['ALLOW'] | default('10.0.2.2') }};
         deny all;
 
@@ -50,8 +50,8 @@ server {
             break;
         }
 
-        # last  [rewrite UIR]，然后对当前重写的新URI在rewrite指令集上[重新查找]。
-        # break [rewrite URI]，并 [不在重新查找 Nginx 路由]。 也就是只有改变 uri, 路由没变， PHP 控制器也没变
+        # last  [rewrite UIR]，and [Refind the route in Nginx and PHP controller]。
+        # break [rewrite URI]，并 [Not Refinde route]。 ie. we only change uri without PHP controller changed.
     }
 
 
