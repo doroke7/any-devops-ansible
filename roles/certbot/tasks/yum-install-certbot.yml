@@ -1,0 +1,24 @@
+---
+- name: (yum) yum install certbot
+  yum:
+    name: certbot
+    state: present
+- name: (yum) yum install python2-certbot-nginx
+  yum:
+    name: python2-certbot-nginx
+    state: present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_version in ['7.0', '7.1', '7.2', '7.3', '7.4', '7.5', '7.6', '7.7', '7.8', '7.9']
+
+
+- name: (yum) yum install python3-certbot-nginx
+  yum:
+    name: python3-certbot-nginx
+    state: present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_version in ['8.0', '8.1', '8.2', '8.3', '8.4', '8.5', '8.6', '8.7', '8.8', '8.9']
+
+  # notify: 
+  #   - debug yum install nginx
+
+# notify 是 ansible 状态 为 changed 才执行， 
+# 在所有 tasks 完成后执行， 
+# 次序是 roles/*/handlers 内的次序 不是 notifiy 的次序
