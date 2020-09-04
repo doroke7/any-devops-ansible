@@ -1,0 +1,5 @@
+---
+- name: (service) service supervisord restarted
+  service:
+    name: supervisord
+    state: restarted

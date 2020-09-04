@@ -1,0 +1,12 @@
+---
+
+- name: (template) scp etc/supervisord.conf.j2 /etc/supervisord.conf
+  template:
+    src: etc/supervisord.conf.j2
+    dest: /etc/supervisord.conf
+    owner: root
+    group: root
+    mode: 0776
+    backup: no
+  # 读取的 是 templates 目录下
+

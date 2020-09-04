@@ -125,7 +125,7 @@ serverurl=unix:///var/run/supervisor/supervisor.sock ; use a unix:// URL  for a 
 ; interpreted as relative to this file.  Included files *cannot*
 ; include files themselves.
 
-; 建议学习 PM2 把 进程管理配置放在项目根目录中
+; 建议学习 PM2, 把 Supervisor 进程管理配置放在 [项目根目录] 中
 [include]
 files = supervisord.d/*.ini
 
