@@ -1,8 +1,8 @@
 ---
-- name: (template) scp etc/supervisor/conf.d/default.conf.j2 /etc/supervisor/conf.d/*.conf
+- name: (template) scp etc/supervisord.d/default.ini.j2 /etc/supervisord.d/*.ini
   template:
-    src: etc/supervisor/conf.d/default.conf.j2
-    dest: "/etc/supervisor/conf.d/{{ CONF['GROUP'] }}.conf"
+    src: etc/supervisord.d/default.ini.j2
+    dest: "/etc/supervisord.d/lottery.ini"
     owner: root
     group: root
     mode: 0776
@@ -11,6 +11,5 @@
   with_items: "{{ LOTTERY.SUPERVISOR.CONFS }}"
   loop_control:
     loop_var: CONF
-  when: lottery_supervisor is not undefined and lottery_supervisor in ['yes', '1', 1, true, True, 'true', 'True', 'nginx']
 
   # notify: start nginx

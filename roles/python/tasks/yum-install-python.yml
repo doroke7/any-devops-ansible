@@ -1,51 +1,13 @@
 ---
-- name: (yum) yum insatll ius-release.rpm
+- name: (yum) yum update 
   yum: 
-    name: https://centos7.iuscommunity.org/ius-release.rpm
+    update_only: yes
+    state: latest
 
-- name: "(yum) yum install python{{ python_version | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }} python{{ python_version | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}-pip python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}-devel"
+- name: (yum) yum install python3
   yum: 
     name:
-      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"
-      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-pip"
-      - "python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}-devel"
+      - python3
     state: latest
-  when: python_version == '3.4' or  python_version == '3.5' or  python_version == '3.6'
-  #notify: debug yum install python
-# - name: yum install python
-#   yum: 
-#     name:
-#       - python
-#       - python-pip
-#     state: absent # 不能移除 python yum 会出错
-#   when: python_version == '2.7'
 
-- name: (yum) yum install python
-  yum: 
-    name:
-      - python
-      - python-pip
-      - python-devel
-    state: latest
-  when: python_version == '2.7'
-
-- name: "(file) ln -sf /usr/bin/pip{{ python_version | default(3.6) }} /usr/bin/pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"  
-  file:
-    src: "/usr/bin/pip{{ python_version | default(3.6) }}"
-    dest: "/usr/bin/pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"
-    state: link
-    force: True
-    follow: False
-  #notify: debug yum install python-pip
-
-- name: "(shell) pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }} install --upgrade pip"
-  shell: "pip{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }} install --upgrade pip"
-
-- name: "(file) ln -sf /usr/bin/python{{ python_version | default(3.6) }} /usr/bin/python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"  
-  file:
-    src: "/usr/bin/python{{ python_version | default(3.6) }}"
-    dest: "/usr/bin/python{{ python_version | default(3.6) | regex_replace('([0-9]+).([0-9]+)', '\\1') }}"
-    state: link
-    force: True
-    follow: False
 #notify: debug yum install python
