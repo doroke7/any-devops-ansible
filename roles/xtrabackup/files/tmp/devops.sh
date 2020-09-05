@@ -1,14 +1,16 @@
 ## xtrabackup 2.3 版本 innobackupex 是 Perl 脚本
 ## xtrabackup 2.4 版本 innobackupex 是 C 程序
 ## xtrabackup 8.0 版本 innobackupex 开始弃用
+## innobackupex 兼容性不好 对于 MySQL 版本兼容不佳
+
 ## xtrabackup 2.4 版本 适应 MySQL Server 5.7 与 Percona Server 5.7
 ## xtrabackup 8.0 版本 适应 MySQL Server 8.0 与 Percona Server 8.0
 
-######################################## xtrabackup 2.4 版本 ########################################
+######################################## xtrabackup [2.3] 版本 ########################################
 sudo innobackupex --use-memory=4G --deaults-file=/etc/my.cnf --host=127.0.0.1 --user=root --password=mysql_pass_cli /var/www/any-devops-python/.xtrabackup/
 
 
-######################################## xtrabackup 8.0 版本 ########################################
+######################################## xtrabackup [2.4] [8.0] 版本 ########################################
 ## 热备份需要连 sys mysql imformation_schema performance_schema 一起备份
 sudo xtrabackup --backup --host=localhost --user=backup --password=mysql_pass_backup  --target-dir=/var/www/any-devops-python/.xtrabackup/ --parallel=2
 
@@ -43,17 +45,24 @@ sudo xtrabackup --defaults-file=/etc/my.cnf --copy-back --rsync --target-dir=/va
 
 
 
-# 增量备份
+# 增量备份与恢复
 ## 全量
-sudo xtrabackup --defaults-file=/etc/my.cnf /var/www/any-devops-python/.xtrabackup/
+
+## 1. 以 xtraback 备份 基本 数据
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup  --target-dir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
+
+## 2. 以 xtraback 备份 以 【基本 数据 --target-dir】为基础，  并产生  【增量数据 --incremental-basedir】 
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --target-dir=/var/www/any-devops-python/.xtrabackup/increment1 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --target-dir=/var/www/any-devops-python/.xtrabackup/increment2 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
 
 
+## 3. 以 xtraback 准备基本数据
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --target-dir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
 
+## 4. 以 xtraback 把增量数据 倒入 基本数据中 , 最后一次 不要加入 --apply-log-only 
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --target-dir=/var/www/any-devops-python/.xtrabackup/now  --incremental-dir=/var/www/any-devops-python/.xtrabackup/increment1 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --target-dir=/var/www/any-devops-python/.xtrabackup/now  --incremental-dir=/var/www/any-devops-python/.xtrabackup/increment2 --parallel=8
 
+## 5. 以 xtraback 把 基本数据 与 增量数据 倒入 MySQL ,  
+sudo xtrabackup --defaults-file=/etc/my.cnf --copy-back  --target-dir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
 
-sudo xtrabackup --backup --defaults-file=/etc/my.cnf --target-dir=/var/www/any-devops-python/.xtrabackup/
-
-
-Xtrabackup全量备份与恢复
-sudo xtrabackup --defaults-file=/etc/my.cnf --backup /var/www/any-devops-python/.xtrabackup/
-sudo xtrabackup --copy-back --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05_17-56-04
