@@ -46,23 +46,29 @@ sudo xtrabackup --defaults-file=/etc/my.cnf --copy-back --rsync --target-dir=/va
 
 
 # 增量备份与恢复
-## 全量
 
 ## 1. 以 xtraback 备份 基本 数据
-sudo xtrabackup --defaults-file=/etc/my.cnf --backup  --target-dir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05 --parallel=8
 
-## 2. 以 xtraback 备份 以 【基本 数据 --target-dir】为基础，  并产生  【增量数据 --incremental-basedir】 
-sudo xtrabackup --defaults-file=/etc/my.cnf --backup --target-dir=/var/www/any-devops-python/.xtrabackup/increment1 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
-sudo xtrabackup --defaults-file=/etc/my.cnf --backup --target-dir=/var/www/any-devops-python/.xtrabackup/increment2 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
+## 2. 以 xtraback 备份 以 【基本 上一次的 增量数据  --incremental-basedir 】为基础，  并产生  【增量数据 --target-dir】 
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/1 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/2020-09-05/1 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/3 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/4 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/2020-09-05/3 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --backup --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/5 --incremental-basedir=/var/www/any-devops-python/.xtrabackup/2020-09-05/4 --parallel=8
 
 
 ## 3. 以 xtraback 准备基本数据
-sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --target-dir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05 --parallel=8
 
-## 4. 以 xtraback 把增量数据 倒入 基本数据中 , 最后一次 不要加入 --apply-log-only 
-sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --target-dir=/var/www/any-devops-python/.xtrabackup/now  --incremental-dir=/var/www/any-devops-python/.xtrabackup/increment1 --parallel=8
-sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --target-dir=/var/www/any-devops-python/.xtrabackup/now  --incremental-dir=/var/www/any-devops-python/.xtrabackup/increment2 --parallel=8
+## 4. 以 xtraback 把增量数据 倒入 基本数据中 , [[[最后一次 不要加入 --apply-log-only ]]]
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05  --incremental-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/1 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05  --incremental-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05  --incremental-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/3 --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --apply-log-only --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05  --incremental-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/4 --parallel=8
+
+sudo xtrabackup --defaults-file=/etc/my.cnf --prepare --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05 --incremental-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/5 --parallel=8
 
 ## 5. 以 xtraback 把 基本数据 与 增量数据 倒入 MySQL ,  
-sudo xtrabackup --defaults-file=/etc/my.cnf --copy-back  --target-dir=/var/www/any-devops-python/.xtrabackup/now --parallel=8
+sudo xtrabackup --defaults-file=/etc/my.cnf --copy-back --rsync --use-memory=4G --target-dir=/var/www/any-devops-python/.xtrabackup/2020-09-05/2020-09-05 --parallel=8
 
