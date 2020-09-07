@@ -19,6 +19,29 @@ MYSQL:
       ENGINE: 'InnoDB'
       CONNECTIONS:
 
+        - drop_user: true                 # index = 5
+          with_grant_option: false
+          GRANTS: 
+            - 'SELECT'
+            - 'INSERT'
+            - 'UPDATE'
+            - 'CREATE'
+            - 'DELETE'
+            - 'CREATE TEMPORARY TABLES'
+            - 'CREATE VIEW'
+            - 'LOCK TABLES'
+            - 'TRIGGER'
+            - 'REFERENCES'
+            - 'EVENT'
+            - 'EXECUTE'
+            - 'CREATE ROUTINE'
+            - 'ALTER ROUTINE'
+          USER: 'backend'
+          HOSTS: 
+            - 'localhost'
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+          PASSWORD: 'mysql_pass_backend'
+          DATABASE: 'shoushou_video'
         - drop_user: true                 # index = 3
           with_grant_option: true
           GRANTS: 
