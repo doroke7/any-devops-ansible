@@ -4,8 +4,8 @@
 
 # We cannot put any Chinese words in Nginx beacause it must cause SSL robot fail
 
-user nginx;
-worker_processes auto;
+user {{ NGINX['USER'] | default('nginx') }};
+worker_processes {{ NGINX['WORKER_PROCESSES'] | default(4) }};  # same as CPU nmber
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;
 
@@ -13,7 +13,8 @@ pid /run/nginx.pid;
 include /usr/share/nginx/modules/*.conf;
 
 events {
-    worker_connections 1024;
+    use {{ NGINX['USE'] | default(4) }};
+    worker_connections {{ NGINX['WORKER_CONNECTIONS'] | default(1024) }};
 }
 
 http {

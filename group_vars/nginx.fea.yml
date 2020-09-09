@@ -1,0 +1,6 @@
+--- # 优先次序高
+NGINX:
+  USER: 'nginx'
+  WORKER_PROCESSES: 4
+  USE: 'epoll'
+  WORKER_CONNECTIONS: 1024  # 併發 = 4 X 1024
