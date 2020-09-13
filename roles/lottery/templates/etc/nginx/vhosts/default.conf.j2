@@ -21,7 +21,7 @@ server {
     {% endif %}
     
     # Load configuration files for the default server block.
-
+    client_max_body_size 20m;
     location ~* \.(ico|css|js|gif|jpe?g|png|ogg|ogv|svg|svgz|eot|otf|woff)(\?.+)?$ {
         expires max;
         log_not_found off;

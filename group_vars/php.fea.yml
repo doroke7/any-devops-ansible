@@ -5,9 +5,15 @@ PHP:
   SESSION:
     SAVE_HANDLER: 'memcached'
     SAVE_PATH: '127.0.0.1:11211'
+<<<<<<< HEAD
   FPM:
     PM: 'dynamic'
     MAX_CHILDREN: 50
     START_SERVERS: 20
     MIN_SPARE_SERVERS: 10
     MAX_SPARE_SERVERS: 30
+=======
+  XDEBUG:
+    REMOTE_CONNECT_BACK: 1
+    REMOTE_HOST: '127.0.0.1'
+>>>>>>> 17fc7acb6f8f6e056e2079ab38cb8ff5adfa35f6
