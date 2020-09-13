@@ -6,6 +6,7 @@
   become: true
   vars_files:
     - ./../group_vars/php.fea.yml
+    - ./../group_vars/fpm.fea.yml
   pre_tasks:
     - name: "本地 feature 环境，PHP 安装开始"
       shell: "echo 'playbook php starts' "
@@ -24,6 +25,7 @@
   become: true
   vars_files:
     - ./../group_vars/php.dev.yml
+    - ./../group_vars/fpm.dev.yml
   pre_tasks:
     - name: "开发 develop 环境，PHP 安装开始"
       shell: echo 'playbook php starts'
