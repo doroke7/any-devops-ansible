@@ -1,0 +1,3 @@
+---
+- name: "(shell) ulimit -n 65536"
+  shell: "ulimit -n 65536"

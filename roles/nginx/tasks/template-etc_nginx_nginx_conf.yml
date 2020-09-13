@@ -16,7 +16,7 @@
   file:
     path: /etc/nginx/frameworks
     state: directory
-    mode: 0755
+    mode: 0766
 
 - name: (template) scp etc/nginx/frameworks/*.conf /etc/nginx/frameworks/*.conf
   template:
@@ -31,7 +31,7 @@
   template:
     src: "{{ item }}"
     dest: /etc/nginx/conf.d/{{ item | basename }}
-    mode: 0755
+    mode: 0766
   with_fileglob: "./etc/nginx/conf.d/*.conf"
   # 读取的 是 files 目录下
 

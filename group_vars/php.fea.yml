@@ -5,3 +5,9 @@ PHP:
   SESSION:
     SAVE_HANDLER: 'memcached'
     SAVE_PATH: '127.0.0.1:11211'
+  FPM:
+    PM: 'dynamic'
+    MAX_CHILDREN: 50
+    START_SERVERS: 20
+    MIN_SPARE_SERVERS: 10
+    MAX_SPARE_SERVERS: 30
