@@ -164,7 +164,8 @@ max_connect_errors = 1000
 back_log = 1000                                         # 指出在MySQL暂时停止响应新请求之前，短时间内的多少个请求
 wait_timeout = 360                                      # 指定一个请求的最大连接时间
 interactive_timeout = 360                               # 连接保持活动的时间
-
+skip_symbolic_links = yes                               # 禁止使用 软 链接 存储 mysql 数据 档案
+local-infile=1
 ######################### [mysqld] Log 相关 #########################
 log_output = FILE                                       # log 写入 file , 效能较好
 
