@@ -3937,4 +3937,15 @@ CREATE TABLE `cmf_winning_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='转盘中奖记录表';
 
+
+DROP TABLE IF EXISTS `cmf_user_investigation`;
+CREATE TABLE `cmf_user_investigation` (
+  `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(100) NOT NULL,
+  `keywords` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '{}',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
 SET FOREIGN_KEY_CHECKS = 1;

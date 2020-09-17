@@ -10,7 +10,6 @@ server {
 
 
 
-
     charset utf-8;
     server_tokens off;
 	
@@ -79,11 +78,7 @@ server {
         include conf.d/php{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}.conf;
     }
 
-    error_page 404 /404.html;
-        location = /40x.html {
-    }
 
-    error_page 500 502 503 504 /50x.html;
-        location = /50x.html {
-    }
+    #ssl_protocols TLSv1.2;
+
 }
