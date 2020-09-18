@@ -1685,7 +1685,18 @@ ldap.max_links = -1
 ; Local Variables:
 ; tab-width: 4
 ; End:
-
+[memcached]
+memcache.allow_failover=1
+memcache.max_failover_attempts=20
+memcache.chunk_size=32768
+memcache.default_port=11211
+memcache.hash_strategy=consistent
+memcache.hash_function=crc32
+memcache.protocol=ascii
+memcache.redundancy=1
+memcache.session_redundancy=2
+memcache.compress_threshold=20000
+memcache.lock_timeout=15
 
 [xdebug]
 zend_extension="xdebug.so"
