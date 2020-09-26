@@ -1,0 +1,24 @@
+[
+	{
+		"word_wrap": "false",
+		"save_on_focus_lost": true,
+	},
+    {
+        "caption": "File",
+        "mnemonic": "F",
+        "id": "file",
+        "children":
+        [
+            { "command": "new_file", "caption": "New File", "mnemonic": "N" },
+
+            { "command": "prompt_open_file", "caption": "Open File…", "mnemonic": "O", "platform": "!OSX" },
+            { "command": "prompt_open_folder", "caption": "Open Folder…", "platform": "!OSX" },
+            { "command": "prompt_open", "caption": "Open…", "platform": "OSX" }
+        ]
+    },
+    {
+        "command": "open_dir",
+        "args": {"dir": "$file_path", "file": "$file_name"},
+        "caption": "Open Folder…"
+    }
+]
