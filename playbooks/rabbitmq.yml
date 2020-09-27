@@ -1,0 +1,20 @@
+---
+- name: Install feature rabbitmq
+  hosts: fea-rabbitmq
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+  - ./../group_vars/rabbitmq.fea.yml
+  pre_tasks:
+    - name: "本地 feature 环境，Rabbitmq 安装开始"
+      shell: echo 'playbook Rabbitmq starts'
+  roles:
+    - role: rabbitmq
+      vars: 
+        bra: fea
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，Rabbitmq 安装开始"
+      shell: echo 'playbook Rabbitmq ends'
+  vars:
