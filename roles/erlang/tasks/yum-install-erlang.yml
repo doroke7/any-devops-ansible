@@ -1,0 +1,10 @@
+---
+- name: (yum_repository)
+  yum_repository:
+    name: rabbitmq-erlang
+    description: EPEL YUM repo
+    file: external_repos
+    baseurl: https://dl.bintray.com/rabbitmq-erlang/rpm/erlang/22/el/7
+    gpgcakey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    gpgcheck: no
+
