@@ -1,0 +1,20 @@
+---
+- name: Install feature kafka
+  hosts: fea-kafka
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+  - ./../group_vars/kafka.fea.yml
+  pre_tasks:
+    - name: "本地 feature 环境，Kafka 安装开始"
+      shell: echo 'playbook Kafka starts'
+  roles:
+    - role: kafka
+      vars: 
+        bra: fea
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，Kafka 安装开始"
+      shell: echo 'playbook Kafka ends'
+  vars:

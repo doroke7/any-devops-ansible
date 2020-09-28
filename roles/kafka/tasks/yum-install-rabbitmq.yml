@@ -1,0 +1,11 @@
+---
+- name: (get_url) wget https://downloads.apache.org/kafka/2.6.0/kafka_2.12-2.6.0.tgz
+  get_url:
+    url: "https://downloads.apache.org/kafka/2.6.0/kafka_2.12-2.6.0.tgz"
+    dest: "/tmp/kafka_2.12-2.6.0.tgz"
+    mode: 0775
+
+- name: (unarchive) tar zxvf /tmp/kafka_2.12-2.6.0.tgz
+  unarchive:
+    src: foo.tgz
+    dest: /var/lib/foo
