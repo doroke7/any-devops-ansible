@@ -1,2 +1,2 @@
 ---
-- import_tasks: yum-install-rabbitmq.yml
+- import_tasks: yum-install-kafka.yml

@@ -5,7 +5,13 @@
     dest: "/tmp/kafka_2.12-2.6.0.tgz"
     mode: 0775
 
+- name: mkdir /opt/kafka
+  file:
+    path: /opt/kafka
+    state: directory
+
 - name: (unarchive) tar zxvf /tmp/kafka_2.12-2.6.0.tgz
   unarchive:
-    src: foo.tgz
-    dest: /var/lib/foo
+    src: "/tmp/kafka_2.12-2.6.0.tgz"
+    dest: /opt/kafka
+    extra_opts: [--strip-components=1]
