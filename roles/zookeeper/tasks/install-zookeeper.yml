@@ -1,17 +1,33 @@
 ---
+- name: (service) service zookeeper stop
+  service:
+    name: zookeeper
+    state: stopped
+  ignore_errors: yes
+
+
 - name: (get_url) wget https://downloads.apache.org/kafka/2.6.0/kafka_2.12-2.6.0.tgz
   get_url:
     url: "https://downloads.apache.org/kafka/2.6.0/kafka_2.12-2.6.0.tgz"
     dest: "/tmp/kafka_2.12-2.6.0.tgz"
     mode: 0775
 
-- name: mkdir /opt/kafka
+- name: (file) rm -Rf /opt/zookeeper
   file:
-    path: /opt/kafka
+    path: /opt/zookeeper
+    state: absent
+
+- name: (file) mkdir /opt/zookeeper
+  file:
+    path: /opt/zookeeper
     state: directory
+    owner: zookeeper
+    group: zookeeper
+    mode: 0775
+    recurse: yes
 
 - name: (unarchive) tar zxvf /tmp/kafka_2.12-2.6.0.tgz
   unarchive:
     src: "/tmp/kafka_2.12-2.6.0.tgz"
-    dest: /opt/kafka
+    dest: /opt/zookeeper
     extra_opts: [--strip-components=1]

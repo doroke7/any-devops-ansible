@@ -1,0 +1,7 @@
+- name: "(template) scp lib/systemd/system/zookeeper.service.j2 /lib/systemd/system/zookeeper.service"
+  template:
+    src: lib/systemd/system/zookeeper.service.j2
+    dest: /lib/systemd/system/zookeeper.service
+    owner: root
+    group: root
+    mode: 0755

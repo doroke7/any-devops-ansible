@@ -1,0 +1,20 @@
+---
+- name: Install feature zookeeper
+  hosts: fea-zookeeper
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+  - ./../group_vars/zookeeper.fea.yml
+  pre_tasks:
+    - name: "本地 feature 环境，Zookeeper 安装开始"
+      shell: echo 'playbook Zookeeper starts'
+  roles:
+    - role: zookeeper
+      vars: 
+        bra: fea
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，Zookeeper 安装开始"
+      shell: echo 'playbook Zookeeper ends'
+  vars:

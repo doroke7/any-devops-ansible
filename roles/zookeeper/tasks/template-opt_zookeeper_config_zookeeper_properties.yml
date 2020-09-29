@@ -1,0 +1,7 @@
+- name: "(template) scp opt/zookeeper/config/zookeeper.properties.j2 /opt/zookeeper/config/zookeeper.properties"
+  template:
+    src: opt/zookeeper/config/zookeeper.properties.j2
+    dest: /opt/zookeeper/config/zookeeper.properties
+    owner: root
+    group: root
+    mode: 0755

@@ -1,2 +1,9 @@
 ---
-- import_tasks: yum-install-kafka.yml
+- import_tasks: install-zookeeper.yml
+- import_tasks: user_user-G-zookeeper-zookeeper.yml
+- import_tasks: template-lib_systemd_system_zookeeper_service.yml
+- import_tasks: template-opt_zookeeper_config_zookeeper_properties.yml
+- import_tasks: file_mkdir_var-log-zookeeper.yml
+- import_tasks: file_mkdir_var-lib-zookeeper.yml
+- import_tasks: service-zookeeper-restarted.yml
+
