@@ -1,0 +1,13 @@
+- name: (file) rm -Rf /var/log/zookeeper
+  file:
+    path: /var/log/zookeeper
+    state: absent
+    
+- name: (file) mkdir /var/log/zookeeper
+  file:
+    path: /var/log/zookeeper
+    state: directory
+    recurse: yes
+    owner: zookeeper
+    group: zookeeper
+    mode: 0775
