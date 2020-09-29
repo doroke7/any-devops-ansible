@@ -6,13 +6,13 @@
   with_fileglob: '/etc/nginx/conf.d/*.conf'
   
   
-- name: mkdir /etc/nginx/vhosts
+- name: (file) mkdir /etc/nginx/vhosts
   file:
     path: /etc/nginx/vhosts
     state: directory
     mode: 0755
 
-- name: mkdir /etc/nginx/frameworks
+- name: (file) mkdir /etc/nginx/frameworks
   file:
     path: /etc/nginx/frameworks
     state: directory

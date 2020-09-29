@@ -1,0 +1,11 @@
+- name: (group) groupadd zookeeper
+  group:
+    name: zookeeper
+    state: present
+
+- name: (user) useradd -G zookeeper zookeeper
+  user:
+    name: zookeeper
+    shell: /bin/bash
+    groups: zookeeper
+    append: yes
