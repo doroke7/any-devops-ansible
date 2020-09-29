@@ -31,3 +31,12 @@
     src: "/tmp/kafka_2.12-2.6.0.tgz"
     dest: /opt/zookeeper
     extra_opts: [--strip-components=1]
+
+- name: (file) chown -r zookeeper:zookeeper /opt/zookeeper
+  file:
+    path: /opt/zookeeper
+    state: directory
+    recurse: yes
+    owner: zookeeper
+    group: zookeeper
+    mode: 0755
