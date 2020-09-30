@@ -1,0 +1,7 @@
+- name: "(template) scp opt/kafka/config/server.properties.j2 /opt/kafka/config/server.properties"
+  template:
+    src: opt/kafka/config/server.properties.j2
+    dest: /opt/kafka/config/server.properties
+    owner: root
+    group: root
+    mode: 0755

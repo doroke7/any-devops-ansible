@@ -1,11 +1,11 @@
-- name: (group) groupadd zookeeper
+- name: (group) groupadd kafka
   group:
-    name: zookeeper
+    name: kafka
     state: present
 
-- name: (user) useradd -G zookeeper zookeeper
+- name: (user) useradd -G kafka kafka
   user:
-    name: zookeeper
+    name: kafka
     shell: /bin/bash
-    groups: zookeeper
+    groups: kafka
     append: yes

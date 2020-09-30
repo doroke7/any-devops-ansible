@@ -1,4 +1,10 @@
 ---
+
+- name: (systemd) systemctl daemon-reload
+  systemd:
+    name: zookeeper
+    state: reloaded
+
 - name: (service) service zookeeper restarted
   service:
     name: zookeeper

@@ -1,0 +1,7 @@
+- name: "(template) scp lib/systemd/system/kafka.service.j2 /lib/systemd/system/kafka.service"
+  template:
+    src: lib/systemd/system/kafka.service.j2
+    dest: /lib/systemd/system/kafka.service
+    owner: root
+    group: root
+    mode: 0755
