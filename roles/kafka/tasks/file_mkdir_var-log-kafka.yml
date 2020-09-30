@@ -7,6 +7,6 @@
   file:
     path: '/var/log/kafka'
     state: 'directory'
-    owner: root
-    group: root
+    owner: kafka
+    group: kafka
     mode: '0775'
