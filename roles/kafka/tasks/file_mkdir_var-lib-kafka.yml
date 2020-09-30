@@ -7,7 +7,7 @@
   file:
     path: /var/lib/kafka
     state: directory
-    recurse: yes
+    # recurse: yes
     owner: kafka
     group: kafka
     mode: 0775

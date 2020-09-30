@@ -1,4 +1,10 @@
 ---
+
+- name: (systemd) systemctl daemon-reload
+  systemd:
+    name: kafka
+    state: reloaded
+
 - name: (service) service kafka restarted
   service:
     name: kafka

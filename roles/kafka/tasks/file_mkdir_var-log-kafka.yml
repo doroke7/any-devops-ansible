@@ -5,9 +5,8 @@
     
 - name: (file) mkdir /var/log/kafka
   file:
-    path: /var/log/kafka
-    state: directory
-    recurse: yes
-    owner: kafka
-    group: kafka
-    mode: 0775
+    path: '/var/log/kafka'
+    state: 'directory'
+    owner: root
+    group: root
+    mode: '0775'

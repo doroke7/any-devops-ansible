@@ -1,9 +1,9 @@
 ---
-- import_tasks: install-kafka.yml
-- import_tasks: user_user-G-kafka-kafka.yml
-- import_tasks: template-lib_systemd_system_kafka_service.yml
-- import_tasks: template-opt_zookeeper_config_kafka_properties.yml
+# - import_tasks: install-kafka.yml
+# - import_tasks: user_user-G-kafka-kafka.yml
+# - import_tasks: template-lib_systemd_system_kafka_service.yml
+# - import_tasks: template-opt_kafka_config_kafka_properties.yml
 - import_tasks: file_mkdir_var-log-kafka.yml
 - import_tasks: file_mkdir_var-lib-kafka.yml
-- import_tasks: service-kafka-restarted.yml
+# - import_tasks: service-kafka-restarted.yml
 
