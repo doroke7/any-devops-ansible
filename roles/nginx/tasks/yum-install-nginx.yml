@@ -11,6 +11,15 @@
   yum:
     name: nginx
     state: present
+
+
+
+
+- name: (get_url) wget http://nginx.org/download/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz
+  get_url:
+    url: "http://nginx.org/download/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz"
+    dest: "/tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz"
+    mode: 0775
   # notify: 
   #   - debug yum install nginx
 
