@@ -1,3 +1,19 @@
+ sudo rabbitmqctl add_user 'backend';
+ sudo rabbitmqctl add_user 'backend' 'rabbitmq_pass';
+ sudo rabbitmqctl add_vhost 'default';
+
+# First ".*" for configure permission on every entity
+# Second ".*" for write permission on every entity
+# Third ".*" for read permission on every entity
+sudo rabbitmqctl set_permissions -p "default" "backend" ".*" ".*" ".*"
+
+# 开启 RabbitMQ WEB GUI
+sudo rabbitmq-plugins enable rabbitmq_management
+
+
+# 查看 rabbitMQ 基本配置   类似 nginx -t
+rabbitmq-diagnostics status
+
 rabbitmqctl stop [{pid_file}]
 # 表示stop 在RabbitMQ服务器上运行的一个Erlang 节点，可以指定某一个 *pid_file*，表示会等待这个指定的程序结束
 
