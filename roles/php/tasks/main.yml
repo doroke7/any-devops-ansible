@@ -1,5 +1,6 @@
 ---
-- import_tasks: yum-install-php.yml
+- import_tasks: yum-install-php.yml   
+
 - import_tasks: file-etc_opt_remi_php_php_d_xdebug_ini.yml
 - import_tasks: template-etc_opt_remi_php_php_ini.yml
 - import_tasks: template-etc_opt_remi_php_php_fpm_d_www_conf.yml

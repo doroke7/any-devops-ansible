@@ -1,3 +1,6 @@
-- import_tasks: yum-install-nginx.yml
+- import_tasks: install-nginx.yml     # 使用 编译 安装
+# - import_tasks: yum-install-nginx.yml # 使用 Yum  安装
+
+
 - import_tasks: template-etc_nginx_nginx_conf.yml
 - import_tasks: shell-ulimit_n_65536.yml

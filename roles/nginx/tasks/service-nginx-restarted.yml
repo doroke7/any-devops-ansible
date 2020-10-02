@@ -1,4 +1,9 @@
 ---
+- name: (systemd) systemctl daemon-reload
+  systemd:
+    name: nginx
+    state: reloaded
+
 - name: (service) service nginx restarted
   service:
     name: nginx

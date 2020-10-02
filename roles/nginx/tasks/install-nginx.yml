@@ -1,0 +1,91 @@
+---
+
+- name: (service) service zookeeper stop
+  service:
+    name: zookeeper
+    state: stopped
+  ignore_errors: yes
+
+- name: (user) useradd nginx -G root
+  user:
+    name: nginx
+    shell: /bin/bash
+    groups: root
+    append: yes
+
+# usermod -s /bin/sh nginx
+
+- name: (file) mkdir  /var/cache/nginx/client_temp
+  file:
+    path:  /var/cache/nginx/client_temp
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+    recurse: yes
+
+- name: (yum) yum install openssl openssl-devel
+  yum:
+    name: 
+      - "openssl"
+      - "openssl-devel"
+    state: present
+
+- name: "(git) git clone https://github.com/arut/nginx-rtmp-module.git /tmp/nginx-rtmp-module"
+  git:
+    repo: 'https://github.com/arut/nginx-rtmp-module.git'
+    dest: "/tmp/nginx-rtmp-module"
+    clone: yes
+    update: yes
+    accept_hostkey: yes
+    force: yes
+  become: no # 使用 vagrant:vagrant git clone 下来， 不使用 root git clone
+
+
+
+
+- name: (get_url) wget http://nginx.org/download/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz
+  get_url:
+    url: "http://nginx.org/download/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz"
+    dest: "/tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz"
+    mode: 0775
+
+
+- name: (file) mkdir /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}
+  file:
+    path: /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+    recurse: yes
+
+
+- name: (unarchive) tar zxvf /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz
+  unarchive:
+    src: "/tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz"
+    dest: /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}
+    extra_opts: [--strip-components=1]
+
+- name: "(command) cd /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }} && ./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --user=nginx --group=nginx --build=CentOS --builddir=nginx-1.18.0 --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --with-select_module --with-poll_module --with-threads --with-file-aio --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-mail=dynamic --with-mail_ssl_module --with-stream=dynamic --with-stream_ssl_module --with-stream_realip_module --with-stream_ssl_preread_module --with-compat --add-module=../nginx-rtmp-module --with-debug"
+  command: "./configure --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-path=/usr/lib64/nginx/modules --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --pid-path=/var/run/nginx.pid --lock-path=/var/run/nginx.lock --user=nginx --group=nginx --build=CentOS --builddir=nginx-{{ NGINX.VERSION | default('1.18.0') }} --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/cache/nginx/client_temp --http-proxy-temp-path=/var/cache/nginx/proxy_temp --http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp --http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp --http-scgi-temp-path=/var/cache/nginx/scgi_temp --with-select_module --with-poll_module --with-threads --with-file-aio --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-mail=dynamic --with-mail_ssl_module --with-stream=dynamic --with-stream_ssl_module --with-stream_realip_module --with-stream_ssl_preread_module --with-compat --add-module=../nginx-rtmp-module --with-debug"
+  args:
+    chdir: /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}
+
+- name: "(command) cd /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }} && make"
+  command: "make"
+  args:
+    chdir: /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}
+
+- name: "(command) cd /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }} && make install"
+  command: "make install"
+  args:
+    chdir: /tmp/nginx-{{ NGINX.VERSION | default('1.18.0') }}
+
+- name: "(template) scp lib/systemd/system/nginx.service.j2 /lib/systemd/system/nginx.service"
+  template:
+    src: lib/systemd/system/nginx.service.j2
+    dest: /lib/systemd/system/nginx.service
+    owner: root
+    group: root
+    mode: 0755
