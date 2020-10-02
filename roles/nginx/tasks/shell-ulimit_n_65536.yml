@@ -1,3 +1,4 @@
 ---
 - name: "(shell) ulimit -n 65536"
   shell: "ulimit -n 65536"
+# 开始 Linux 本身 数字限制  提高 Nginx 并发
