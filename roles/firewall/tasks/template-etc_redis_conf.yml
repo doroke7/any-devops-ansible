@@ -1,0 +1,9 @@
+---
+- name: (template) scp etc/redis.conf.j2 /etc/redis.conf
+  template:
+    src: etc/redis.conf.j2
+    dest: /etc/redis.conf
+    owner: root
+    group: root
+    mode: 0600
+  # notify: start nginx
