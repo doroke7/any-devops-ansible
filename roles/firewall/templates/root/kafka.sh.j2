@@ -1,0 +1,2 @@
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="{ source_address }" destination address="{ destination_address }" port port="9092" protocol="tcp" accept"
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="{ source_address }" destination address="{ destination_address }" port port="9092" protocol="udp" accept"

@@ -2,3 +2,5 @@
 /roles/mysql/files/root/.ssh/*
 /ssh/*
 /hosts/hosts
+.gitsecret/keys/random_seed
+!*.secret

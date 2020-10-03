@@ -21,3 +21,6 @@ firewall-cmd --get-active-zones  # 查看区域信息
 
 
 firewall-cmd --zone=public --list-all
+
+
+firewall-cmd --reload # 更新防火墙规则
