@@ -1,0 +1,57 @@
+---
+- name: Install feature firewall
+  hosts: fea-firewall
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/firewall.fea.yml
+  pre_tasks:
+    - name: '本地 feature 环境，Redis 安装开始'
+      shell: echo 'playbook firewall starts'
+  roles:
+    - role: firewall
+      vars:
+        bra: fea
+      when: branch == 'fea' or branch == 'feature' or branch == 'all' or branch is not defined
+  post_tasks:
+    - name: '开发 feature 环境，Redis 安装完毕'
+      shell: echo 'playbook firewall ends'
+  vars:
+- name: Install develop firewall
+  hosts: dev-firewall
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/firewall.dev.yml
+  pre_tasks:
+    - name: '开发 develop 环境，Redis 安装开始'
+      shell: echo 'playbook firewall starts'
+  roles:
+    - role: firewall
+      vars:
+        bra: dev
+      when: branch == 'dev' or branch == 'develop' or branch == 'all'
+  post_tasks:
+    - name: '开发 develop 环境，Redis 安装完毕'
+      shell: echo 'playbook firewall ends'
+
+- name: Install develop firewall
+  hosts: dev-firewall
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/firewall.dev.yml
+  pre_tasks:
+    - name: '开发 develop 环境，Redis 安装开始'
+      shell: echo 'playbook firewall starts'
+  roles:
+    - role: firewall
+      vars:
+        bra: dev
+      when: branch == 'dev' or branch == 'develop' or branch == 'all'
+  post_tasks:
+    - name: '开发 develop 环境，Redis 安装完毕'
+      shell: echo 'playbook firewall ends'
