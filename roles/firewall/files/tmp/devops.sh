@@ -8,10 +8,16 @@ sudo firewall-cmd --list-all-zones
 firewall-cmd --get-default-zone
 
 # 設定預設區域
-firewall-cmd --set-default-zone=home
+firewall-cmd --set-default-zone=public
 
 # 查詢網路介面所屬區域
 firewall-cmd --get-zone-of-interface=enp7s0d1
 
 # 列出 public 區域永久的服務設定值
 sudo firewall-cmd --zone=public --permanent --list-services
+
+
+firewall-cmd --get-active-zones  # 查看区域信息
+
+
+firewall-cmd --zone=public --list-all
