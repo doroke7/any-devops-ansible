@@ -36,26 +36,15 @@ server {
 	
     error_page 404 /index.php;
 
-    location ~ \.mp4$ {
+    location ~* \.(mp4|avi|wmv|rm|rmvb|mkv|mp3|wma|wav|aac|txt|pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar)(\?.+)?$ {
         max_ranges 0;
     }
 
-    location ~* \.(ico|css|js|gif|jpe?g|png|ogg|ogv|svg|svgz|eot|otf|woff)(\?.+)?$ {
+    location ~* \.(ico|bmp|bmp4|css|js|gif|jpe?g|png|ogg|ogv|svg|svgz|eot|otf|woff)(\?.+)?$ {
         expires max;
         log_not_found off;
     }
     
-
-    location /admin/public/index {
-        # Deny admin for customers instead of officers
-        {% for ALLOW in VHOST['ALLOWS'] %}
-        {% if ALLOW != '' %}
-        allow {{ ALLOW | default('10.0.2.2') }};
-        {% endfor %}
-        deny all;
-
-    }
-
 
     location / {
 
