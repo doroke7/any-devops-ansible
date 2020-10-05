@@ -48,23 +48,19 @@ server {
 
     location /admin {
         # Deny admin for customers instead of officers
-        allow {{ VHOST['ALLOW'] | default('10.0.2.2') }};
+        {% for ALLOW in VHOST['ALLOWS'] %}
+        {% if ALLOW != '' %}
+        allow {{ ALLOW | default('10.0.2.2') }};
+        {% endfor %}
         deny all;
 
-
-        if (!-e $request_filename) {
-            rewrite  "^/admin/public/(.*)$"  /admin/public/index.php/$1  last;
-            break;
-        }
-
-        # last  [rewrite UIR]，and [Refind the route in Nginx and PHP controller]。
-        # break [rewrite URI]，并 [Not Refinde route]。 ie. we only change uri without PHP controller changed.
     }
 
 
     location / {
 
         if (!-e $request_filename) {
+            rewrite  "^/admin/public/(.*)$"  /admin/public/index.php/$1  last;
             rewrite  "^/mapi/public/(.*)$"  /mapi/public/index.php/$1  last;
             rewrite  "^/agent/public/(.*)$"  /agent/public/index.php/$1  last;
             rewrite  "^/share/([a-z0-9_]{1,32})$" /agent/public/admin/download/index?agent=$1 last;
