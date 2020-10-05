@@ -46,7 +46,7 @@ server {
     }
     
 
-    location /admin {
+    location /admin/public/index {
         # Deny admin for customers instead of officers
         {% for ALLOW in VHOST['ALLOWS'] %}
         {% if ALLOW != '' %}
