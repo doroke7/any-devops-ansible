@@ -7,120 +7,56 @@
   vars_files:
     - ./../group_vars/shoushou_video.fea.yml
   pre_tasks:
-    - name: "本地 feature 环境，nginx 安装开始"
-      shell: echo 'playbook nginx starts'
+    - name: "本地 feature shoushou_video 安装开始"
+      shell: echo 'playbook shoushou_video starts'
   roles:
     - role: shoushou_video
       vars:
         bra: fea
-        nginx: true
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
       
-- name: Install feature shoushou_video
-  hosts: fea-shoushou_video
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
-  pre_tasks:
-    - name: "本地 feature 环境，mysql 安装开始"
-      shell: echo 'playbook mysql starts'
-  roles:
-    - role: shoushou_video
-      vars: 
-        bra: fea
-        mysql: true
-        mysql_version: '5.6'
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
-  post_tasks:
-    - name: "本地 feature 环境，mysql 安装完毕"
-      shell: echo 'playbook mysql ends'
-      
-- name: Install feature shoushou_video
-  hosts: fea-shoushou_video
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
-  pre_tasks:
-    - name: "本地 feature 环境，采用 GIT 同步代码 安装开始"
-      shell: echo 'playbook git starts'
-  roles:
-    - role: shoushou_video
-      vars: 
-        bra: fea
-        git: true
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
-  post_tasks:
-    - name: "本地 feature 环境，采用 GIT 同步代码 安装开始"
-      shell: echo 'playbook git ends'
 
 
 
 
 - name: Install develop shoushou_video
-  hosts: dev-nginx
+  hosts: dev-shoushou_video
   strategy: linear # free, debug
   gather_facts: true
   become: true
   vars_files:
     - ./../group_vars/shoushou_video.dev.yml
   pre_tasks:
-    - name: "本地 develop 环境，nginx 安装开始"
-      shell: echo 'playbook nginx starts'
+    - name: "本地 develop shoushou_video 安装开始"
+      shell: echo 'playbook shoushou_video starts'
   roles:
     - role: shoushou_video
       vars:
         bra: dev
-        nginx: true
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: "本地 develop 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
       
-- name: Install develop shoushou_video
-  hosts: dev-mysql
+- name: Install master shoushou_video
+  hosts: mas-shoushou_video
   strategy: linear # free, debug
   gather_facts: true
   become: true
   vars_files:
-    - ./../group_vars/shoushou_video.dev.yml
+    - ./../group_vars/shoushou_video.mas.yml
   pre_tasks:
-    - name: "本地 develop 环境，mysql 安装开始"
-      shell: echo 'playbook mysql starts'
+    - name: "本地 master shoushou_video 安装开始"
+      shell: echo 'playbook shoushou_video starts'
   roles:
     - role: shoushou_video
       vars: 
-        bra: dev
-        mysql: true
-        mysql_version: '5.6'
-      when: branch is not defined or branch in ['dev', 'develop', 'all']
+        bra: mas
+      when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
-    - name: "本地 develop 环境，mysql 安装完毕"
-      shell: echo 'playbook mysql ends'
-      
-- name: Install develop shoushou_video_php
-  hosts: dev-shoushou_video_php
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/shoushou_video.dev.yml
-  pre_tasks:
-    - name: "本地 develop 环境，采用 GIT 同步 shoushou_video_php 代码 安装开始"
-      shell: echo 'playbook git starts'
-  roles:
-    - role: shoushou_video
-      vars: 
-        bra: dev
-        git: true
-      when: branch is not defined or branch in ['dev', 'develop', 'all']
-  post_tasks:
-    - name: "本地 develop 环境，采用 GIT 同步 shoushou_video_php 代码 安装开始"
-      shell: echo 'playbook shoushou_video_php ends'
+    - name: "本地 master shoushou_video 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
       

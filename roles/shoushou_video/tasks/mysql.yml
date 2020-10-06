@@ -1,6 +1,8 @@
 ---
 - name: (command) mysql_upgrade --force -uroot
   command: mysql_upgrade --force -u root
+  when: mysql is not undefined or mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
+
 - name: (template) scp tmp/shoushou_video.sql.j2 /tmp/shoushou_video.sql
   template:
     src: tmp/shoushou_video.sql.j2
@@ -9,7 +11,7 @@
     group: root
     mode: 0776
     backup: no
-  when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
+  when: mysql is not undefined or mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
 
 
 - name: (shell) mysql < /tmp/shoushou_video.sql
@@ -24,7 +26,7 @@
     owner: root
     group: root
     mode: 0755
-  when: mysql is not undefined and mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
+  when: mysql is not undefined or mysql in ['yes', '1', 1, true, True, 'true', 'True', 'mysql']
 
     
 - name: "(shell) mysql --user='root' --password='mysql_pass_cli' --force < /tmp/grant.sql"

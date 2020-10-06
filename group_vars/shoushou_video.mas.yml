@@ -1,0 +1,48 @@
+--- # 优先次序高
+NGINX:
+  VHOSTS:
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_video_php'
+      SERVER_NAME: 'yecao-7k8s.xyz lives3-yec-sto07k8.xyz www.yecao-7k8s.xyz www.lives3-yec-sto07k8.xyz'
+      INDEX: 'index.php index.html index.htm'
+      PHP: '7.3'
+      ALLOWS:
+        - '27.110.131.128/26'  # AOA PH WIFI
+        - '122.10.26.192/26'   # AOA HK WIFI 香港
+        - '122.10.26.216'      # AOA HK
+        - '27.110.131.164'     # AOA PH
+      
+
+MYSQL:
+  GTID_MODE: yes
+  TRANSACTION_ISOLATION: 'READ-COMMITTED'
+  CHARACTER_SET: 'utf8mb4'
+  COLLATION: 'utf8mb4_unicode_ci'
+  SERVERS:
+    - HOST: '47.242.59.96'       # 外网 IP   
+      ENGINE: 'InnoDB'
+      CONNECTIONS:
+
+        - drop_user: true                 # index = 5
+          with_grant_option: false
+          GRANTS: 
+            - 'SELECT'
+            - 'INSERT'
+            - 'UPDATE'
+            - 'CREATE'
+            - 'DELETE'
+            - 'CREATE TEMPORARY TABLES'
+            - 'CREATE VIEW'
+            - 'LOCK TABLES'
+            - 'TRIGGER'
+            - 'REFERENCES'
+            - 'EVENT'
+            - 'EXECUTE'
+            - 'CREATE ROUTINE'
+            - 'ALTER ROUTINE'
+          USER: 'backend'
+          HOSTS: 
+            - 'localhost'
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+          PASSWORD: 'mysql_pass_backend'
+          DATABASE: 'shoushou_video'
