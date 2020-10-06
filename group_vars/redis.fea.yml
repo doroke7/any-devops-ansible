@@ -1,7 +1,7 @@
 ---
 REDIS:
   PORT: 6379
-  BIND: '127.0.0.1'
+  BIND: '0.0.0.0'
   UNIXSOCKET: '/var/run/redis/redis.sock'
   REQUIREPASS: 'redis_pass'
   PIDFILE: '/var/run/redis/redis.pid'

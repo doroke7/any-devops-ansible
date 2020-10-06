@@ -1,6 +1,11 @@
 ---
 REDIS:
   PORT: 6379
-  BIND: '127.0.0.1'
-  UNIXSOCKET: '/run/redis/redis.sock'
-  REQUIREPASS: 'redis_pass'
+  BIND: '0.0.0.0'
+  UNIXSOCKET: '/var/run/redis/redis.sock'
+  REQUIREPASS: 'redis_pass_D83411ECBD62E24E83561F5FA5C88C52'
+  PIDFILE: '/var/run/redis/redis.pid'
+  LOGFILE: '/var/log/redis/redis.log'
+  DIR: '/var/lib/redis'
+  LOGLEVEL: 'notice'
+  PROTECTED_MODE: 'yes'

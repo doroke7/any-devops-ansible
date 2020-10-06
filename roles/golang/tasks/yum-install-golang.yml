@@ -1,4 +1,9 @@
 ---
+- name: (yum) yum install epel-release
+  yum:
+    name: epel-release
+    state: present
+    
 - name: (yum) yum remove golang
   yum: 
     name:
