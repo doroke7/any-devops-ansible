@@ -13,7 +13,7 @@
     - role: redis
       vars:
         bra: fea
-      when: branch == 'fea' or branch == 'feature' or branch == 'all' or branch is not defined
+      when: branch is defined and branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: '开发 feature 环境，Redis 安装完毕'
       shell: echo 'playbook redis ends'
@@ -32,7 +32,26 @@
     - role: redis
       vars:
         bra: dev
-      when: branch == 'dev' or branch == 'develop' or branch == 'all'
+      when: branch is defined and branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: '开发 develop 环境，Redis 安装完毕'
+      shell: echo 'playbook redis ends'
+
+- name: Install master redis
+  hosts: mas-redis
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/redis.mas.yml
+  pre_tasks:
+    - name: '开发 master 环境，Redis 安装开始'
+      shell: echo 'playbook redis starts'
+  roles:
+    - role: redis
+      vars:
+        bra: mas
+      when: branch is defined and branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: '开发 master 环境，Redis 安装完毕'
       shell: echo 'playbook redis ends'
