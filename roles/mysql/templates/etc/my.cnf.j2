@@ -251,6 +251,9 @@ log-slave-updates = 0                                   # master-slave SLAVE 不
 plugin_load = "rpl_semi_sync_slave=semisync_slave.so"   # slave 安装 semisync_slave
 loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_slave
 
+
+
+
 {% elif mysql_ha == 'master-slave' and groups[bra ~ '-mysql'].index(inventory_hostname) + 1 >= 3 %}
 log-slave-updates = 0                                   # master-slave SLAVE 不用 将 replication 来的 记入到从服务器自己的二进制日志文件中 
 
@@ -361,20 +364,20 @@ loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_
 
 ############################ [mysqld] MGR 相关 - 主从问题 ############################
 
-{% elif mysql_ha = 'mgr' }
+{% elif mysql_ha == 'mgr' %}
 
 
 
 master_info_repository=TABLE
 relay_log_info_repository=TABLE
 transaction_write_set_extraction=XXHASH64
-loose-group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+loose-group_replication_group_name="aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
 loose-group_replication_start_on_boot=off
-loose-group_replication_local_address="{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }"     #启动组server，种子server，加入组应该连接这些的ip和端口；其他server要加入组得由组成员同意
-loose-group_replication_group_seeds="{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }"
+loose-group_replication_local_address="{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"     #启动组server，种子server，加入组应该连接这些的ip和端口；其他server要加入组得由组成员同意
+loose-group_replication_group_seeds="{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
 loose-group_replication_bootstrap_group=off
-report_host={ MYSQL.SERVERS[i].HOST }
-report_port={ MYSQL.SERVERS[i].PORT }
+report_host={{ MYSQL.SERVERS[i].HOST }}
+report_port={{ MYSQL.SERVERS[i].PORT }}
 
 
 {% else %}
