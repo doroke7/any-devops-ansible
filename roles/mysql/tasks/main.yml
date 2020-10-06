@@ -23,4 +23,6 @@
 
 
 
-# - import_tasks: shell-mysql-tmp_change_master_sql.yml
+- import_tasks: shell-mysql-tmp_change_master_sql.yml
+- import_tasks: shell-mysql-tmp_mgr2_sql.yml
+- import_tasks: shell-mysql-tmp_mgr_sql.yml

@@ -1,8 +1,8 @@
 ---
 
-- name: (service) service zookeeper stop
+- name: (service) service nginx stop
   service:
-    name: zookeeper
+    name: nginx
     state: stopped
   ignore_errors: yes
 
