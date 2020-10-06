@@ -3,7 +3,7 @@
   template:
     src: etc/redis.conf.j2
     dest: /etc/redis.conf
-    owner: root
-    group: root
-    mode: 0600
+    owner: redis
+    group: redis
+    mode: 0755
   # notify: start nginx

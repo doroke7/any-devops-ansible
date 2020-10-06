@@ -208,6 +208,12 @@ relay_log_purge = 1                                     # MHA 需要 relay-log �
 gtid_executed_compression_period = 1000                      
 gtid_mode = on            
 enforce_gtid_consistency = on
+binlog_checksum = NONE
+
+# log_bin=binlog
+# log_slave_updates=ON
+
+ 
 {% endif %}
 
 ############################ [mysqld] Bin log 相关 - 其他 ############################
@@ -353,9 +359,28 @@ log-slave-updates = 0                                   # mha , 可能切换一�
 plugin_load = "rpl_semi_sync_slave=semisync_slave.so"   # slave 安装 semisync_slave
 loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_slave
 
-#########################################################################################
+############################ [mysqld] MGR 相关 - 主从问题 ############################
+
+{% elif mysql_ha = 'mgr' }
+
+
+
+master_info_repository=TABLE
+relay_log_info_repository=TABLE
+transaction_write_set_extraction=XXHASH64
+loose-group_replication_group_name="aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+loose-group_replication_start_on_boot=off
+loose-group_replication_local_address="{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }"     #启动组server，种子server，加入组应该连接这些的ip和端口；其他server要加入组得由组成员同意
+loose-group_replication_group_seeds="{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }"
+loose-group_replication_bootstrap_group=off
+report_host={ MYSQL.SERVERS[i].HOST }
+report_port={ MYSQL.SERVERS[i].PORT }
+
 
 {% else %}
+
+############################ [mysqld]  - 主从问题 ############################
+
 log-slave-updates = 0                                   # 将从服务器从主服务器收到的更新记入到从服务器自己的二进制日志文件中
       
 plugin_load = "rpl_semi_sync_slave=semisync_slave.so"   # slave 安装 semisync_slave
@@ -370,3 +395,6 @@ default_storage_engine = InnoDB                         # 二级 master 若使�
 {% else %}
 default_storage_engine = {{ MYSQL.SERVERS[i].ENGINE }}  # 二级 master 若使用 BACKHOLE engine , 在 二级 master 看不见资料的 !!
 {% endif %}
+
+
+
