@@ -1,9 +1,10 @@
 {% if mysql_ha == 'cluster' %}
 {% set i =  groups[bra ~ '-cluster_mysql'].index(inventory_hostname) %}
-{% elif %}
+{% else %}
 {% set i =  groups[bra ~ '-mysql'].index(inventory_hostname) %}
 {% endif %}
 
+# 我们的 i = {{i}}
 
 ############################################################################################
 
@@ -18,26 +19,15 @@
 
 ############################################################################################
 
-{% elif MYSQL.SERVERS[i].MASTER_HOST is defined %}
-{% set master_host = MYSQL.SERVERS[i].MASTER_HOST %} ## 预设指向 设定当里面的 MASTER_HOST
-
-############################################################################################
-
-{% else %}
-## master_host is undefined!!
-
-############################################################################################
-
-{% endif %}
 
 STOP SLAVE IO_THREAD;
 STOP SLAVE;
 
 
 
-{% if master_host is defined %}               
+{% if MYSQL.MASTER is defined and i > 0 %}               
 
-CHANGE MASTER TO MASTER_HOST='{{ master_host }}', 
+CHANGE MASTER TO MASTER_HOST='{{  MYSQL.MASTER }}', 
                  MASTER_USER='replicator', 
                  MASTER_PASSWORD='mysql_pass_replicator', 
                  {{ 'MASTER_LOG_FILE=mysql-bin.000001, MASTER_LOG_POS=2760,' if (mysql_version == '5.5' or mysql_version == '5.6' or MYSQL.GTID_MODE == 'no' or MYSQL.GTID_MODE == 0 or MYSQL.GTID_MODE == false ) else 'MASTER_AUTO_POSITION=1,' }}
