@@ -5,9 +5,9 @@
   template:
     src: tmp/alter_user.sql.j2
     dest: /tmp/alter_user.sql
-    owner: root
-    group: root
-    mode: 0755
+    owner: mysql
+    group: mysql
+    mode: 0777
 
 - name: "(shell) mysql --user={{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }} --password='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['PASSWORD'] }}' --force < /tmp/alter_user.sql"
   shell: "mysql --user={{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }} --password='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['PASSWORD'] }}' --force < /tmp/alter_user.sql"

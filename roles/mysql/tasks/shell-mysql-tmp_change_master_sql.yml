@@ -1,0 +1,17 @@
+---
+# - name: command mysql_upgrade --force -uroot
+#   command: mysql_upgrade --force -u root
+- name: (template) scp tmp/change_master.sql.j2 /tmp/change_master.sql
+  template:
+    src: tmp/change_master.sql.j2
+    dest: /tmp/change_master.sql
+    owner: mysql
+    group: mysql
+    mode: 0777
+- name: (shell) mysql --force < /tmp/change_master.sql
+  shell: mysql --force < /tmp/change_master.sql
+ # when: mysql_version == '5.5' or mysql_version == '5.6' or mysql_version == '5.7'
+# - name: (shell) mysqld --init-file=/tmp/update_user.sql
+#   shell: mysqld --init-file=/tmp/update_user.sql
+#   when: mysql_version == '8.0' or mysql_version == '8.1'
+  

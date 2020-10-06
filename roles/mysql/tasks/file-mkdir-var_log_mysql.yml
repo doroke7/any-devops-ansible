@@ -10,4 +10,4 @@
     recurse: yes
     owner: mysql
     group: mysql
-    mode: 0775
+    mode: 0777

@@ -1,0 +1,18 @@
+SET GLOBAL group_replication_bootstrap_group=ON;
+
+START GROUP_REPLICATION;
+
+SET GLOBAL group_replication_bootstrap_group=OFF;
+
+SELECT * FROM performance_schema.replication_group_members;
+
+
+
+
+
+
+##################################################################
+set global group_replication_allow_local_disjoint_gtids_join=ON;
+START GROUP_REPLICATION;
+
+SELECT * FROM performance_schema.replication_group_members;

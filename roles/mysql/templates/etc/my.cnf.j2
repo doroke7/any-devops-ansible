@@ -368,16 +368,18 @@ loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_
 
 
 
-master_info_repository=TABLE
-relay_log_info_repository=TABLE
-transaction_write_set_extraction=XXHASH64
-loose-group_replication_group_name="aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
-loose-group_replication_start_on_boot=off
-loose-group_replication_local_address="{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"     #启动组server，种子server，加入组应该连接这些的ip和端口；其他server要加入组得由组成员同意
-loose-group_replication_group_seeds="{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
-loose-group_replication_bootstrap_group=off
-report_host={{ MYSQL.SERVERS[i].HOST }}
-report_port={{ MYSQL.SERVERS[i].PORT }}
+master_info_repository = TABLE
+relay_log_info_repository = TABLE
+transaction_write_set_extraction = XXHASH64
+loose-group_replication_group_name = "aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
+loose-group_replication_start_on_boot = off
+loose-group_replication_local_address = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"     #启动组server，种子server，加入组应该连接这些的ip和端口；其他server要加入组得由组成员同意
+loose-group_replication_group_seeds = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
+loose-group_replication_bootstrap_group = off
+report_host = {{ MYSQL.SERVERS[i].HOST }}
+report_port = {{ MYSQL.SERVERS[i].PORT }}
+group_replication_single_primary_mode=off
+
 
 
 {% else %}

@@ -2,6 +2,6 @@
   template:
     src: etc/my.cnf.j2
     dest: /etc/my.cnf
-    owner: root
-    group: root
+    owner: mysql
+    group: mysql
     mode: 0755
