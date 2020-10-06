@@ -208,7 +208,7 @@ relay_log_purge = 1                                     # MHA 需要 relay-log �
 gtid_executed_compression_period = 1000                      
 gtid_mode = on            
 enforce_gtid_consistency = on
-binlog_checksum = NONE
+###########################binlog_checksum = NONE
 
 # log_bin=binlog
 # log_slave_updates=ON
@@ -368,17 +368,17 @@ loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_
 
 
 
-master_info_repository = TABLE
-relay_log_info_repository = TABLE
-transaction_write_set_extraction = XXHASH64
-loose-group_replication_group_name = "aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
-loose-group_replication_start_on_boot = off
-loose-group_replication_local_address = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"   
-loose-group_replication_group_seeds = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
-loose-group_replication_bootstrap_group = off
-report_host = {{ MYSQL.SERVERS[i].HOST }}
-report_port = {{ MYSQL.SERVERS[i].PORT }}
-group_replication_single_primary_mode=off
+#master_info_repository = TABLE
+#relay_log_info_repository = TABLE
+#transaction_write_set_extraction = XXHASH64
+#loose-group_replication_group_name = "aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
+#loose-group_replication_start_on_boot = off
+#loose-group_replication_local_address = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"   
+#loose-group_replication_group_seeds = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
+#loose-group_replication_bootstrap_group = off
+#report_host = {{ MYSQL.SERVERS[i].HOST }}
+#report_port = {{ MYSQL.SERVERS[i].PORT }}
+#group_replication_single_primary_mode=off
 
 
 
