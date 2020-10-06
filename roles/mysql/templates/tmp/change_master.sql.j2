@@ -20,12 +20,12 @@
 ############################################################################################
 
 
-STOP SLAVE IO_THREAD;
-STOP SLAVE;
 
 
 
 {% if MYSQL.MASTER is defined and i > 0 %}               
+STOP SLAVE IO_THREAD;
+STOP SLAVE;
 
 CHANGE MASTER TO MASTER_HOST='{{  MYSQL.MASTER }}', 
                  MASTER_USER='replicator', 
@@ -35,7 +35,7 @@ CHANGE MASTER TO MASTER_HOST='{{  MYSQL.MASTER }}',
                  
 START SLAVE;
 START SLAVE IO_THREAD;
-
+SHOW SLAVE STATUS;
 {% endif %}
 
-SHOW SLAVE STATUS;
+
