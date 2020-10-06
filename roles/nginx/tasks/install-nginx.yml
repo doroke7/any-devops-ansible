@@ -44,6 +44,8 @@
 
 
 
+
+
 - name: (get_url) wget http://nginx.org/download/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz
   get_url:
     url: "http://nginx.org/download/nginx-{{ NGINX.VERSION | default('1.18.0') }}.tar.gz"

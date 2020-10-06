@@ -1,4 +1,11 @@
 ---
+
+- name: (file) mkdir /etc/nginx/conf.d
+  file:
+    path: /etc/nginx/conf.d
+    state: directory
+    mode: 0755
+
 - name: "(file) rm -Rf /etc/nginx/conf.d/*.conf"
   file:
     state: absent
