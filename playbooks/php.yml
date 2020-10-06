@@ -37,3 +37,23 @@
   post_tasks:
     - name: "开发 develop 环境，PHP 安装完毕"  
       shell: echo 'playbook php ends'
+
+- name: Install master php
+  hosts: mas-php
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/php.mas.yml
+    - ./../group_vars/fpm.mas.yml
+  pre_tasks:
+    - name: "开发 master 环境，PHP 安装开始"
+      shell: echo 'playbook php starts'
+  roles:
+    - role: php
+      vars:
+        bra: mas
+      when: branch is defined and branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "开发 master 环境，PHP 安装完毕"  
+      shell: echo 'playbook php ends'
