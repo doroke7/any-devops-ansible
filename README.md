@@ -23,6 +23,12 @@ ansible-playbook playbooks/nginx.yml --extra-vars "branch=fea"
 
 `
 ansible-playbook playbooks/nginx.yml --extra-vars "branch=feature"
+
+`
+
+`
+ansible-playbook playbooks/nginx.yml --extra-vars "branch=feature php_version=7.3"
+
 `
 
 `
