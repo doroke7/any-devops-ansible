@@ -55,7 +55,10 @@ datadir = {{ MYSQL.SERVERS[i].DATADIR }}
 socket = {{ MYSQL.SERVERS[i].SOCKET }}
 pid-file = /var/run/mysqld/mysqld.pid
 
+{% if (mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') and mysql_skip == True %}
 ngram_token_size=2
+{% endif %}
+
 #SQL MODE 使用的话很多外包代码 没办法使用
 #sql_mode='ONLY_FULL_GROUP_BY,NO_AUTO_VALUE_ON_ZERO,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,PIPES_AS_CONCAT,ANSI_QUOTES'
 
@@ -364,21 +367,21 @@ loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_
 
 ############################ [mysqld] MGR 相关 - 主从问题 ############################
 
-{% elif mysql_ha == 'mgr' %}
+{% elif mysql_ha == 'mgr' and ( mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
 
 
 
-#master_info_repository = TABLE
-#relay_log_info_repository = TABLE
-#transaction_write_set_extraction = XXHASH64
-#loose-group_replication_group_name = "aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
-#loose-group_replication_start_on_boot = off
-#loose-group_replication_local_address = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"   
-#loose-group_replication_group_seeds = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
-#loose-group_replication_bootstrap_group = off
-#report_host = {{ MYSQL.SERVERS[i].HOST }}
-#report_port = {{ MYSQL.SERVERS[i].PORT }}
-#group_replication_single_primary_mode=off
+master_info_repository = TABLE
+relay_log_info_repository = TABLE
+transaction_write_set_extraction = XXHASH64
+loose-group_replication_group_name = "aaaaaaaa-bbbb-cccc-dddd-aaaaaaaaaaaa"
+loose-group_replication_start_on_boot = off
+loose-group_replication_local_address = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS }}"   
+loose-group_replication_group_seeds = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATION_GROUPS_SEEDS }}"
+loose-group_replication_bootstrap_group = off
+report_host = {{ MYSQL.SERVERS[i].HOST }}
+report_port = {{ MYSQL.SERVERS[i].PORT }}
+group_replication_single_primary_mode=off
 
 
 
