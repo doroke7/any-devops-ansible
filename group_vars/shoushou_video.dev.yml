@@ -3,7 +3,7 @@ NGINX:
   VHOSTS:
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_php'
-      SERVER_NAME: 'lives2-yc-test0708.xyz www.lives2-yc-test0708.xyz lives3-yec-sto07test.xyz www.lives3-yec-sto07test.xyz'
+      SERVER_NAME: '99percent.xyz jiushiyumi.xyz zwmhyy.com.cn yecao07.me www.yecao07.me lives2-yc-test0708.xyz lives3-yec-sto07test.xyz'
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
       ALLOWS:
