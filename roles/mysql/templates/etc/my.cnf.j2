@@ -209,7 +209,7 @@ relay_log_purge = 1                                     # MHA 需要 relay-log �
 gtid_executed_compression_period = 1000                      
 gtid_mode = on            
 enforce_gtid_consistency = on
-###########################binlog_checksum = NONE
+###########################
 
 # log_bin=binlog
 # log_slave_updates=ON
@@ -234,6 +234,8 @@ log_bin_trust_function_creators = 1                     # 将函数复制到slav
 binlog-ignore-db = information_schema
 binlog-ignore-db = performace_schema
 binlog-ignore-db = sys
+
+binlog_checksum = NONE                                   # MGR 模式必備  
 
 ############################ [mysqld] Bin log 相关 - 主从问题 ############################
 ## 主从 MASTER_HOST 等资讯 建议不要写在 /etc/my.cnf，因为主从 可能会动态切换 
@@ -368,7 +370,7 @@ loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_
 {% elif mysql_ha == 'mgr' and ( mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
 
 
-
+log-slave-updates = ON                                   # 到从服务器自己的二进制日志文件中 
 master_info_repository = TABLE
 relay_log_info_repository = TABLE
 transaction_write_set_extraction = XXHASH64
@@ -379,9 +381,10 @@ loose-group_replication_group_seeds = "{{ MYSQL.SERVERS[i].LOOSE_GROUP_REPLICATI
 loose-group_replication_bootstrap_group = off
 report_host = {{ MYSQL.SERVERS[i].HOST }}
 report_port = {{ MYSQL.SERVERS[i].PORT }}
-group_replication_single_primary_mode=off
 
+slave_parallel_type=LOGICAL_CLOCK
 
+slave_preserve_commit_order=on
 
 {% else %}
 
