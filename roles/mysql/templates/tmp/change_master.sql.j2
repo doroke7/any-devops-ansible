@@ -19,8 +19,9 @@
 
 ############################################################################################
 
-
-
+{% if MYSQL.MASTER is defined and i == 0 %} 
+SHOW SLAVE STATUS;
+{% endif %}
 
 
 {% if MYSQL.MASTER is defined and i > 0 %}               
