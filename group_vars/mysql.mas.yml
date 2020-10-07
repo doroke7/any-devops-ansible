@@ -9,14 +9,22 @@ MYSQL:
     CONF: '/etc/masterha/app.cnf'
     MANAGER_LOG: '/var/log/masterha/masterha.log'
   GTID_MODE: yes
+  CHARACTER_SET: 'utf8mb4'
+  TRANSACTION_ISOLATION: 'READ-COMMITTED'
+  COLLATION: 'utf8mb4_unicode_ci'
+  MASTER: '192.168.1.2'
   SERVERS:
-    - HOST: '10.0.0.191'       # 内网 IP   
+    - HOST: '192.168.1.2'       # 内网 IP   
       NAME: 'mysql-1'
       BIND_ADDRESS: '0.0.0.0'  # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      IS_MASTER: yes                        # 一级 MYSQL , 是别的 SLAVE 的 MASTER 大部分 主机 log-slave-updates = 1
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                 # index = 0, 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -94,7 +102,7 @@ MYSQL:
             - '10.0.0.92'                # PHP
             - '10.0.0.121'               # NODE
             - '10.0.0.151'               # Python            
-          PASSWORD: 'mysql_pass_backend'
+          PASSWORD: 'mysql_pass_backend_1B40E5312B2A2B47B0390F8F8AE00B7C'
           DATABASE: '*'
         - drop_user: true                # index = 6
           with_grant_option: false
@@ -151,14 +159,17 @@ MYSQL:
           PASSWORD: 'mysql_pass_backup'
           DATABASE: '*'
           
-    - HOST: '10.0.0.192'       # 外网 IP   # 次一级 MYSQL 
+    - HOST: '192.168.1.8'       # 外网 IP   # 次一级 MYSQL 
       NAME: 'mysql-2'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
-      # ENGINE: 'BLACKHOLE'
-      IS_MASTER: yes                        # 一级 MYSQL , 此 SLAVE 是别的 SLAVE 的 MASTER 大部分 主机 log-slave-updates = 1
-      MASTER_HOST: '10.0.0.191'             
+      ENGINE: 'InnoDB'
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -236,7 +247,7 @@ MYSQL:
             - '10.0.0.92'                # PHP
             - '10.0.0.121'               # NODE
             - '10.0.0.151'               # Python            
-          PASSWORD: 'mysql_pass_backend'
+          PASSWORD: 'mysql_pass_backend_1B40E5312B2A2B47B0390F8F8AE00B7C'
           DATABASE: '*'
         - drop_user: true
           with_grant_option: false
@@ -297,10 +308,13 @@ MYSQL:
       NAME: 'mysql-3'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      IS_MASTER: yes                        # 一级 MYSQL , 此 SLAVE 是别的 SLAVE 的 MASTER 大部分 主机 log-slave-updates = 1
-      MASTER_HOST: '10.0.0.191'              # 若 master-master-slave 高可用，slave 使用 replication 都改指向第二台 MySQL
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -439,9 +453,13 @@ MYSQL:
       NAME: 'mysql-1_1'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      MASTER_HOST: '10.0.0.191'              # 若 master-master-slave 高可用，slave 使用 replication 都改指向第二台 MySQL
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -581,9 +599,13 @@ MYSQL:
       NAME: 'mysql-1_2'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      MASTER_HOST: '10.0.0.191'              # 若 master-master-slave 高可用，slave 使用 replication 都改指向第二台 MySQL
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -722,9 +744,13 @@ MYSQL:
       NAME: 'mysql-2_1'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      MASTER_HOST: '10.0.0.192'              # 若 master-master-slave 高可用，slave 使用 replication 都改指向第二台 MySQL
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -863,9 +889,14 @@ MYSQL:
       NAME: 'mysql-2_2'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
-      ENGINE: 'InnoDB'                      # 若 master-slave 高可用，slave 使用 replication 都改指向第一台 MySQL
-      MASTER_HOST: '10.0.0.192'              # 若 master-master-slave 高可用，slave 使用 replication 都改指向第二台 MySQL
+      ENGINE: 'InnoDB'
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
+
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -1004,9 +1035,13 @@ MYSQL:
       NAME: 'mysql-3_1'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      MASTER_HOST: '10.0.0.193'
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -1145,9 +1180,13 @@ MYSQL:
       NAME: 'mysql-3_2'
       BIND_ADDRESS: '0.0.0.0' # 内网 IP
       DATADIR: '/var/lib/mysql'
+      BASEDIR: '/var/lib/mysql'
+      LOGDIR: '/var/log/mysql'
+      SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      MASTER_HOST: '10.0.0.193'
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '192.168.1.2:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: ' 192.168.1.2:33601,192.168.1.8:33601'
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true

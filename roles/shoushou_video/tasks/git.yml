@@ -10,8 +10,7 @@
     accept_hostkey: yes
     force: yes
   become: no # 使用 vagrant:vagrant git clone 下来， 不使用 root git clone
-  tags:
-  - git  
+  when: git is not undefined and git == 1
 
 - name: 'chmod -R 777 /var/www/shoushou_video_php'
   file:
@@ -20,14 +19,5 @@
     group: root
     recurse: yes
     mode: '0777'
-  tags:
-  - git  
+  when: git is not undefined and git == 1
   
-# - name: (template) scp var/www/lottery-service_resource_backend-lumen/.env.j2 /var/www/lottery-service_resource_backend-lumen/.env
-#   template:
-#     src: var/www/lottery-service_resource_backend-lumen/.env.j2
-#     dest: /var/www/lottery-service_resource_backend-lumen/.env
-#     owner: root
-#     group: root
-#     mode: 0776
-#     backup: no   

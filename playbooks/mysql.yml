@@ -75,3 +75,27 @@
   post_tasks:
     - name: "开发 release 环境，MySQL 安装完毕"
       shell: echo 'playbook mysql ends'
+
+
+- name: install master mysql
+  hosts: mas-mysql
+  strategy: linear # free, debug
+  serial:
+    - 10
+    - 50%
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/mysql.mas.yml
+  pre_tasks:
+    - name: "开发 master 环境，MySQL 安装开始"
+      shell: echo 'playbook mysql starts'
+      check_mode: no
+  roles:
+    - role: mysql
+      vars:
+        bra: mas
+      when: (branch is defined and branch in ['mas', 'master', 'all'] )
+  post_tasks:
+    - name: "开发 master 环境，MySQL 安装完毕"
+      shell: echo 'playbook mysql ends'

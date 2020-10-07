@@ -166,15 +166,12 @@
 [rel-supervisor]
 
 [rel-node]
-47.75.11.136 ansible_ssh_host=47.75.11.136 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=wJ123456@Abc! ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
 
 [rel-redis]
-47.75.11.136 ansible_ssh_host=47.75.11.136 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=wJ123456@Abc! ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
 
 [rel-memcached]
 
 [rel-beanstalkd]
-47.75.11.136 ansible_ssh_host=47.75.11.136 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=wJ123456@Abc! ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
 
 [rel-logstash]
 
@@ -185,11 +182,9 @@
 [rel-xtrabackup]
 
 [rel-mysql]
-47.75.11.136 ansible_ssh_host=47.75.11.136 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=wJ123456@Abc! ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
 
 
 [rel-mongodb]
-47.75.11.136 ansible_ssh_host=47.75.11.136 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=wJ123456@Abc! ansible_ssh_private_key_file=/home/vagrant/.ssh/id_rsa
 
 
 [rel-elasticsearch]
@@ -202,6 +197,9 @@
 
 [mas-shoushou_video]
 154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
+
+[mas-shoushou_video-mysql]
+154.196.140.58 ansible_ssh_host=154.196.140.58 ansible_ssh_port=10628 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-mysql-1
 
 
 [mas-git]
@@ -240,6 +238,8 @@
 [mas-xtrabackup]
 
 [mas-mysql]
+154.196.140.58 ansible_ssh_host=154.196.140.58 ansible_ssh_port=10628 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-mysql-1
+154.196.161.52 ansible_ssh_host=154.196.161.52 ansible_ssh_port=11761 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-mysql-2
 
 [mas-elasticsearch]
 

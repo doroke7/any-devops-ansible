@@ -1,5 +1,5 @@
 ---
-- name: Install feature shoushou_video
+- name: Install feature shoushou_video all
   hosts: fea-shoushou_video
   strategy: linear # free, debug
   gather_facts: true
@@ -13,16 +13,21 @@
     - role: shoushou_video
       vars:
         bra: fea
+        git: 1
+        nginx: 1
+        mysql: 1
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
+
+
       
 
 
 
 
-- name: Install develop shoushou_video
+- name: Install develop shoushou_video all
   hosts: dev-shoushou_video
   strategy: linear # free, debug
   gather_facts: true
@@ -36,27 +41,83 @@
     - role: shoushou_video
       vars:
         bra: dev
+        git: 1
+        nginx: 1
+        mysql: 1
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: "本地 develop 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
+
+
+
       
-- name: Install master shoushou_video
-  hosts: mas-shoushou_video
+- name: Install master shoushou_video GIT
+  hosts: mas-shoushou_video-git
   strategy: linear # free, debug
   gather_facts: true
   become: true
   vars_files:
     - ./../group_vars/shoushou_video.mas.yml
   pre_tasks:
-    - name: "本地 master shoushou_video 安装开始"
+    - name: "本地 master shoushou_video GIT 安装开始"
       shell: echo 'playbook shoushou_video starts'
   roles:
     - role: shoushou_video
       vars: 
         bra: mas
+        git: 1
+        nginx: 0
+        mysql: 0
       when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
-    - name: "本地 master shoushou_video 安装完毕"
+    - name: "本地 master shoushou_video GIT 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+
+
+- name: Install master shoushou_video NGINX
+  hosts: mas-shoushou_video-nginx
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.mas.yml
+  pre_tasks:
+    - name: "本地 master shoushou_video NGINX 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars: 
+        bra: mas
+        git: 0
+        nginx: 1
+        mysql: 0
+      when: branch is not defined or branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "本地 master shoushou_video NGINX 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+
+
+
+- name: Install master shoushou_video MYSQL
+  hosts: mas-shoushou_video-mysql
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.mas.yml
+  pre_tasks:
+    - name: "本地 master shoushou_video MYSQL 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars: 
+        bra: mas
+        git: 0
+        nginx: 0
+        mysql: 1
+      when: branch is not defined or branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "本地 master shoushou_video MYSQL 安装完毕"
       shell: echo 'playbook shoushou_video ends'
       

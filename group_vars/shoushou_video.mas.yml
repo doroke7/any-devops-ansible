@@ -19,7 +19,7 @@ MYSQL:
   CHARACTER_SET: 'utf8mb4'
   COLLATION: 'utf8mb4_unicode_ci'
   SERVERS:
-    - HOST: '47.242.59.96'       # 外网 IP   
+    - HOST: '192.168.1.2'       # 内网 IP   
       ENGINE: 'InnoDB'
       CONNECTIONS:
 
@@ -46,3 +46,81 @@ MYSQL:
             - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
           PASSWORD: 'mysql_pass_backend'
           DATABASE: 'shoushou_video'
+        - drop_user: true                 # index = 3
+          with_grant_option: true
+          GRANTS: 
+            - 'REPLICATION CLIENT'
+          USER: 'monitor'
+          HOSTS: 
+            - '192.168.1.2'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
+            - '192.168.1.8'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
+
+          PASSWORD: 'mysql_pass_monitor'
+          DATABASE: 'shoushou_video'
+        - drop_user: true                 # index = 4
+          with_grant_option: true
+          GRANTS: 
+            - 'SUPER'
+            - 'RELOAD'
+            - 'REPLICATION CLIENT'
+            - 'SELECT'
+            - 'CREATE'
+            - 'INSERT'
+            - 'UPDATE'
+            - 'DELETE'
+            - 'DROP'
+          USER: 'manager'
+          HOSTS: 
+            - '10.0.0.172'                 # 提供 MHA manager 从 10.0.0.172  连取 10.0.0.191 ，在 VM 外网
+          PASSWORD: 'mysql_pass_manager'
+          DATABASE: 'shoushou_video'
+        - drop_user: true                 # index = 5
+          with_grant_option: false
+          GRANTS: 
+            - 'SELECT'
+            - 'INSERT'
+            - 'UPDATE'
+            - 'CREATE'
+            - 'DELETE'
+            - 'CREATE TEMPORARY TABLES'
+            - 'LOCK TABLES'
+            - 'EXECUTE'
+            - 'CREATE ROUTINE'
+            - 'ALTER ROUTINE'
+          USER: 'backend'
+          HOSTS: 
+            - 'localhost'
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
+            - '192.168.1.7'              # PHP       
+          PASSWORD: 'mysql_pass_backend'
+          DATABASE: 'shoushou_video'
+        - drop_user: true                # index = 6
+          with_grant_option: false
+          GRANTS: 
+            - 'REPLICATION SLAVE'
+            - 'REPLICATION CLIENT'
+          USER: 'replicator'
+          HOSTS: 
+            - '192.168.1.2'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
+            - '192.168.1.8'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
+
+          PASSWORD: 'mysql_pass_replicator'
+          DATABASE: 'shoushou_video'          
+           
+        - drop_user: true                # index = 7
+          with_grant_option: false
+          GRANTS: 
+            - 'SUPER'
+            - 'REPLICATION CLIENT'
+            - 'PROCESS'
+          USER: 'agent'
+          HOSTS: 
+            - '192.168.1.2'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
+            - '192.168.1.8'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
+       PASSWORD: 'mysql_pass_agent'
+          DATABASE: 'shoushou_video'
+
+
+           
+
+

@@ -11,12 +11,11 @@
   with_items: "{{ NGINX.VHOSTS }}"
   loop_control:
     loop_var: VHOST
-  tags:
-  - nginx
+  when: nginx is not undefined and nginx == 1
+
   
 - name: (service) service nginx restarted
   service:
     name: nginx
     state: restarted
-  tags:
-  - nginx  
+  when: nginx is not undefined and nginx == 1

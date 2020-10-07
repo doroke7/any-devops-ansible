@@ -1,8 +1,5 @@
-{% if mysql_ha == 'cluster' %}
-{% set i =  groups[bra ~ '-cluster_mysql'].index(inventory_hostname) %}
-{% else %}
 {% set i =  groups[bra ~ '-mysql'].index(inventory_hostname) %}
-{% endif %}
+
 
 # 我们的 i = {{i}}
 

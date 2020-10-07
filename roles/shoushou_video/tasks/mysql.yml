@@ -9,14 +9,14 @@
     group: root
     mode: 0776
     backup: no
-  tags:
-  - mysql
+  when: mysql is not undefined and mysql == 1
+
 
 
 - name: (shell) mysql < /tmp/shoushou_video.sql
   shell: mysql < /tmp/shoushou_video.sql
-  tags:
-  - mysql
+  when: mysql is not undefined and mysql == 1
+
 
 
 - name: (template) scp tmp/grant.sql.j2 /tmp/grant.sql
@@ -26,12 +26,12 @@
     owner: root
     group: root
     mode: 0755
-  tags:
-  - mysql
+  when: mysql is not undefined and mysql == 1
+
 
     
 - name: "(shell) mysql --user='root' --password='mysql_pass_cli' --force < /tmp/grant.sql"
   shell: "mysql --user='root' --password='mysql_pass_cli' --force < /tmp/grant.sql"
-  tags:
-  - mysql
+  when: mysql is not undefined and mysql == 1
+
   
