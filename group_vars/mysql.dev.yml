@@ -83,30 +83,7 @@ MYSQL:
             - '10.0.0.172'                 # 提供 MHA manager 从 10.0.0.172  连取 10.0.0.191 ，在 VM 外网
           PASSWORD: 'mysql_pass_manager'
           DATABASE: '*'
-        - drop_user: true                 # index = 5
-          with_grant_option: false
-          GRANTS: 
-            - 'SELECT'
-            - 'INSERT'
-            - 'UPDATE'
-            - 'CREATE'
-            - 'CREATE TEMPORARY TABLES'
-            - 'LOCK TABLES'
-            - 'EXECUTE'
-            - 'CREATE ROUTINE'
-            - 'ALTER ROUTINE'
-          USER: 'backend'
-          HOSTS: 
-            - 'localhost'
-            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
-            - '10.0.0.51'                # GOLANG
-            - '10.0.0.52'                # GOLANG
-            - '10.0.0.91'                # PHP
-            - '10.0.0.92'                # PHP
-            - '10.0.0.121'               # NODE
-            - '10.0.0.151'               # Python            
-          PASSWORD: 'mysql_pass_backend'
-          DATABASE: '*'
+
         - drop_user: true                # index = 6
           with_grant_option: false
           GRANTS: 

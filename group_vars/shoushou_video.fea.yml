@@ -6,13 +6,8 @@ NGINX:
       SERVER_NAME: 'fea.lives2-yc-test0708.xyz www.fea.lives2-yc-test0708.xyz fea.lives3-yec-sto07test.xyz www.fea.lives3-yec-sto07test.xyz'
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
-      ALLOW: '10.0.2.2'
-      ALLOWS:
-        - '27.110.131.128/26'  # AOA PH WIFI
-        - '122.10.26.192/26'   # AOA HK WIFI 香港
-        - '122.10.26.216'      # AOA HK
-        - '27.110.131.164'     # AOA PH
-      
+
+mysql_version: '5.6'      
 MYSQL:
   GTID_MODE: yes
   TRANSACTION_ISOLATION: 'READ-COMMITTED'
@@ -22,119 +17,31 @@ MYSQL:
     - HOST: '10.0.0.181'       # 内网 IP   
       ENGINE: 'InnoDB'
       CONNECTIONS:
-
         - drop_user: true                 # index = 5
           with_grant_option: false
           GRANTS: 
-            - 'SELECT'
-            - 'INSERT'
-            - 'UPDATE'
+
+            - 'ALTER ROUTINE'
             - 'CREATE'
-            - 'DELETE'
+            - 'CREATE ROUTINE'
             - 'CREATE TEMPORARY TABLES'
             - 'CREATE VIEW'
-            - 'LOCK TABLES'
-            - 'TRIGGER'
-            - 'REFERENCES'
+            - 'DELETE'
             - 'EVENT'
             - 'EXECUTE'
-            - 'CREATE ROUTINE'
-            - 'ALTER ROUTINE'
+            - 'INSERT'
+            - 'LOCK TABLES'
+            - 'REFERENCES'
+            - 'SELECT'
+            - 'TRIGGER'
+            - 'UPDATE'
           USER: 'backend'
           HOSTS: 
             - 'localhost'
             - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
           PASSWORD: 'mysql_pass_backend'
           DATABASE: 'shoushou_video'
-        - drop_user: true                 # index = 3
-          with_grant_option: true
-          GRANTS: 
-            - 'REPLICATION CLIENT'
-          USER: 'monitor'
-          HOSTS: 
-            - '10.0.0.171'                 # 提供 MHA manager 从 10.0.0.171  连取 10.0.0.191 ，在 VM 外网
-          PASSWORD: 'mysql_pass_monitor'
-          DATABASE: 'shoushou_video'
-        - drop_user: true                 # index = 4
-          with_grant_option: true
-          GRANTS: 
-            - 'SUPER'
-            - 'RELOAD'
-            - 'REPLICATION CLIENT'
-            - 'SELECT'
-            - 'CREATE'
-            - 'INSERT'
-            - 'UPDATE'
-            - 'DELETE'
-            - 'DROP'
-          USER: 'manager'
-          HOSTS: 
-            - '10.0.0.172'                 # 提供 MHA manager 从 10.0.0.172  连取 10.0.0.191 ，在 VM 外网
-          PASSWORD: 'mysql_pass_manager'
-          DATABASE: 'shoushou_video'
-        - drop_user: true                 # index = 5
-          with_grant_option: false
-          GRANTS: 
-            - 'SELECT'
-            - 'INSERT'
-            - 'UPDATE'
-            - 'CREATE'
-            - 'DELETE'
-            - 'CREATE TEMPORARY TABLES'
-            - 'LOCK TABLES'
-            - 'EXECUTE'
-            - 'CREATE ROUTINE'
-            - 'ALTER ROUTINE'
-          USER: 'backend'
-          HOSTS: 
-            - 'localhost'
-            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
-            - '10.0.0.51'                # GOLANG
-            - '10.0.0.52'                # GOLANG
-            - '10.0.0.91'                # PHP
-            - '10.0.0.92'                # PHP
-            - '10.0.0.121'               # NODE
-            - '10.0.0.151'               # Python            
-          PASSWORD: 'mysql_pass_backend'
-          DATABASE: 'shoushou_video'
-        - drop_user: true                # index = 6
-          with_grant_option: false
-          GRANTS: 
-            - 'REPLICATION SLAVE'
-            - 'REPLICATION CLIENT'
-          USER: 'replicator'
-          HOSTS: 
-            - '10.0.0.181'                # 提供 MYSQL SLAVE 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
-            - '10.0.0.182'                # 提供 MYSQL SLAVE 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
-            - '10.0.0.183'
-            - '10.0.0.191'
-            - '10.0.0.192'
-            - '10.0.0.193'
-            - '10.0.0.194'
-            - '10.0.0.195'
-            - '10.0.0.196'
-          PASSWORD: 'mysql_pass_replicator'
-          DATABASE: 'shoushou_video'          
-           
-        - drop_user: true                # index = 7
-          with_grant_option: false
-          GRANTS: 
-            - 'SUPER'
-            - 'REPLICATION CLIENT'
-            - 'PROCESS'
-          USER: 'agent'
-          HOSTS: 
-            - '10.0.0.181'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
-            - '10.0.0.182'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
-            - '10.0.0.183'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
-            - '10.0.0.191'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
-            - '10.0.0.192'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
-            - '10.0.0.193'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
-            - '10.0.0.194'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
-            - '10.0.0.195'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
-            - '10.0.0.196'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
-          PASSWORD: 'mysql_pass_agent'
-          DATABASE: 'shoushou_video'
+
 
 
            

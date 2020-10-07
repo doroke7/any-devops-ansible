@@ -1,6 +1,6 @@
 ---
-- name: Install feature shoushou_video all
-  hosts: fea-shoushou_video
+- name: Install feature shoushou_video git
+  hosts: fea-shoushou_video-git
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -14,12 +14,63 @@
       vars:
         bra: fea
         git: 1
-        nginx: 1
-        mysql: 1
+        nginx: 0
+        mysql: 0
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'git'
+
+
+- name: Install feature shoushou_video nginx
+  hosts: fea-shoushou_video-nginx
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.fea.yml
+  pre_tasks:
+    - name: "本地 feature shoushou_video nginx 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        git: 0
+        nginx: 1
+        mysql: 0
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，shoushou_video nginx 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'nginx'
+
+- name: Install feature shoushou_video mysql
+  hosts: fea-shoushou_video-mysql
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.fea.yml
+  pre_tasks:
+    - name: "本地 feature shoushou_video mysql 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        git: 0
+        nginx: 0
+        mysql: 1
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，shoushou_video mysql 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'mysql'
 
 
       

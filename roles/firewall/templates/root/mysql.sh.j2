@@ -1,4 +1,9 @@
 sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="{ source_address }" destination address="{ destination_address }" port port="3306" protocol="tcp" accept"
 sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="{ source_address }" destination address="{ destination_address }" port port="3306" protocol="udp" accept"
 
-# sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="156.12.3.13" destination address="156.12.3.16" port port="3306" protocol="tcp" accept"
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="192.168.1.0/24" destination address="192.168.1.2" port port="3306" protocol="tcp" accept"
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="192.168.1.0/24" destination address="192.168.1.2" port port="3306" protocol="udp" accept"
+
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="192.168.1.0/24" destination address="192.168.1.8" port port="3306" protocol="tcp" accept"
+sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" source address="192.168.1.0/24" destination address="192.168.1.8" port port="3306" protocol="udp" accept"
+

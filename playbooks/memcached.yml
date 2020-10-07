@@ -29,8 +29,10 @@
   post_tasks:
     - shell: echo 'playbook memcached ends'
 
+    
+
 - name: Install master memcached
-  hosts: dev-memcached
+  hosts: mas-memcached
   strategy: linear # free, debug
   gather_facts: true
   become: true

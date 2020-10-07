@@ -6,12 +6,8 @@ NGINX:
       SERVER_NAME: '99percent.xyz jiushiyumi.xyz zwmhyy.com.cn yecao07.me www.yecao07.me lives2-yc-test0708.xyz lives3-yec-sto07test.xyz'
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
-      ALLOWS:
-        - '27.110.131.128/26'  # AOA PH WIFI
-        - '122.10.26.192/26'   # AOA HK WIFI 香港
-        - '122.10.26.216'      # AOA HK
-        - '27.110.131.164'     # AOA PH
-      
+
+mysql_version: '5.6'      
 
 MYSQL:
   GTID_MODE: yes
@@ -26,20 +22,20 @@ MYSQL:
         - drop_user: true                 # index = 5
           with_grant_option: false
           GRANTS: 
-            - 'SELECT'
-            - 'INSERT'
-            - 'UPDATE'
+            - 'ALTER ROUTINE'
             - 'CREATE'
-            - 'DELETE'
+            - 'CREATE ROUTINE'
             - 'CREATE TEMPORARY TABLES'
             - 'CREATE VIEW'
-            - 'LOCK TABLES'
-            - 'TRIGGER'
-            - 'REFERENCES'
+            - 'DELETE'
             - 'EVENT'
             - 'EXECUTE'
-            - 'CREATE ROUTINE'
-            - 'ALTER ROUTINE'
+            - 'INSERT'
+            - 'LOCK TABLES'
+            - 'REFERENCES'
+            - 'SELECT'
+            - 'TRIGGER'
+            - 'UPDATE'
           USER: 'backend'
           HOSTS: 
             - 'localhost'
