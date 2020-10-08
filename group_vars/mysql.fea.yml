@@ -29,7 +29,7 @@ MYSQL:
       PORT: 3306
       ENGINE: 'InnoDB'
       LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '10.0.0.181:33601'
-      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: '10.0.0.181:33601,10.0.0.182:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: '10.0.0.181:33601,10.0.0.182:33601,10.0.0.183:33601'
       CONNECTIONS:
         - drop_user: false                 # index = 0, 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
           with_grant_option: true
@@ -173,8 +173,8 @@ MYSQL:
       SOCKET: '/var/lib/mysql/mysql.sock'
       PORT: 3306
       ENGINE: 'InnoDB'
-      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '10.0.0.181:33601'
-      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: '10.0.0.181:33601,10.0.0.182:33601'
+      LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '10.0.0.182:33601'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: '10.0.0.181:33601,10.0.0.182:33601,10.0.0.183:33601'
       MASTER_HOST: '10.0.0.181'             
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
@@ -320,7 +320,7 @@ MYSQL:
       PORT: 3306
       ENGINE: 'InnoDB'
       LOOSE_GROUP_REPLICATION_LOCAL_ADDRESS: '10.0.0.183:24901'
-      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: '10.0.0.181:24901,10.0.0.182:24901,10.0.0.183:24901'
+      LOOSE_GROUP_REPLICATION_GROUPS_SEEDS: '10.0.0.181:33601,10.0.0.182:33601,10.0.0.183:33601'
       MASTER_HOST: '10.0.0.181'              # 若 master-master-slave 高可用，slave 使用 replication 都改指向第二台 MySQL
       CONNECTIONS:
         - drop_user: false                  # 第一个 CONNECTIONS 为 root@localhost 使用 ， 请勿改变次序
