@@ -21,6 +21,13 @@ server {
     add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
     add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
 	
+    types {
+
+        application/vnd.apple.mpegurl m3u8;
+
+        video/mp2t ts;
+
+    }
   
 
 
