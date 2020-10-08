@@ -70,7 +70,3 @@ ansible-playbook playbooks/main.yml --extra-vars "debug=true"
 
 
 
-# 解决时间最好方案
-## 1. MYSQL 使用 timestamp 格式
-## 2. PHP 返回 timestamp 字段 + 服务器效正时间
-## 3. PHP 使用 date('Y-m-d H:i:s') insert
