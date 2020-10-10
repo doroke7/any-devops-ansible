@@ -6,6 +6,8 @@
 # Second ".*" for write permission on every entity
 # Third ".*" for read permission on every entity
 sudo rabbitmqctl set_permissions -p "default" "backend" ".*" ".*" ".*"
+sudo rabbitmqctl set_permissions -p "/" "backend" ".*" ".*" ".*"
+
 sudo rabbitmqctl set_user_tags backend administrator
 
 # 开启 RabbitMQ WEB GUI
@@ -59,4 +61,13 @@ rabbitmqctl hipe_compile {directory}
 
 
 
+# Source：源头的意思，其实就是 Exchange。
+# destination：目的地的意思，其实就是 Queue。
+# routing_key：路由键的规则，用于 Queue 匹配（比如test.#）。
+
+
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list vhosts
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list queues
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass get queue=test
