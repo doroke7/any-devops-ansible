@@ -16,3 +16,17 @@
     group: root
     mode: 0766
   when: php_version == '7.0' or php_version == '7.1' or php_version == '7.2' or php_version == '7.3'
+
+
+- name: (file) rm -Rf /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+  file:
+    path: /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+    state: absent
+    
+- name: (file) mkdir /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+  file:
+    path: '/var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}'
+    state: 'directory'
+    owner: root
+    group: root
+    mode: '0766'

@@ -28,6 +28,15 @@
     mode: 0777
     recurse: yes
 
+- name: (file) mkdir  /var/log/nginx/
+  file:
+    path:  /var/log/nginx/
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+    recurse: yes
+
 - name: (yum) yum install openssl openssl-devel
   yum:
     name: 
