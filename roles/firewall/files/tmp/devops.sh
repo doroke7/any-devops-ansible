@@ -24,3 +24,6 @@ firewall-cmd --zone=public --list-all
 
 
 firewall-cmd --reload # 更新防火墙规则
+
+
+firewall-cmd --permanent --remove-source=192.168.1.100

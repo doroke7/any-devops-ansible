@@ -13,6 +13,21 @@
     loop_var: VHOST
   when: nginx is not undefined and nginx == 1
 
+
+- name: (template) scp etc/nginx/vhosts/download.conf.j2 /etc/nginx/vhosts/*.conf
+  template:
+    src: etc/nginx/vhosts/download.conf.j2
+    dest: "/etc/nginx/vhosts/{{ VHOST['SERVER_NAME'] | replace(' ', '___') }}.conf"
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+    #validate: nginx -t -c /etc/nginx/nginx.conf
+  with_items: "{{ NGINX.VHOSTS }}"
+  loop_control:
+    loop_var: VHOST
+  when: nginx is not undefined and nginx == 1
+
   
 - name: (service) service nginx restarted
   service:

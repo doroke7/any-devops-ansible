@@ -69,9 +69,13 @@ server {
     }
 
 
+    {% if VHOST['PHP'] is defined %}
     location ~ \.php(.*)$ {
         include conf.d/php{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}.conf;
     }
+    {% endif %}
+
+
 
 
 }

@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0766
-  when: php_version == '5.3' or php_version == '5.4' or php_version == '5.5' or php_version == '5.6'
+  when: php_version in ['5.3', '5.4', '5.5', '5.6']
   # 没有 php53
 - name: "(template) scp etc/opt/remi/php/php-fpm.d/www.conf.j2 /etc/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-fpm.d/www.conf"
   template:
@@ -15,7 +15,29 @@
     owner: root
     group: root
     mode: 0766
-  when: php_version == '7.0' or php_version == '7.1' or php_version == '7.2' or php_version == '7.3'
+  when: php_version in ['7.0', '7.1', '7.2', '7.3', '7.4']
+
+
+
+  - name: "(template) scp etc/opt/remi/php/php-fpm.conf.j2 /etc/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-fpm.conf"
+  template:
+    src: etc/opt/remi/php/php-fpm.d/www.conf.j2
+    dest: "/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/root/etc/php-fpm.conf"
+    owner: root
+    group: root
+    mode: 0766
+  when: php_version in ['5.3', '5.4', '5.5', '5.6']
+  # 没有 php53
+- name: "(template) scp etc/opt/remi/php/php-fpm.conf.j2 /etc/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-fpm.conf"
+  template:
+    src: etc/opt/remi/php/php-fpm.conf.j2
+    dest: "/etc/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-fpm.conf"
+    owner: root
+    group: root
+    mode: 0766
+  when: php_version in ['7.0', '7.1', '7.2', '7.3', '7.4']
+
+
 
 
 - name: (file) rm -Rf /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
@@ -26,6 +48,14 @@
 - name: (file) mkdir /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
   file:
     path: '/var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}'
+    state: 'directory'
+    owner: root
+    group: root
+    mode: '0766'
+
+- name: (file) mkdir /var/run/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+  file:
+    path: '/var/run/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}'
     state: 'directory'
     owner: root
     group: root

@@ -1,0 +1,36 @@
+---
+
+- name: (file) mkdir /opt/rabbitmqadmin/bin/rabbitmqadmin
+  file:
+    path: '/opt/rabbitmqadmin/bin/rabbitmqadmin'
+    state: 'directory'
+    owner: root
+    group: root
+    mode: '0766'
+
+
+- name: "(template) scp opt/rabbitmqadmin/bin/rabbitmqadmin.j2 /opt/rabbitmqadmin/bin/rabbitmqadmin"
+  template:
+    src: opt/rabbitmqadmin/bin/rabbitmqadmin.j2
+    dest: "/opt/rabbitmqadmin/bin/rabbitmqadmin"
+    owner: root
+    group: root
+    mode: 0777
+    backup: no
+
+- name: "(file) ln -sf /opt/rabbitmqadmin/bin/rabbitmqadmin /usr/bin/rabbitmqadmin"  
+  file:
+    src: "/opt/rabbitmqadmin/bin/rabbitmqadmin"
+    dest: "/usr/bin/rabbitmqadmin"
+    state: link
+    force: True
+    follow: False
+       
+# - name: (template) scp etc/php.d/xdebug.ini.j2 /etc/php.d/xdebug.ini
+#   template:
+#     src: etc/php.d/xdebug.ini.j2
+#     dest: /etc/php.d/xdebug.ini
+#     owner: vagrant
+#     group: vagrant
+#     mode: 0766
+#     backup: 

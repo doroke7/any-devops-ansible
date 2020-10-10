@@ -1,0 +1,78 @@
+#jinja2: lstrip_blocks: True
+
+server {
+    listen       {{ VHOST['HTTP_PORT'] | default(80) }};
+    listen       [::]:{{ VHOST['HTTP_PORT'] | default(80) }};
+    server_name  {{ VHOST['SERVER_NAME'] }};
+    {% if VHOST['ROOT'] is defined %}
+    root         {{ VHOST['ROOT'] }};
+    {% endif %}
+
+
+
+    charset utf-8;
+    server_tokens off;
+	
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+    add_header 'Access-Control-Allow-Origin' '*';
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
+    add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+	
+
+
+    
+    index        {{ VHOST['INDEX'] | default('index.html index.htm') }}; 
+
+    
+    # Load configuration files for the default server block.
+	
+	
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+	
+    error_page 404 /index.php;
+
+    location ~* \.(mp4|avi|wmv|rm|rmvb|mkv|mp3|wma|wav|aac|txt|pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar)(\?.+)?$ {
+        max_ranges 0;
+    }
+
+    location ~* \.(ico|bmp|bmp4|css|js|gif|jpe?g|png|ogg|ogv|svg|svgz|eot|otf|woff)(\?.+)?$ {
+        expires max;
+        log_not_found off;
+    }
+    
+
+    {% if VHOST['M_SERVER_NAME'] is defined %}
+
+    if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
+        return 301 $scheme://{{ VHOST['M_SERVER_NAME'] }}$request_uri;
+    }
+
+    {% endif %}
+
+
+
+    {% if VHOST['WWW_SERVER_NAME'] is defined %}
+
+    if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
+        return 301 $scheme://{{ VHOST['WWW_SERVER_NAME'] }}$request_uri;
+    }
+
+    {% endif %}
+
+
+
+
+    {% if VHOST['PHP'] is defined %}
+    location ~ \.php(.*)$ {
+        include conf.d/php{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}.conf;
+    }
+    {% endif %}
+
+
+
+
+}
