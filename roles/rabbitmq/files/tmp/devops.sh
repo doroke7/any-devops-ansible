@@ -71,3 +71,9 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list vhosts
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list queues
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass get queue=test
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange name=my.topic type=topic
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=my.topic destination=test routing_key=my.#
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
