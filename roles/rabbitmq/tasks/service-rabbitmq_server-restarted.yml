@@ -1,7 +1,7 @@
 ---
-- name: (service) service firewalld restarted
+- name: (service) service rabbitmq-server restarted
   service:
-    name: firewalld
+    name: rabbitmq-server
     state: restarted
 # - name: Debug start nginx
 #   debug: 

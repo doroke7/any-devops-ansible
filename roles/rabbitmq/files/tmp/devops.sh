@@ -1,4 +1,4 @@
- sudo rabbitmqctl add_user 'backend';
+ # sudo rabbitmqctl add_user 'backend';
  sudo rabbitmqctl add_user 'backend' 'rabbitmq_pass';
  sudo rabbitmqctl add_vhost 'default';
 
@@ -6,6 +6,7 @@
 # Second ".*" for write permission on every entity
 # Third ".*" for read permission on every entity
 sudo rabbitmqctl set_permissions -p "default" "backend" ".*" ".*" ".*"
+sudo rabbitmqctl set_user_tags backend administrator
 
 # 开启 RabbitMQ WEB GUI
 sudo rabbitmq-plugins enable rabbitmq_management
@@ -55,3 +56,7 @@ rabbitmqctl hipe_compile {directory}
 # 表示在指定的目录下执行HiPE编译和缓存结果文件 .beam-files
 # 如果需要父目录会被创建。并且在编译之前，该目录下的所有 .beam-files会被自动删除。
 # 使用预编译的文件，你应该设置 RABBITMQ_SERVER_CODE_PATH 环境变量为 hipe_compile 调用指定的目录。
+
+
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list vhosts

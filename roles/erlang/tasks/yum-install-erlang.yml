@@ -10,4 +10,4 @@
 - name: (yum) yum install erlang
   yum:
     name: erlang
-    state: lastest
+    state: latest
