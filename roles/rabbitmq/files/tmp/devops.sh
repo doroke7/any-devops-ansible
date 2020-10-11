@@ -74,6 +74,22 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass get queue=test
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange name=my.topic type=topic
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=my.topic destination=test routing_key=my.#
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
+
+
+# 推送 playload Hello xxx 消息 给交换机 my.topic 其中 路由关键字是  my.test
+# 注意 RabbitMQ 是不直接推送 
+sudo rabbitmqadmin publish routing_key=my.test exchange=my.topic  payload="hello world by my.test"
+
+# 把 队列 test 分配到 交换机 my.topic 旗下， 指定 路由  my.#
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=my.topic destination=test routing_key=my.#
+
+
+sudo rabbitmqadmin purge queue name=name_of_the_queue_to_be_purged
+
+
+# rabbitmq 的建议配置架构
+## vhost 区分项目
+## exchange 区分功能模块
+## quequ 区分功能点

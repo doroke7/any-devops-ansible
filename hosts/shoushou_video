@@ -1,16 +1,16 @@
 
 [fea-shoushou_video]
-10.0.0.91 ansible_ssh_host=10.0.0.91 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 [fea-shoushou_video-git]
-10.0.0.91 ansible_ssh_host=10.0.0.91 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 [fea-shoushou_video-nginx]
-10.0.0.91 ansible_ssh_host=10.0.0.91 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 
 [fea-shoushou_video-mysql]
-10.0.0.181 ansible_ssh_host=10.0.0.181 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 
 
@@ -211,8 +211,16 @@
 [mas-shoushou_video]
 154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
 
+[mas-shoushou_video-git]
+#154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
+
+[mas-shoushou_video-nginx]
+154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
+
+
 [mas-shoushou_video-mysql]
-154.196.140.58 ansible_ssh_host=154.196.140.58 ansible_ssh_port=10628 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-mysql-1
+#154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
+
 
 
 [mas-git]

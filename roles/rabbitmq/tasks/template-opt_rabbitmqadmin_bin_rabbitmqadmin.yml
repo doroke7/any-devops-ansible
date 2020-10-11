@@ -12,7 +12,7 @@
 - name: "(template) scp opt/rabbitmqadmin/bin/rabbitmqadmin.j2 /opt/rabbitmqadmin/bin/rabbitmqadmin"
   template:
     src: opt/rabbitmqadmin/bin/rabbitmqadmin.j2
-    dest: "/opt/rabbitmqadmin/bin/rabbitmqadmin"
+    dest: "/opt/rabbitmqadmin/bin"
     owner: root
     group: root
     mode: 0777

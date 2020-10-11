@@ -99,7 +99,10 @@
   post_tasks:
     - name: "本地 develop 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
-
+  tags:
+    - 'git'
+    - 'mysql'
+    - 'nginx'
 
 
       
@@ -124,6 +127,8 @@
   post_tasks:
     - name: "本地 master shoushou_video GIT 安装完毕"
       shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'git'
 
 
 - name: Install master shoushou_video NGINX
@@ -147,7 +152,8 @@
   post_tasks:
     - name: "本地 master shoushou_video NGINX 安装完毕"
       shell: echo 'playbook shoushou_video ends'
-
+  tags:
+    - 'nginx'
 
 
 - name: Install master shoushou_video MYSQL
@@ -171,4 +177,5 @@
   post_tasks:
     - name: "本地 master shoushou_video MYSQL 安装完毕"
       shell: echo 'playbook shoushou_video ends'
-      
+  tags:
+    - 'mysql'
