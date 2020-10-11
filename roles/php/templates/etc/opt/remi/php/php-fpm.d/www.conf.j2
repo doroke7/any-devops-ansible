@@ -271,7 +271,7 @@ slowlog = /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([
 ; dumped to the 'slowlog' file. A value of '0s' means 'off'.
 ; Available units: s(econds)(default), m(inutes), h(ours), or d(ays)
 ; Default Value: 0
-;request_slowlog_timeout = 0
+request_slowlog_timeout = 0.5s
 
 ; Depth of slow log stack trace.
 ; Default Value: 20
