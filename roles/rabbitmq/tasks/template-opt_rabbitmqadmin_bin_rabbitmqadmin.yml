@@ -1,21 +1,21 @@
 ---
 
-- name: (file) mkdir /opt/rabbitmqadmin/bin/rabbitmqadmin
+- name: (file) mkdir /opt/rabbitmqadmin/bin
   file:
-    path: '/opt/rabbitmqadmin/bin/rabbitmqadmin'
+    path: '/opt/rabbitmqadmin/bin'
     state: 'directory'
     owner: root
     group: root
-    mode: '0766'
+    mode: '0755'
 
 
 - name: "(template) scp opt/rabbitmqadmin/bin/rabbitmqadmin.j2 /opt/rabbitmqadmin/bin/rabbitmqadmin"
   template:
     src: opt/rabbitmqadmin/bin/rabbitmqadmin.j2
-    dest: "/opt/rabbitmqadmin/bin"
+    dest: "/opt/rabbitmqadmin/bin/rabbitmqadmin"
     owner: root
     group: root
-    mode: 0777
+    mode: 0755
     backup: no
 
 - name: "(file) ln -sf /opt/rabbitmqadmin/bin/rabbitmqadmin /usr/bin/rabbitmqadmin"  

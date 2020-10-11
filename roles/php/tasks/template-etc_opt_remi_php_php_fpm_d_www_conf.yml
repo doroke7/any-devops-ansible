@@ -19,7 +19,7 @@
 
 
 
-  - name: "(template) scp etc/opt/remi/php/php-fpm.conf.j2 /etc/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-fpm.conf"
+- name: "(template) scp etc/opt/remi/php/php-fpm.conf.j2 /etc/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-fpm.conf"
   template:
     src: etc/opt/remi/php/php-fpm.d/www.conf.j2
     dest: "/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/root/etc/php-fpm.conf"
@@ -40,22 +40,22 @@
 
 
 
-- name: (file) rm -Rf /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+- name: "(file) rm -Rf /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}"
   file:
     path: /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
     state: absent
     
-- name: (file) mkdir /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+- name: "(file) mkdir /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}"
   file:
-    path: '/var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}'
+    path: "/var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}"
     state: 'directory'
     owner: root
     group: root
     mode: '0766'
 
-- name: (file) mkdir /var/run/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}
+- name: "(file) mkdir /var/run/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}"
   file:
-    path: '/var/run/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}'
+    path: "/var/run/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}"
     state: 'directory'
     owner: root
     group: root
