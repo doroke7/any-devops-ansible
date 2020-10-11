@@ -1,6 +1,6 @@
  # sudo rabbitmqctl add_user 'backend';
  sudo rabbitmqctl add_user 'backend' 'rabbitmq_pass';
- sudo rabbitmqctl add_vhost 'default';
+ sudo rabbitmqctl add_vhost '/';
 
 # First ".*" for configure permission on every entity
 # Second ".*" for write permission on every entity

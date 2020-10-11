@@ -1,0 +1,16 @@
+---
+
+- name: "(command) rabbitmqctl add_user '{{ RABBITMQ.USERNAME }}' '{{ RABBITMQ.PASSWORD }}'"
+  command: "rabbitmqctl add_user '{{ RABBITMQ.USERNAME }}' '{{ RABBITMQ.PASSWORD }}'"
+
+
+- name: "(command) rabbitmqctl add_vhost '{{ RABBITMQ.VHOST }}'"
+  command: "rabbitmqctl add_vhost '{{ RABBITMQ.VHOST }}'"
+
+
+- name: rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*'' '.*'' '.*'
+  command: rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
+
+
+- name: rabbitmqctl set_user_tags -p '{{ RABBITMQ.USERNAME }}' administrator
+  command: rabbitmqctl set_user_tags -p '{{ RABBITMQ.USERNAME }}' administrator
