@@ -83,6 +83,7 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
 sudo rabbitmqadmin publish routing_key=my.test exchange=my.topic  payload="hello world by my.test"
 
 # 把 队列 test 分配到 交换机 my.topic 旗下， 指定 路由  my.#
+# 使用路由分配的优点是 可做到 一个 publish 多个 subscribe 的效果
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=my.topic destination=test routing_key=my.#
 
 
