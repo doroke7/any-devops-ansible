@@ -79,10 +79,9 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass get queue=test
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
 
 
-# 推送 playload Hello xxx 消息 给交换机 my.topic 其中 路由关键字是  my.test
-# 注意 RabbitMQ 是不直接推送 
-sudo rabbitmqadmin publish routing_key=demo.# exchange=demo.exchange  payload="hello world by my.test"
 
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare queue name=demo.queue durable=true
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange name=demo.exchange type=topic
 
@@ -90,6 +89,10 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange nam
 # 使用路由分配的优点是 可做到 一个 publish 多个 subscribe 的效果
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=demo.exchange destination=demo.queue routing_key=demo.#
 
+
+# 推送 playload Hello xxx 消息 给交换机 my.topic 其中 路由关键字是  my.test
+# 注意 RabbitMQ 一般建议不直接推送 
+sudo rabbitmqadmin publish routing_key=demo.# exchange=demo.exchange  payload="hello world by my.test"
 
 sudo rabbitmqadmin purge queue name=name_of_the_queue_to_be_purged
 
