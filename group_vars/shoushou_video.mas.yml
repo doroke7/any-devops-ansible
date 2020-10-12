@@ -5,6 +5,7 @@ NGINX:
       ROOT: '/var/www/shoushou_video_php'
       SERVER_NAME: 'yecao-7k8s.xyz lives3-yec-sto07k8.xyz www.yecao-7k8s.xyz www.lives3-yec-sto07k8.xyz'
       INDEX: 'index.php index.html index.htm'
+      PHP: '7.3'
       REWRITE: 1
 
       
