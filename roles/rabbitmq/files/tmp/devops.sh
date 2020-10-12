@@ -68,11 +68,12 @@ rabbitmqctl hipe_compile {directory}
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list vhosts
 
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list exchanges
+
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list queues
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass get queue=test
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange name=my.topic type=topic
 
 
 sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
@@ -80,11 +81,14 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
 
 # 推送 playload Hello xxx 消息 给交换机 my.topic 其中 路由关键字是  my.test
 # 注意 RabbitMQ 是不直接推送 
-sudo rabbitmqadmin publish routing_key=my.test exchange=my.topic  payload="hello world by my.test"
+sudo rabbitmqadmin publish routing_key=demo.# exchange=demo.exchange  payload="hello world by my.test"
+
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange name=demo.exchange type=topic
 
 # 把 队列 test 分配到 交换机 my.topic 旗下， 指定 路由  my.#
 # 使用路由分配的优点是 可做到 一个 publish 多个 subscribe 的效果
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=my.topic destination=test routing_key=my.#
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=demo.exchange destination=demo.queue routing_key=demo.#
 
 
 sudo rabbitmqadmin purge queue name=name_of_the_queue_to_be_purged
