@@ -55,6 +55,8 @@ server {
 
     location / {
 
+
+        {% if VHOST['REWRITE'] == 1 %}
         if (!-e $request_filename) {
             rewrite  "^/admin/public/(.*)$"  /admin/public/index.php/$1  last;
             rewrite  "^/mapi/public/(.*)$"  /mapi/public/index.php/$1  last;
@@ -62,6 +64,25 @@ server {
             rewrite  "^/share/([a-z0-9_]{1,32})$" /agent/public/admin/download/index?agent=$1 last;
             break;
         }
+        {% endif %}
+
+
+
+        {% if VHOST['M_SERVER_NAME'] is defined %}
+        if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
+            return 301 $scheme://{{ VHOST['M_SERVER_NAME'] }}$request_uri;
+        }
+        {% endif %}
+
+
+
+        {% if VHOST['WWW_SERVER_NAME'] is defined %}
+        if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
+            return 301 $scheme://{{ VHOST['WWW_SERVER_NAME'] }}$request_uri;
+        }
+        {% endif %}
+
+
 
         # rewrite  "^/(.*).html$"  /$1/index.html  last;
         # rewrite  "^/((.*\/)+)(.*).html$"  /$1/$2/index.html  last;

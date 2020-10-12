@@ -92,7 +92,7 @@ sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding sour
 
 # 推送 playload Hello xxx 消息 给交换机 my.topic 其中 路由关键字是  my.test
 # 注意 RabbitMQ 一般建议不直接推送 
-sudo rabbitmqadmin publish routing_key=demo.# exchange=demo.exchange  payload="hello world by my.test"
+sudo rabbitmqadmin publish routing_key=demo.any exchange=demo.exchange  payload="hello world by my.test"
 
 sudo rabbitmqadmin purge queue name=name_of_the_queue_to_be_purged
 
