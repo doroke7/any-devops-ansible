@@ -11,7 +11,7 @@ NGINX:
       
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: 'www.yecao07.me'
+      SERVER_NAME: 'www.yecao07.me yecao07.me' 
       INDEX: 'www_index.html www_index.htm'
       M_SERVER_NAME: 'm.yecao07.me'
       REWRITE: 0
@@ -26,7 +26,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: 'www.yehua07.com'
+      SERVER_NAME: 'www.yehua07.com yehua07.com'
       INDEX: 'www_index.html www_index.htm'
       M_SERVER_NAME: 'm.yehua07.com'
       REWRITE: 0
