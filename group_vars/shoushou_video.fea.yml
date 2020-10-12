@@ -3,7 +3,7 @@ NGINX:
   VHOSTS:
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_php'
-      SERVER_NAME: '_ fea.lives2-yc-test0708.xyz www.fea.lives2-yc-test0708.xyz fea.lives3-yec-sto07test.xyz www.fea.lives3-yec-sto07test.xyz'
+      SERVER_NAME: 'fea.lives2-yc-test0708.xyz www.fea.lives2-yc-test0708.xyz fea.lives3-yec-sto07test.xyz www.fea.lives3-yec-sto07test.xyz'
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
       REWRITE: 1
