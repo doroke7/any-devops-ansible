@@ -5,7 +5,7 @@
     state: latest
 
     
-- name: (yum) yum insatll https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+- name: (yum) yum install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
   yum: 
     name: https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
 

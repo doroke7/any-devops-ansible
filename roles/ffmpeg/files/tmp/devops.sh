@@ -18,7 +18,7 @@ ffmpeg -y -i "dist/rmvb.rmvb" -c:v h264 -c:a libfdk_aac "dist/rmvb.mp4"
 
 
 # mp4 to ts
-ffmpeg -y -i z.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb z.ts
+ffmpeg -y -i fff1b353d64ee65f72f7acbb985d8af0.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb fff1b353d64ee65f72f7acbb985d8af0.ts
 
 
-ffmpeg -i z.ts -c copy -map 0 -f segment -segment_list z.m3u8 -segment_time 1 z_%03d.ts  
+ffmpeg -i fff1b353d64ee65f72f7acbb985d8af0.ts -c copy -map 0 -f segment -segment_list fff1b353d64ee65f72f7acbb985d8af0.m3u8 -segment_time 1 fff1b353d64ee65f72f7acbb985d8af0_%03d.ts  
