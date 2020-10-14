@@ -138,4 +138,5 @@ MYSQL:
             - '10.0.0.21'                 # 提供 xtrabuckup shell  连取 127.0.0.1 ，在 Ansilbe 主机
           PASSWORD: 'mysql_pass_backup'
           DATABASE: '*'
+
           

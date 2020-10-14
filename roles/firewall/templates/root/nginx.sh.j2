@@ -2,3 +2,6 @@ sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" 
 
 sudo firewall-cmd --permanent --zone=public --add-rich-rule="rule family="ipv4" port port="443" protocol="tcp" accept"
 
+firewall-cmd --permanent --add-rich-rule="rule family='ipv4' source address='163.181.38.0/24' reject"
+
+firewall-cmd --add-rich-rule='rule family="ipv4" source address="8.8.8.8" reject

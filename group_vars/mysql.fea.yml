@@ -124,7 +124,28 @@ MYSQL:
             - '10.0.0.196'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
           PASSWORD: 'mysql_pass_agent'
           DATABASE: '*'
-                 
+
+
+        - drop_user: true                # index = 7
+          with_grant_option: false
+          GRANTS: 
+            - 'SUPER'
+            - 'REPLICATION CLIENT'
+            - 'PROCESS'
+          USER: 'agent'
+          HOSTS: 
+            - '10.0.0.181'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
+            - '10.0.0.182'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
+            - '10.0.0.183'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
+            - '10.0.0.191'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
+            - '10.0.0.192'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
+            - '10.0.0.193'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网
+            - '10.0.0.194'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
+            - '10.0.0.195'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
+            - '10.0.0.196'                # 提供 MYSQL mmm agnent 从 10.0.0.* 连取 10.0.0.191 ，在 VM 内网   
+          PASSWORD: 'mysql_pass_qa'
+          DATABASE: '*'
+           
         - drop_user: false               # index = 8
           with_grant_option: true
           GRANTS:
@@ -139,6 +160,21 @@ MYSQL:
             - 'localhost'                 # 提供 xtrabuckup shell  连取 127.0.0.1 ，在 localhost
             - '10.0.0.21'                 # 提供 xtrabuckup shell  连取 127.0.0.1 ，在 Ansilbe 主机
           PASSWORD: 'mysql_pass_backup'
+          DATABASE: '*'
+        - drop_user: true                 # index = 5
+          with_grant_option: false
+          GRANTS: 
+
+            - 'DELETE'
+            - 'EXECUTE'
+            - 'INSERT'
+            - 'SELECT'
+            - 'UPDATE'
+          USER: 'backend'
+          HOSTS: 
+            - 'localhost'
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+          PASSWORD: 'mysql_pass_qa'
           DATABASE: '*'
           
     - HOST: '10.0.0.182'       # 内网 IP   
