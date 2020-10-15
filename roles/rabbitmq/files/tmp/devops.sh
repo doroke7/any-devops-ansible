@@ -59,7 +59,9 @@ rabbitmqctl hipe_compile {directory}
 # 如果需要父目录会被创建。并且在编译之前，该目录下的所有 .beam-files会被自动删除。
 # 使用预编译的文件，你应该设置 RABBITMQ_SERVER_CODE_PATH 环境变量为 hipe_compile 调用指定的目录。
 
+rabbitmqctl list_users
 
+rabbitmqctl clear_permissions -p "custom-vhost" "username"
 
 # Source：源头的意思，其实就是 Exchange。
 # destination：目的地的意思，其实就是 Queue。

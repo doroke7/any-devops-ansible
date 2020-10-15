@@ -11,7 +11,7 @@
   ignore_errors: yes
 
 
-- name: rabbitmqctl set_permissions '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*'' '.*' '.*'
-  command: rabbitmqctl set_permissions '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
+- name: (command) rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
+  command: rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
   when: rabbitmq is not undefined and rabbitmq == 1
   ignore_errors: yes
