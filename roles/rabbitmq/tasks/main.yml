@@ -2,3 +2,4 @@
 - import_tasks: yum-install-rabbitmq.yml
 - import_tasks: template-opt_rabbitmqadmin_bin_rabbitmqadmin.yml
 - import_tasks: service-rabbitmq_server-restarted.yml
+- import_tasks: command-rabbitmqctl.yml
