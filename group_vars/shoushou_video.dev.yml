@@ -25,7 +25,10 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yecaojule-07test.xyz'
 
-
+RABBITMQ:
+  VHOST: 'shoushou_video'
+  USERNAME: 'backend'
+  PASSWORD: 'rabbitmq_pass_backend'
 
 mysql_version: '5.6'      
 
