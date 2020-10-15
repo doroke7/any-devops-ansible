@@ -1,0 +1,7 @@
+- name: "(template) scp lib/systemd/system/supervisord.service.j2 /lib/systemd/system/supervisord.service"
+  template:
+    src: lib/systemd/system/supervisord.service.j2
+    dest: /lib/systemd/system/supervisord.service
+    owner: root
+    group: root
+    mode: 0755

@@ -1,4 +1,7 @@
 ---
+- name: (systemd) systemctl daemon-reload
+  systemd: daemon_reload=yes
+
 - name: (service) service supervisord restarted
   service:
     name: supervisord
