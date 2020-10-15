@@ -1,0 +1,17 @@
+---
+
+- name: "(command) rabbitmqctl add_user '{{ RABBITMQ.USERNAME }}' '{{ RABBITMQ.PASSWORD }}'"
+  command: "rabbitmqctl add_user '{{ RABBITMQ.USERNAME }}' '{{ RABBITMQ.PASSWORD }}'"
+  when: rabbitmq is not undefined and rabbitmq == 1  
+  ignore_errors: yes
+
+- name: "(command) rabbitmqctl add_vhost '{{ RABBITMQ.VHOST }}'"
+  command: "rabbitmqctl add_vhost '{{ RABBITMQ.VHOST }}'"
+  when: rabbitmq is not undefined and rabbitmq == 1
+  ignore_errors: yes
+
+
+- name: rabbitmqctl set_permissions '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*'' '.*' '.*'
+  command: rabbitmqctl set_permissions '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
+  when: rabbitmq is not undefined and rabbitmq == 1
+  ignore_errors: yes

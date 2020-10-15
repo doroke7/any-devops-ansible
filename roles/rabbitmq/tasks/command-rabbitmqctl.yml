@@ -9,11 +9,11 @@
   ignore_errors: yes
 
 
-- name: rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*'' '.*'' '.*'
+- name: rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
   command: rabbitmqctl set_permissions -p '{{ RABBITMQ.VHOST }}' '{{ RABBITMQ.USERNAME }}' '.*' '.*' '.*'
   ignore_errors: yes
 
 
-- name: rabbitmqctl set_user_tags -p '{{ RABBITMQ.USERNAME }}' administrator
-  command: rabbitmqctl set_user_tags -p '{{ RABBITMQ.USERNAME }}' administrator
+- name: rabbitmqctl set_user_tags '{{ RABBITMQ.USERNAME }}' administrator
+  command: rabbitmqctl set_user_tags '{{ RABBITMQ.USERNAME }}' administrator
   ignore_errors: yes
