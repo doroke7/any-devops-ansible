@@ -68,28 +68,27 @@ rabbitmqctl clear_permissions -p "custom-vhost" "username"
 # routing_key：路由键的规则，用于 Queue 匹配（比如test.#）。
 
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list vhosts
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list vhosts
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list exchanges
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list exchanges
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list queues
-
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass get queue=test
-
-
-
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass list bindings
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list queues
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli get queue=test
 
 
 
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list bindings
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare queue name=demo.queue durable=true
 
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare exchange name=demo.exchange type=topic
+
+
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli declare queue name=demo.queue durable=true
+
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli declare exchange name=demo.exchange type=topic
 
 # 把 队列 test 分配到 交换机 my.topic 旗下， 指定 路由  my.#
 # 使用路由分配的优点是 可做到 一个 publish 多个 subscribe 的效果
-sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass declare binding source=demo.exchange destination=demo.queue routing_key=demo.#
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass declare binding source=demo.exchange destination=demo.queue routing_key=demo.#
 
 
 # 推送 playload Hello xxx 消息 给交换机 my.topic 其中 路由关键字是  my.test
