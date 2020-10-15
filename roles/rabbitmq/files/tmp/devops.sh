@@ -98,6 +98,7 @@ sudo rabbitmqadmin purge queue name=name_of_the_queue_to_be_purged
 
 
 # rabbitmq 的建议配置架构
+
 ## vhost 区分项目
 ## exchange 区分功能模块
 ## quequ 区分功能点
