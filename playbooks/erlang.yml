@@ -18,3 +18,45 @@
     - name: "本地 feature 环境，Erlang 安装开始"
       shell: echo 'playbook Erlang ends'
   vars:
+
+
+- name: Install develop erlang
+  hosts: dev-erlang
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+  - ./../group_vars/erlang.dev.yml
+  pre_tasks:
+    - name: "本地 develop 环境，Erlang 安装开始"
+      shell: echo 'playbook Erlang starts'
+  roles:
+    - role: erlang
+      vars: 
+        bra: dev
+      when: branch is not defined or branch in ['dev', 'develop', 'all']
+  post_tasks:
+    - name: "本地 develop 环境，Erlang 安装开始"
+      shell: echo 'playbook Erlang ends'
+  vars:
+
+
+- name: Install master erlang
+  hosts: mas-erlang
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+  - ./../group_vars/erlang.mas.yml
+  pre_tasks:
+    - name: "本地 master 环境，Erlang 安装开始"
+      shell: echo 'playbook Erlang starts'
+  roles:
+    - role: erlang
+      vars: 
+        bra: mas
+      when: branch is not defined or branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "本地 master 环境，Erlang 安装开始"
+      shell: echo 'playbook Erlang ends'
+  vars:
