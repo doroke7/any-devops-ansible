@@ -10,9 +10,11 @@
     - role: golang
       vars:
         bra: fea
-      when: branch == 'fea' or branch == 'feature' or branch == 'all' or branch is not defined
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - shell: echo 'playbook golang ends'
+
+
 - name: Install develop golang
   hosts: dev-golang
   strategy: linear # free, debug
@@ -24,6 +26,21 @@
     - role: golang
       vars:
         bra: dev
-      when: branch == 'dev' or branch == 'develop' or branch == 'all'
+      when: branch is not defined or branch in ['dev', 'develop', 'all']
+  post_tasks:
+    - shell: echo 'playbook golang ends'
+
+- name: Install master golang
+  hosts: mas-golang
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  pre_tasks:
+    - shell: echo 'playbook golang starts'
+  roles:
+    - role: golang
+      vars:
+        bra: mas
+      when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
     - shell: echo 'playbook golang ends'

@@ -38,12 +38,10 @@
 127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 [fea-golang] # Group Name, 空白错误 [node server] 错误 
-10.0.0.91 ansible_ssh_host=10.0.0.91 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 [fea-php] # Group Name, 空白错误 [node server] 错误 
-#127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
-10.0.0.91 ansible_ssh_host=10.0.0.91 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
-#10.0.0.92 ansible_ssh_host=10.0.0.92 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 [fea-erlang]
 127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
@@ -191,6 +189,13 @@
 47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
 
 [dev-erlang]
+47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
+
+
+[dev-golang]
+47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
+
+[dev-supervisor]
 47.242.59.96 ansible_ssh_host=47.242.59.96 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=He0072554394 
 
 
