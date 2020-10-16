@@ -13,26 +13,26 @@
 
  Date: 08/10/2020 17:58:51
 */
-CREATE DATABASE IF NOT EXISTS `domain`;
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for domains
--- ----------------------------
 DROP TABLE IF EXISTS `domains`;
 CREATE TABLE `domains`  (
   `domain_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
+  `server` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
-  `protocol` enum('HTTP','HTTPS') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'HTTP',
+  `type` enum('API','STORAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `added_time` timestamp(0) NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP(0),
+  `removed_time` timestamp(0) NULL DEFAULT NULL,
+  `response` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `method` enum('GET','POST','PUT','PATCH','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'GET',
   PRIMARY KEY (`domain_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of domains
 -- ----------------------------
+INSERT INTO `domains` VALUES (1, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-16 17:44:34', '2020-10-16 17:42:52', NULL, NULL, 'GET');
+INSERT INTO `domains` VALUES (2, 'https://yecao-7k8s.xyz', '/result.json', 'STORAGE', 1, '2020-10-16 20:30:37', '2020-10-16 20:30:37', NULL, NULL, 'GET');
+
 
 SET FOREIGN_KEY_CHECKS = 1;
