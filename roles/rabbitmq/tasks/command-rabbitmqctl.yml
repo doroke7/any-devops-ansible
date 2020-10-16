@@ -17,3 +17,7 @@
 - name: rabbitmqctl set_user_tags '{{ RABBITMQ.USERNAME }}' administrator
   command: rabbitmqctl set_user_tags '{{ RABBITMQ.USERNAME }}' administrator
   ignore_errors: yes
+
+- name: rabbitmq-plugins enable rabbitmq_management
+  command: rabbitmq-plugins enable rabbitmq_management
+  ignore_errors: yes

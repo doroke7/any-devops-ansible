@@ -289,6 +289,10 @@
 [mas-php]
 154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
 
+[mas-erlang]
+154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
+
+
 
 [mas-supervisor]
 
@@ -298,11 +302,16 @@
 154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
 
 
+
 [mas-memcached]
 154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
 
 
 [mas-beanstalkd]
+
+[mas-rabbitmq]
+154.196.140.20 ansible_ssh_host=154.196.140.20 ansible_ssh_port=15081 ansible_ssh_user=root ansible_ssh_private_key_file=./keys/shoushou-master-php-1
+
 
 [mas-logstash]
 

@@ -15,7 +15,7 @@
         bra: fea
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
-    - name: "本地 feature 环境，Erlang 安装开始"
+    - name: "本地 feature 环境，Erlang 安装完毕"
       shell: echo 'playbook Erlang ends'
   vars:
 
@@ -36,7 +36,7 @@
         bra: dev
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
-    - name: "本地 develop 环境，Erlang 安装开始"
+    - name: "本地 develop 环境，Erlang 安装完毕"
       shell: echo 'playbook Erlang ends'
   vars:
 
@@ -57,6 +57,6 @@
         bra: mas
       when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
-    - name: "本地 master 环境，Erlang 安装开始"
+    - name: "本地 master 环境，Erlang 安装完毕"
       shell: echo 'playbook Erlang ends'
   vars:

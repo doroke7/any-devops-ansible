@@ -75,7 +75,7 @@
     - role: rabbitmq
       vars: 
         bra: mas
-      when: branch is not defined or branch in ['rel', 'master', 'all']
+      when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
     - name: "本地 master 环境，Rabbitmq 安装开始"
       shell: echo 'playbook Rabbitmq ends'
