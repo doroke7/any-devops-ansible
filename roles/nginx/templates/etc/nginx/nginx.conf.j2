@@ -28,7 +28,8 @@ rtmp {
        hls_type event;  # MUST BE event, if not event, m3u8 will be removed affter being played
        hls on;
        hls_path /var/www/shoushou_video_php;
-       hls_fragment 1s;
+       hls_fragment 20s;
+       hls_cleanup  off;
        hls_playlist_length 60s;
        allow play all;
      }
