@@ -156,6 +156,7 @@
         nginx: 0
         mysql: 0
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: "本地 develop 环境，shoushou_video 安装完毕"
@@ -182,6 +183,7 @@
         nginx: 1
         mysql: 0
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: "本地 develop 环境，shoushou_video nginx 安装完毕"
@@ -207,6 +209,7 @@
         nginx: 0
         mysql: 1
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: "本地 develop 环境，shoushou_video mysql 安装完毕"
@@ -232,12 +235,39 @@
         nginx: 0
         mysql: 0
         rabbitmq: 1
+        supervisor: 0
       when: branch is not defined or branch in ['dev', 'develop', 'all']
   post_tasks:
     - name: "本地 develop 环境，shoushou_video rabbitmq 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'rabbitmq'
+
+- name: Install develop shoushou_video supervisor
+  hosts: dev-shoushou_video-supervisor
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.dev.yml
+  pre_tasks:
+    - name: "本地 develop shoushou_video supervisor 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: dev
+        git: 0
+        nginx: 0
+        mysql: 0
+        rabbitmq: 0
+        supervisor: 1
+      when: branch is not defined or branch in ['dev', 'develop', 'all']
+  post_tasks:
+    - name: "本地 develop 环境，shoushou_video supervisor 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'supervisor'
 
 ##############################################################################
       
@@ -259,6 +289,7 @@
         nginx: 0
         mysql: 0
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
     - name: "本地 master shoushou_video GIT 安装完毕"
@@ -285,6 +316,7 @@
         nginx: 1
         mysql: 0
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
     - name: "本地 master shoushou_video NGINX 安装完毕"
@@ -311,6 +343,7 @@
         nginx: 0
         mysql: 1
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
     - name: "本地 master shoushou_video MYSQL 安装完毕"
@@ -337,9 +370,37 @@
         nginx: 0
         mysql: 0
         rabbitmq: 1
+        supervisor: 0
       when: branch is not defined or branch in ['mas', 'master', 'all']
   post_tasks:
     - name: "本地 master 环境，shoushou_video rabbitmq 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'rabbitmq'
+
+
+- name: Install master shoushou_video supervisor
+  hosts: mas-shoushou_video-supervisor
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.mas.yml
+  pre_tasks:
+    - name: "本地 master shoushou_video supervisor 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: mas
+        git: 0
+        nginx: 0
+        mysql: 0
+        rabbitmq: 0
+        supervisor: 1
+      when: branch is not defined or branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "本地 master 环境，shoushou_video supervisor 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'supervisor'
