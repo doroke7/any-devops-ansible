@@ -8,5 +8,11 @@
     group: root
     mode: 0776
     backup: no
+
+- name: (file) mkdir /etc/supervisord.d
+  file:
+    path: /etc/supervisord.d
+    state: directory
+    mode: 0755
   # 读取的 是 templates 目录下
 

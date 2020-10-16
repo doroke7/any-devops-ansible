@@ -5,7 +5,7 @@
 {% for PROGRAM in GROUP.PROGRAMS %}
 [program:{{ PROGRAM.NAME }}]
 directory = {{ PROGRAM.DIRECTORY }}
-command =  {{ PROGRAM.COMMAND }}
+command = {{ PROGRAM.COMMAND }}
 process_name = %(program_name)s-%(process_num)s
 numprocs = {{ PROGRAM.NUMPROCS }}
 autostart= true
@@ -26,7 +26,8 @@ exitcodes= 0
 {% endfor %}
 
 [group:{{ GROUP.NAME }}]
-programs={{ GROUP.PROGRAMS | map(attribute='NAME') | list | join(', ') }} ;  {#% 取出 GROUP.PROGRAMS 里面 每一个 element 的 NAME 属性|  然后 以 array 排列 |  已 , 连接 %#}
+programs={{ GROUP.PROGRAMS | map(attribute='NAME') | list | join(', ') }} {#% 取出 GROUP.PROGRAMS 里面 每一个 element 的 NAME 属性|  然后 以 array 排列 |  已 , 连接 %#}
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; group-{{ GROUP.NAME }} ends ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 

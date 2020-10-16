@@ -30,7 +30,7 @@ RABBITMQ:
   PASSWORD: 'rabbitmq_pass_backend'
 
 SUPERVISOR:
-  NAME: 'shoushou_video'
+  NAME: 'shoushou_video_golang'
   GROUPS:
     - NAME: 'shoushou_video_golang'
       PROGRAMS:

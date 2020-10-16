@@ -1,17 +1,22 @@
+
+sudo rabbitmq-plugins enable rabbitmq_management
+
  # sudo rabbitmqctl add_user 'backend';
- sudo rabbitmqctl add_user 'backend' 'rabbitmq_pass';
- sudo rabbitmqctl add_vhost '/';
+sudo rabbitmqctl delete_user root;
+
+sudo rabbitmqctl add_user 'root' 'rabbitmq_pass_cli';
+
+sudo rabbitmqctl add_vhost '/';
 
 # First ".*" for configure permission on every entity
 # Second ".*" for write permission on every entity
 # Third ".*" for read permission on every entity
-sudo rabbitmqctl set_permissions -p "default" "backend" ".*" ".*" ".*"
-sudo rabbitmqctl set_permissions -p "/" "backend" ".*" ".*" ".*"
+sudo rabbitmqctl set_permissions -p "/" "root" ".*" ".*" ".*"
 
-sudo rabbitmqctl set_user_tags backend administrator
+sudo rabbitmqctl set_user_tags root administrator
 
 # 开启 RabbitMQ WEB GUI
-sudo rabbitmq-plugins enable rabbitmq_management
+
 
 
 # 查看 rabbitMQ 基本配置   类似 nginx -t
@@ -68,18 +73,16 @@ rabbitmqctl clear_permissions -p "custom-vhost" "username"
 # routing_key：路由键的规则，用于 Queue 匹配（比如test.#）。
 
 
+
+# rabbitmqadmin 有个缺点， 必须 Rabbitmq Web GUI 开启才能使用， 因为 他使用的 是 WEB GUI 的 API
+
 sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list vhosts
-
 sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list exchanges
-
 sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list queues
-sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli get queue=test
-
-
-
 sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli list bindings
 
 
+sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli get queue=test
 
 
 sudo rabbitmqadmin -H 127.0.0.1 -u root -p rabbitmq_pass_cli declare queue name=demo.queue durable=true
