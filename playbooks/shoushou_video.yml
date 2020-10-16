@@ -17,6 +17,7 @@
         nginx: 0
         mysql: 0
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video 安装完毕"
@@ -43,6 +44,7 @@
         nginx: 1
         mysql: 0
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video nginx 安装完毕"
@@ -68,6 +70,7 @@
         nginx: 0
         mysql: 1
         rabbitmq: 0
+        supervisor: 0
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video mysql 安装完毕"
@@ -94,12 +97,40 @@
         nginx: 0
         mysql: 0
         rabbitmq: 1
+        supervisor: 0
       when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video rabbitmq 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'rabbitmq'
+
+
+- name: Install feature shoushou_video supervisor
+  hosts: fea-shoushou_video-supervisor
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.fea.yml
+  pre_tasks:
+    - name: "本地 feature shoushou_video supervisor 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        git: 0
+        nginx: 0
+        mysql: 0
+        rabbitmq: 0
+        supervisor: 1
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，shoushou_video supervisor 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'supervisor'
 
 
       

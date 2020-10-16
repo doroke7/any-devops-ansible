@@ -1,0 +1,18 @@
+---
+- name: (template) scp etc/supervisord.d/default.ini.j2 /etc/supervisord.d/{{ SUPERVISOR['NAME'] }}.ini
+  template:
+    src: etc/supervisord.d/default.ini.j2
+    dest: "/etc/supervisord.d/{{ SUPERVISOR['NAME'] }}.ini"
+    owner: root
+    group: root
+    mode: 0777
+    backup: no
+  when: supervisor is not undefined and supervisor == 1
+
+
+  
+- name: (service) service supervisord restarted
+  service:
+    name: supervisord
+    state: restarted
+  when: supervisor is not undefined and supervisor == 1

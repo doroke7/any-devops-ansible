@@ -15,7 +15,8 @@
 [fea-shoushou_video-rabbitmq]
 127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
-
+[fea-shoushou_video-supervisor]
+127.0.0.1 ansible_ssh_host=127.0.0.1 ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant ansible_ssh_private_key_file=/root/.ssh/authorized_keys
 
 ####################################################################################################################################################################
 

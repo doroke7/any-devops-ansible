@@ -3,3 +3,4 @@
 - import_tasks: nginx.yml
 - import_tasks: git.yml
 - import_tasks: rabbitmq.yml
+- import_tasks: supervisor.yml

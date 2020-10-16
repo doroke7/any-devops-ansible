@@ -1,0 +1,37 @@
+
+{% for GROUP in SUPERVISOR.GROUPS %}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; group-{{ GROUP.NAME }} starts ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+{% for PROGRAM in GROUP.PROGRAMS %}
+[program:{{ PROGRAM.NAME }}]
+directory = {{ PROGRAM.DIRECTORY }}
+command =  {{ PROGRAM.COMMAND }}
+process_name = %(program_name)s-%(process_num)s
+numprocs = {{ PROGRAM.NUMPROCS }}
+autostart= true
+autorestart= true
+startsecs= 1
+startretries= -1
+stdout_logfile= {{ PROGRAM.STDOUT_LOGFILE }}
+stdout_logfile_maxbytes= 10MB   ; max # logfile bytes b4 rotation (default 50MB)
+stdout_logfile_backups= 30     ; # of stdout logfile backups (default 10)
+;stdout_events_enabled=false   ; emit events on stdout writes (default false)
+stderr_logfile= {{ PROGRAM.STDERR_LOGFILE }}
+stderr_logfile_maxbytes= 1MB   ; max # logfile bytes b4 rotation (default 50MB)
+stderr_logfile_backups= 30        ; # of stderr logfile backups (default 10)
+;stderr_events_enabled=false   ; emit events on stderr writes (default false)
+;environment=A=1,B=2           ; process environment additions
+redirect_stderr= true
+exitcodes= 0
+{% endfor %}
+
+[group:{{ GROUP.NAME }}]
+programs={{ GROUP.PROGRAMS | map(attribute='NAME') | list | join(', ') }} ;  {#% 取出 GROUP.PROGRAMS 里面 每一个 element 的 NAME 属性|  然后 以 array 排列 |  已 , 连接 %#}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; group-{{ GROUP.NAME }} ends ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+{% endfor %}
+
+
