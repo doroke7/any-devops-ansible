@@ -50,3 +50,21 @@
   post_tasks:
     - name: "开发 release 环境，Supervisor 安装完毕"
       shell: echo 'playbook supervisor ends'
+
+
+- name: Install master supervisor
+  hosts: mas-supervisor
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  pre_tasks:
+    - name: "开发 master 环境，Supervisor 安装开始"
+      shell: echo 'playbook supervisor starts'
+  roles:
+    - role: supervisor
+      vars:
+        bra: mas
+      when: branch is defined and branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "开发 master 环境，Supervisor 安装完毕"
+      shell: echo 'playbook supervisor ends'

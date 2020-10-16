@@ -106,3 +106,16 @@ sudo rabbitmqadmin purge queue name=name_of_the_queue_to_be_purged
 ## vhost 区分项目
 ## exchange 区分功能模块
 ## quequ 区分功能点
+
+
+
+sudo rabbitmqadmin -H 127.0.0.1 -u backend -p rabbitmq_pass_backend_AC273677C1BF0364252283ECE8C70C25 list queues
+
+sudo rabbitmqctl add_user 'backend' 'rabbitmq_pass_backend_AC273677C1BF0364252283ECE8C70C25';
+
+sudo rabbitmqctl add_vhost 'shoushou_video';
+
+# First ".*" for configure permission on every entity
+# Second ".*" for write permission on every entity
+# Third ".*" for read permission on every entity
+sudo rabbitmqctl set_permissions -p "shoushou_video" "backend" ".*" ".*" ".*"
