@@ -59,6 +59,10 @@ http {
     send_timeout          10;
     types_hash_max_size 2048;
     
+    limit_rate_after 20M;  # After 20M size file, download in 10M/sec
+    limit_rate 10M; 
+
+
 
 
     gzip on;

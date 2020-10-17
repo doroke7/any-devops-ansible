@@ -1,8 +1,7 @@
-# 开启 supervisord
-sudo mkdir -p /var/run/supervisord/;
-sudo unlink /var/run/supervisord/supervisord.sock; 
-sudo unlink /var/run/supervisord/supervisord.pid;
-sudo supervisord -c /etc/supervisord.conf;   # 注意不是 CTL 是 d !!!!!!!!!!!!!!!!!
+# Supervisor 体验并不好
+# 每次 supervisorctl restart 之前 都要 reload 设定档
+sudo supervisorctl reload;
+
 
 
 # 关闭 supervisord

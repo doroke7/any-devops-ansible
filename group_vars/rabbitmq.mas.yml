@@ -2,4 +2,4 @@
 RABBITMQ:
   VHOST: '/'
   USERNAME: 'root'
-  PASSWORD: 'rabbitmq_pass_cli_7E98573DC8854E71F9861F67D11A844A'
+  PASSWORD: 'rabbitmq_pass_cli'
