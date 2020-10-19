@@ -1,18 +1,135 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : MAS mysql-1 154.196.140.58
+ Source Server         : 127.0.0.1
  Source Server Type    : MySQL
- Source Server Version : 50649
- Source Host           : localhost:3306
- Source Schema         : service
+ Source Server Version : 50731
+ Source Host           : 127.0.0.1:3306
+ Source Schema         : domain
 
  Target Server Type    : MySQL
- Target Server Version : 50649
+ Target Server Version : 50731
  File Encoding         : 65001
 
- Date: 08/10/2020 17:58:51
+ Date: 19/10/2020 10:09:37
 */
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for administrator_authorizations
+-- ----------------------------
+DROP TABLE IF EXISTS `administrator_authorizations`;
+CREATE TABLE `administrator_authorizations`  (
+  `administrator_authorization_id` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `route` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `methods` set('GET','POST','PUT','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
+  `administrator_group_id` int(12) NOT NULL,
+  `status` tinyint(1) NULL DEFAULT NULL,
+  `added_time` timestamp(0) NULL DEFAULT NULL,
+  `edited_time` timestamp(0) NULL DEFAULT NULL,
+  `removed_time` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_authorization_id`) USING BTREE,
+  UNIQUE INDEX `administrator_group_id_route`(`administrator_group_id`, `route`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of administrator_authorizations
+-- ----------------------------
+INSERT INTO `administrator_authorizations` VALUES (1, '/admin/resource/room', 'GET,POST,PUT,DELETE', 1, 1, '2019-08-14 15:29:06', '2019-08-14 15:29:06', NULL);
+INSERT INTO `administrator_authorizations` VALUES (2, '/admin/resource/word', 'DELETE', 1, 1, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for administrator_groups
+-- ----------------------------
+DROP TABLE IF EXISTS `administrator_groups`;
+CREATE TABLE `administrator_groups`  (
+  `administrator_group_id` int(12) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `status` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '状态',
+  `added_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `edited_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `removed_time` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of administrator_groups
+-- ----------------------------
+INSERT INTO `administrator_groups` VALUES (1, '超级部门', 0, NULL, NULL, NULL);
+INSERT INTO `administrator_groups` VALUES (2, '技術部', 0, NULL, NULL, NULL);
+INSERT INTO `administrator_groups` VALUES (3, '人事部', 0, NULL, NULL, NULL);
+INSERT INTO `administrator_groups` VALUES (4, '空部门', 0, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for administrator_to_administrator_group
+-- ----------------------------
+DROP TABLE IF EXISTS `administrator_to_administrator_group`;
+CREATE TABLE `administrator_to_administrator_group`  (
+  `administrator_id` int(12) UNSIGNED NOT NULL,
+  `administrator_group_id` int(12) UNSIGNED NOT NULL,
+  `added_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `edited_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `removed_time` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_id`, `administrator_group_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of administrator_to_administrator_group
+-- ----------------------------
+INSERT INTO `administrator_to_administrator_group` VALUES (1, 1, NULL, NULL, NULL);
+INSERT INTO `administrator_to_administrator_group` VALUES (1, 4, NULL, NULL, NULL);
+INSERT INTO `administrator_to_administrator_group` VALUES (2, 1, NULL, NULL, NULL);
+INSERT INTO `administrator_to_administrator_group` VALUES (2, 2, NULL, NULL, NULL);
+
+-- ----------------------------
+-- Table structure for administrators
+-- ----------------------------
+DROP TABLE IF EXISTS `administrators`;
+CREATE TABLE `administrators`  (
+  `administrator_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
+  `nickname` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
+  `password` char(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
+  `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '头像',
+  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '电子邮箱',
+  `status` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '状态',
+  `added_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `edited_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `removed_time` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`administrator_id`) USING BTREE,
+  UNIQUE INDEX `username`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of administrators
+-- ----------------------------
+INSERT INTO `administrators` VALUES (1, 'admin', '管理者', 'iF_jEh7ncd2oaptGHXgP-ry2J4bC7y8r', 'user/1564820023-6c1af0a78b6233d1e03a3ee09efc6515268d5867.png', 'admin@mail.wonderful.com', 1, '2020-10-18 17:32:27', '2020-10-18 17:32:27', NULL);
+INSERT INTO `administrators` VALUES (2, 'jim', '吉姆', '', '', '', 1, '2020-07-26 00:07:29', '2020-07-26 00:07:29', NULL);
+
+-- ----------------------------
+-- Table structure for configs
+-- ----------------------------
+DROP TABLE IF EXISTS `configs`;
+CREATE TABLE `configs`  (
+  `config_id` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`config_id`) USING BTREE,
+  UNIQUE INDEX `key`(`key`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of configs
+-- ----------------------------
+INSERT INTO `configs` VALUES (1, 'betMoney', '0');
+INSERT INTO `configs` VALUES (2, 'chargeMoney', '0');
+INSERT INTO `configs` VALUES (3, 'day', '2');
+
+-- ----------------------------
+-- Table structure for domains
+-- ----------------------------
 DROP TABLE IF EXISTS `domains`;
 CREATE TABLE `domains`  (
   `domain_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -34,5 +151,5 @@ CREATE TABLE `domains`  (
 INSERT INTO `domains` VALUES (1, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-16 17:44:34', '2020-10-16 17:42:52', NULL, NULL, 'GET');
 INSERT INTO `domains` VALUES (2, 'https://yecao-7k8s.xyz', '/result.json', 'STORAGE', 1, '2020-10-16 20:30:37', '2020-10-16 20:30:37', NULL, NULL, 'GET');
 
-
 SET FOREIGN_KEY_CHECKS = 1;
+
