@@ -1,5 +1,10 @@
 # Supervisor 体验并不好
 # 每次 supervisorctl restart 之前 都要 reload 设定档
+
+# Supervisor 体验并不好
+# 每次 supervisorctl start 之前 都要 sudo service supervisord restart
+
+
 sudo supervisorctl reload;
 
 

@@ -76,20 +76,20 @@ MYSQL:
             - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
           PASSWORD: 'mysql_pass_backend'
           DATABASE: 'shoushou_video'
-        # - drop_user: true                 # index = 5
-        #   with_grant_option: false
-        #   GRANTS:
-        #     - 'DELETE'
-        #     - 'EXECUTE'
-        #     - 'INSERT'
-        #     - 'SELECT'
-        #     - 'UPDATE'
-        #   USER: 'backend'
-        #   HOSTS: 
-        #     - 'localhost'
-        #     - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
-        #   PASSWORD: 'mysql_pass_qa'
-        #   DATABASE: 'shoushou_video'
+        - drop_user: true                 # index = 5
+          with_grant_option: false
+          GRANTS:
+            - 'DELETE'
+            - 'EXECUTE'
+            - 'INSERT'
+            - 'SELECT'
+            - 'UPDATE'
+          USER: 'backend'
+          HOSTS: 
+            - 'localhost'
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+          PASSWORD: 'mysql_pass_qa'
+          DATABASE: 'shoushou_video'
     # - HOST: '10.0.0.181'       # 内网 IP   
     #   ENGINE: 'InnoDB'
     #   CONNECTIONS:
