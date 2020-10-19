@@ -107,3 +107,7 @@ ffmpeg -i 1min-300k.ts -c copy -map 0 -f segment -segment_list 1min-300k.m3u8 -s
 # 20201031
 ffmpeg -i 1min-1000k.mp4 -c:v libx264 -hls_time 5 -hls_list_size 0 -c:a aac -strict -2 -f hls 1min-1000k.m3u8
 ffmpeg -i 1min-700k.mp4 -c:v libx264 -hls_time 5 -hls_list_size 0 -c:a aac -strict -2 -f hls 1min-700k.m3u8
+
+
+ffmpeg -i 22min.mp4 -b 1000k -minrate 1000k -maxrate 1000k -bufsize 1000k 22min-1000k.mp4
+ffmpeg -i 22min-1000k.mp4 -c:v libx264 -hls_time 5 -hls_list_size 0 -c:a aac -strict -2 -f hls 22min-1000k.m3u8
