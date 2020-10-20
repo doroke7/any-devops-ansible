@@ -114,5 +114,5 @@ ffmpeg -i 1min-700k.mp4 -c:v libx264 -hls_time 5 -hls_list_size 0 -c:a aac -stri
 
 ffmpeg -i 22min.mp4 -b 1000k -minrate 1000k -maxrate 1000k -bufsize 1000k 22min-1000k.mp4
 ffmpeg -i 22min-1000k.mp4 -c:v libx264 -hls_time 5 -hls_list_size 0 -c:a aac -strict -2 -f hls 22min-1000k.m3u8
-ffmpeg -i 22min-1000k.mp4 -force_key_frames "expr:gte(t,n_forced*5)" -strict -2 -c:a aac -c:v libx264 -hls_time 5 -f hls 22min-1000k.m3u8
+ffmpeg -i a37c3d6d8f446b971ababed68cf0c802-1000k.mp4 -force_key_frames expr:gte(t,n_forced*5) -strict -2 -c:a aac -c:v libx264 -hls_list_size 0 -hls_time 5 -f hls tt.m3u8
 
