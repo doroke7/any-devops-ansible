@@ -54,6 +54,9 @@ server {
 
     location / {
 
+        {% if VHOST['TRY_FILES'] is defined %}
+        try_files {{ VHOST['TRY_FILES'] }};
+        {% endif %}        
 
         {% if VHOST['REWRITE'] == 1 %}
         if (!-e $request_filename) {
