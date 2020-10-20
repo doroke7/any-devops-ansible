@@ -7,6 +7,7 @@ NGINX:
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
       REWRITE: 1
+      TRY_FILES: '$uri $uri/ /index.php?$query_string'
 
       
     - HTTP_PORT: 80
@@ -15,6 +16,7 @@ NGINX:
       INDEX: 'www_index.html www_index.htm'
       M_SERVER_NAME: 'm.yecao07.me'
       REWRITE: 0
+      TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -23,6 +25,7 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yecao07.me'
       REWRITE: 0
+      TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -31,6 +34,7 @@ NGINX:
       M_SERVER_NAME: 'm.yehua07.com'
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
+      TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -39,6 +43,7 @@ NGINX:
       REWRITE: 0
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yehua07.com'
+      TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
 
 RABBITMQ:
   VHOST: 'shoushou_video'
