@@ -1,18 +1,21 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 127.0.0.1
+ Source Server         : FEA all 127.0.0.1
  Source Server Type    : MySQL
- Source Server Version : 50731
- Source Host           : 127.0.0.1:3306
+ Source Server Version : 50650
+ Source Host           : localhost:3306
  Source Schema         : domain
 
  Target Server Type    : MySQL
- Target Server Version : 50731
+ Target Server Version : 50650
  File Encoding         : 65001
 
- Date: 19/10/2020 10:09:37
+ Date: 23/10/2020 15:27:39
 */
+
+USE `domain`;
+
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -100,13 +103,15 @@ CREATE TABLE `administrators`  (
   `removed_time` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`administrator_id`) USING BTREE,
   UNIQUE INDEX `username`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '管理员表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of administrators
 -- ----------------------------
-INSERT INTO `administrators` VALUES (1, 'admin', '管理者', 'iF_jEh7ncd2oaptGHXgP-ry2J4bC7y8r', 'user/1564820023-6c1af0a78b6233d1e03a3ee09efc6515268d5867.png', 'admin@mail.wonderful.com', 1, '2020-10-18 17:32:27', '2020-10-18 17:32:27', NULL);
-INSERT INTO `administrators` VALUES (2, 'jim', '吉姆', '', '', '', 1, '2020-07-26 00:07:29', '2020-07-26 00:07:29', NULL);
+INSERT INTO `administrators` VALUES (1, 'admin', '管理者', 'otpqviUAs5XJFawWdSrCEpc2TRFXKe4I', 'user/1564820023-6c1af0a78b6233d1e03a3ee09efc6515268d5867.png', 'admin@mail.wonderful.com', 1, '2020-10-23 06:03:09', '2020-10-23 06:03:09', NULL);
+INSERT INTO `administrators` VALUES (2, 'jim', '吉姆', 'nhmbWpbnUCKOg3JOE6ANxbrbBEyJKjAn', '', '', 1, '2020-10-23 06:05:33', '2020-10-23 06:05:33', NULL);
+INSERT INTO `administrators` VALUES (3, 'mars', '火星人', 'nhmbWpbnUCKOg3JOE6ANxbrbBEyJKjAn', '', '', 0, '2020-10-23 06:05:30', '2020-10-23 06:05:30', NULL);
+INSERT INTO `administrators` VALUES (4, 'usher', '亚索', 'nhmbWpbnUCKOg3JOE6ANxbrbBEyJKjAn', '', '', 0, '2020-10-23 06:06:11', '2020-10-23 06:06:11', NULL);
 
 -- ----------------------------
 -- Table structure for configs
@@ -133,23 +138,25 @@ INSERT INTO `configs` VALUES (3, 'day', '2');
 DROP TABLE IF EXISTS `domains`;
 CREATE TABLE `domains`  (
   `domain_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `server` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
+  `server` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `path` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
   `type` enum('API','STORAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  `added_time` timestamp(0) NOT NULL DEFAULT '1980-01-01 00:00:00' ON UPDATE CURRENT_TIMESTAMP(0),
+  `added_time` timestamp(0) NOT NULL DEFAULT '1980-01-01 00:00:00',
   `removed_time` timestamp(0) NULL DEFAULT NULL,
-  `response` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `method` enum('GET','POST','PUT','PATCH','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'GET',
+  `weight` smallint(2) UNSIGNED NOT NULL DEFAULT 0,
+  `response` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `method` enum('GET','POST','PUT','PATCH','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'GET',
+  `error` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`domain_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 171 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of domains
 -- ----------------------------
-INSERT INTO `domains` VALUES (1, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-16 17:44:34', '2020-10-16 17:42:52', NULL, NULL, 'GET');
-INSERT INTO `domains` VALUES (2, 'https://yecao-7k8s.xyz', '/result.json', 'STORAGE', 1, '2020-10-16 20:30:37', '2020-10-16 20:30:37', NULL, NULL, 'GET');
+INSERT INTO `domains` VALUES (1, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-22 11:13:40', '2020-10-22 11:13:40', NULL, 0, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', NULL);
+INSERT INTO `domains` VALUES (2, 'https://yecao-7k8s.xyz', '/result.json', 'STORAGE', 1, '2020-10-16 20:30:37', '2020-10-16 20:30:37', NULL, 0, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (9, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-23 05:06:01', '2020-10-23 05:06:01', NULL, 0, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '[错误]: https://yecao-7k8s.xyzz/result.json \n');
 
 SET FOREIGN_KEY_CHECKS = 1;
-
