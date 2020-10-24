@@ -14,6 +14,9 @@
  Date: 23/10/2020 15:27:39
 */
 
+
+CREATE DATABASE IF NOT EXISTS `domain` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 USE `domain`;
 
 /*
@@ -153,7 +156,7 @@ INSERT INTO `configs` VALUES (3, 'day', '2');
 DROP TABLE IF EXISTS `domains`;
 CREATE TABLE `domains`  (
   `domain_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `server` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `server` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `path` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
   `type` enum('API','STORAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
