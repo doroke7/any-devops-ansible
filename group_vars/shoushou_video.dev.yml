@@ -108,6 +108,30 @@ MYSQL:
             - 'localhost'
             - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
           PASSWORD: 'mysql_pass_backend'
+        - drop_user: true                 # index = 5
+          with_grant_option: false
+          GRANTS: 
+
+            - 'ALTER ROUTINE'
+            - 'CREATE'
+            - 'CREATE ROUTINE'
+            - 'CREATE TEMPORARY TABLES'
+            - 'CREATE VIEW'
+            - 'DELETE'
+            - 'EVENT'
+            - 'EXECUTE'
+            - 'INSERT'
+            - 'LOCK TABLES'
+            - 'REFERENCES'
+            - 'SELECT'
+            - 'TRIGGER'
+            - 'UPDATE'
+          USER: 'backend'
+          HOSTS: 
+            - 'localhost'
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+          PASSWORD: 'mysql_pass_backend'
+          DATABASE: 'domain'
           DATABASE: 'shoushou_video'
         - drop_user: false                 # index = 5
           with_grant_option: false
