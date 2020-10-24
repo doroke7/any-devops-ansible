@@ -48,10 +48,6 @@ server {
         log_not_found off;
     }
 
-
-
-    
-
     location / {
 
         {% if VHOST['TRY_FILES'] is defined %}
@@ -66,10 +62,7 @@ server {
             rewrite  "^/share/([a-z0-9_]{1,32})$" /agent/public/admin/download/index?agent=$1 last;
             break;
         }
-
         {% endif %}
-
-
 
         {% if VHOST['M_SERVER_NAME'] is defined %}
         if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
@@ -77,30 +70,16 @@ server {
         }
         {% endif %}
 
-
-
         {% if VHOST['WWW_SERVER_NAME'] is defined %}
         if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             return 301 $scheme://{{ VHOST['WWW_SERVER_NAME'] }}$request_uri;
         }
         {% endif %}
 
+        {% if VHOST['PROXY_PORT'] is defined %}
+        include conf.d/proxy{{ VHOST['PROXY_PORT'] | default(4001) }}.conf;
 
-
-        {% if VHOST['PROXY_PASS'] is defined %}
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-SSL-Client-Cert $ssl_client_cert;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_http_version 1.1;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $host;
-        proxy_pass {{ VHOST['PROXY_PASS'] }};
-        proxy_redirect off;
         {% endif %}
-
-        # rewrite  "^/(.*).html$"  /$1/index.html  last;
-        # rewrite  "^/((.*\/)+)(.*).html$"  /$1/$2/index.html  last;
 
     }
 
@@ -110,10 +89,5 @@ server {
         include conf.d/php{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}.conf;
     }
     {% endif %}
-
-
-
-
-
 
 }

@@ -55,13 +55,13 @@ NGINX:
       ROOT: '/var/www/shoushou_video_golang/dist'
       SERVER_NAME: 'api.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PASS: 'http://127.0.0.1:4001'
+      PROXY_PORT: '4001'
       REWRITE: 0
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_domain_socketio/dist'
       SERVER_NAME: 'socket.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PASS: 'http://127.0.0.1:4002'
+      PROXY_PORT: '4002'
       REWRITE: 0
 
 RABBITMQ:
