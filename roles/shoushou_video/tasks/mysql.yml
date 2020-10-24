@@ -19,6 +19,23 @@
 
 
 
+- name: (template) scp tmp/domain.sql.j2 /tmp/domain.sql
+  template:
+    src: tmp/domain.sql.j2
+    dest: /tmp/domain.sql
+    owner: root
+    group: root
+    mode: 0776
+    backup: no
+  when: mysql is not undefined and mysql == 1
+
+
+
+- name: (shell) mysql < /tmp/domain.sql
+  shell: mysql < /tmp/domain.sql
+  when: mysql is not undefined and mysql == 1
+
+
 - name: (template) scp tmp/grant.sql.j2 /tmp/grant.sql
   template:
     src: tmp/grant.sql.j2

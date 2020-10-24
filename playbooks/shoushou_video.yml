@@ -138,6 +138,33 @@
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'supervisor'
+- name: Install feature shoushou_video mongodb
+  hosts: fea-shoushou_video-mongodb
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.fea.yml
+  pre_tasks:
+    - name: "本地 feature shoushou_video mongodb 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        git: 0
+        nginx: 0
+        mysql: 0
+        rabbitmq: 0
+        supervisor: 0
+        mongodb: 1
+
+      when: branch is not defined or branch in ['fea', 'feature', 'all']
+  post_tasks:
+    - name: "本地 feature 环境，shoushou_video mongodb 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'mongodb'
 
 
       
@@ -286,6 +313,34 @@
   tags:
     - 'supervisor'
 
+- name: Install develop shoushou_video mongodb
+  hosts: dev-shoushou_video-mongodb
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.dev.yml
+  pre_tasks:
+    - name: "本地 develop shoushou_video mongodb 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        git: 0
+        nginx: 0
+        mysql: 0
+        rabbitmq: 0
+        supervisor: 0
+        mongodb: 1
+
+      when: branch is not defined or branch in ['dev', 'develop', 'all']
+  post_tasks:
+    - name: "本地 develop 环境，shoushou_video mongodb 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'mongodb'
+
 ##############################################################################
       
 - name: Install master shoushou_video GIT
@@ -431,3 +486,31 @@
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'supervisor'
+
+- name: Install master shoushou_video mongodb
+  hosts: mas-shoushou_video-mongodb
+  strategy: linear # free, debug
+  gather_facts: true
+  become: true
+  vars_files:
+    - ./../group_vars/shoushou_video.mas.yml
+  pre_tasks:
+    - name: "本地 master shoushou_video mongodb 安装开始"
+      shell: echo 'playbook shoushou_video starts'
+  roles:
+    - role: shoushou_video
+      vars:
+        bra: fea
+        git: 0
+        nginx: 0
+        mysql: 0
+        rabbitmq: 0
+        supervisor: 0
+        mongodb: 1
+
+      when: branch is not defined or branch in ['mas', 'master', 'all']
+  post_tasks:
+    - name: "本地 master 环境，shoushou_video mongodb 安装完毕"
+      shell: echo 'playbook shoushou_video ends'
+  tags:
+    - 'mongodb'
