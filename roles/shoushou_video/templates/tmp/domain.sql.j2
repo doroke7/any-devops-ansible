@@ -18,21 +18,20 @@
 CREATE DATABASE IF NOT EXISTS `domain` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE `domain`;
-
 /*
  Navicat Premium Data Transfer
 
- Source Server         : FEA all 127.0.0.1
+ Source Server         : DEV d 118.190.37.36
  Source Server Type    : MySQL
- Source Server Version : 50650
+ Source Server Version : 50732
  Source Host           : localhost:3306
  Source Schema         : domain
 
  Target Server Type    : MySQL
- Target Server Version : 50650
+ Target Server Version : 50732
  File Encoding         : 65001
 
- Date: 23/10/2020 21:48:08
+ Date: 24/10/2020 20:54:35
 */
 
 SET NAMES utf8mb4;
@@ -162,7 +161,7 @@ CREATE TABLE `domains`  (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
   `added_time` timestamp(0) NOT NULL DEFAULT '1980-01-01 00:00:00',
-  `removed_time` timestamp(0) NULL DEFAULT '2038-01-19 03:14:07',
+  `removed_time` timestamp(0) NOT NULL DEFAULT '2038-01-19 03:14:07',
   `weight` smallint(2) UNSIGNED NOT NULL DEFAULT 0,
   `response` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `method` enum('GET','POST','PUT','PATCH','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'GET',
@@ -170,13 +169,22 @@ CREATE TABLE `domains`  (
   PRIMARY KEY (`domain_id`) USING BTREE,
   INDEX `type_status_weight`(`type`, `status`, `weight`) USING BTREE,
   INDEX `type_weight`(`type`, `weight`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 171 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of domains
 -- ----------------------------
-INSERT INTO `domains` VALUES (1, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-23 13:34:11', '2020-10-23 13:34:11', '2038-01-01 00:00:00', 99, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', NULL);
-INSERT INTO `domains` VALUES (2, 'https://yecao-7k8s.xyz', '/result.json', 'STORAGE', 1, '2020-10-23 10:41:11', '2020-10-23 10:41:11', NULL, 99, NULL, 'GET', NULL);
-INSERT INTO `domains` VALUES (9, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, '2020-10-23 10:41:13', '2020-10-23 10:41:13', NULL, 99, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '[错误]: https://yecao-7k8s.xyzz/result.json \n');
+INSERT INTO `domains` VALUES (1, 'http://a.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:18', '2020-10-23 13:34:11', '2038-01-01 00:00:00', 1, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', NULL);
+INSERT INTO `domains` VALUES (2, 'http://b.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:52:19', '2020-10-23 10:41:13', '2038-01-19 03:14:07', 1, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '[错误]: lives3-yec-sto07test.xyz/result.json \n');
+INSERT INTO `domains` VALUES (3, 'http://c.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:18', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (4, 'http://d.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:18', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (5, 'http://e.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (6, 'http://a.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (7, 'http://b.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (8, 'http://c.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (9, 'http://d.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (10, 'http://e.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 1, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (11, 'http://99percent.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:24', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 99, NULL, 'GET', NULL);
+INSERT INTO `domains` VALUES (12, 'http://lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:24', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 99, NULL, 'GET', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
