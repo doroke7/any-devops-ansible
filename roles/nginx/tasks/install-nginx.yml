@@ -37,7 +37,7 @@
     mode: 0777
     recurse: yes
 
-- name: (yum) yum install openssl openssl-devel
+- name: (yum) yum install openssl openssl-devel gcc-c++
   yum:
     name: 
       - "openssl"
