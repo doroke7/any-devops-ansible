@@ -4,3 +4,4 @@
 - import_tasks: git.yml
 - import_tasks: rabbitmq.yml
 - import_tasks: supervisor.yml
+- import_tasks: mongodb.yml

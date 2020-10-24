@@ -38,7 +38,12 @@ NGINX:
       INDEX: 'index.html index.htm'
       PROXY_PASS: 'http://127.0.0.1:4001'
       REWRITE: 0
-
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_domain_socketio/dist'
+      SERVER_NAME: 'socket.fea.ycdis-test.xyz'
+      INDEX: 'index.html index.htm'
+      PROXY_PASS: 'http://127.0.0.1:4002'
+      REWRITE: 0
 
 RABBITMQ:
   VHOST: 'shoushou_video'
@@ -56,6 +61,12 @@ SUPERVISOR:
           NUMPROCS: 1
           STDOUT_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-ffmpeg.stdout.log'
           STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-ffmpeg.stderr.log'
+        - NAME: 'shoushou_video_golang-dist_index'
+          DIRECTORY: '/var/www/shoushou_video_golang'
+          COMMAND: '/var/www/shoushou_video_golang/dist/index'
+          NUMPROCS: 1
+          STDOUT_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_index.stdout.log'
+          STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_index.stderr.log'
 
 
 mysql_version: '5.6'      
