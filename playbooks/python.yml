@@ -23,23 +23,3 @@
   post_tasks:
     - name: "本地 feature 环境，Python 安装完毕"
       shell: echo 'playbook python ends'
-- name: Install develop python
-  hosts: dev-python
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/python.dev.yml
-    - ./../group_vars/supervisor.dev.yml
-    - ./../group_vars/timedatectl.dev.yml
-  pre_tasks:
-    - name: "开发 develop 环境，Python 安装开始"
-      shell: echo 'playbook python starts'
-  roles:
-    - role: python
-      vars:
-        bra: dev
-      when: branch in ['dev', 'develop', 'all']
-  post_tasks:
-    - name: "开发 develop 环境，Python 安装完毕"
-      shell: echo 'playbook python ends'

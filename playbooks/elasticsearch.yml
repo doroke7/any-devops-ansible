@@ -16,19 +16,3 @@
   post_tasks:
     - shell: echo 'playbook elasticsearch ends'
   vars:
-- name: Install develop elesticsearch
-  hosts: dev-elasticsearch
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/elasticsearch.dev.yml
-  pre_tasks:
-    - shell: echo 'playbook elasticsearch starts'
-  roles:
-    - role: elasticsearch
-      vars:
-        bra: dev
-      when: branch == 'dev' or branch == 'develop' or branch == 'all'
-  post_tasks:
-    - shell: echo 'playbook elasticsearch ends'

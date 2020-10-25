@@ -16,19 +16,3 @@
   post_tasks:
     - shell: echo 'playbook logstash ends'
   vars:
-- name: Install develop logstash
-  hosts: dev-logstash
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/logstash.dev.yml
-  pre_tasks:
-    - shell: echo 'playbook logstash starts'
-  roles:
-    - role: logstash
-      vars:
-        bra: dev
-      when: branch == 'dev' or branch == 'develop' or branch == 'all'
-  post_tasks:
-    - shell: echo 'playbook logstash ends'
