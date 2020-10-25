@@ -150,12 +150,13 @@ innodb_buffer_pool_load_at_startup = 1
 
 {% if mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1' %}
 # innodb_undo_tablespaces=4                             # 5.7 不作用
-innodb_undo_logs=2048
 innodb_purge_rseg_truncate_frequency=512
 innodb_max_undo_log_size=2G
 innodb_undo_log_truncate=1
 {% endif %}
-
+{% if mysql_version == '5.7' %}
+innodb_undo_logs=2048                                   # 8.0 不作用
+{% endif %}
 
 ############################# [mysqld] 效能 - 连接相关 #############################
 bind-address = {{ MYSQL.SERVERS[i].BIND_ADDRESS }}
@@ -166,7 +167,9 @@ max_connect_errors = 1000
 back_log = 1000                                         # 指出在MySQL暂时停止响应新请求之前，短时间内的多少个请求
 wait_timeout = 360                                      # 指定一个请求的最大连接时间
 interactive_timeout = 360                               # 连接保持活动的时间
+{% if mysql_version == '5.7' or mysql_version == '8.0' %}
 skip_symbolic_links = yes                               # 禁止使用 软 链接 存储 mysql 数据 档案
+{% endif %}
 local-infile=1                           
 ######################### [mysqld] Log 相关 #########################
 log_output = FILE                                       # log 写入 file , 效能较好
