@@ -1,13 +1,25 @@
 ---
-- name: Install feature filebeat
+- name: Install filebeat
   hosts: filebeat
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/filebeat.fea.yml
+    - ./../group_vars/filebeat.{{ branch }}.yml
   pre_tasks:
-    - shell: echo 'playbook filebeat starts'
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+    - name: "{{ branch }} ffmpeg 安装开始"
+      shell: echo 'playbook ffmpeg starts'
   roles:
     - role: filebeat
       vars:

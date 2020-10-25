@@ -1,6 +1,6 @@
 ---
 
-- name: install feature mha_node
+- name: install mha_node
   hosts: mha_node
   strategy: linear # free, debug
   serial:
@@ -8,13 +8,25 @@
     - 50%
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/mysql.fea.yml
-    - ./../group_vars/masterha.fea.yml
-    - ./../group_vars/cluster_ndb.fea.yml
-    - ./../group_vars/cluster_ndb_mgm.fea.yml
+    - ./../group_vars/mysql.{{ branch }}.yml
+    - ./../group_vars/masterha.{{ branch }}.yml
+    - ./../group_vars/cluster_ndb.{{ branch }}.yml
+    - ./../group_vars/cluster_ndb_mgm.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature 环境，MHA Node 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+    - name: "{{ branch }} mha_node 安装开始"
       shell: echo 'playbook mha_node starts'
   roles:
     - role: mha_node

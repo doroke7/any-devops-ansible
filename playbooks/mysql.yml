@@ -12,12 +12,17 @@
       prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
       private: no
   vars_files:
-    - ./../group_vars/mysql.fea.yml
+    - ./../group_vars/mysql.{{ branch }}.yml
   pre_tasks:
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "本地 feature 环境，MySQL 安装开始"
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} 环境，MySQL 安装开始"
       shell: echo 'playbook mysql starts'
       check_mode: no
   roles:
