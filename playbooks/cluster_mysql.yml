@@ -8,11 +8,6 @@
     - 50%
   gather_facts: true
   become: true
-  vars_files:
-    - ./../group_vars/mysql.fea.yml
-    - ./../group_vars/masterha.fea.yml
-    - ./../group_vars/cluster_ndb.fea.yml
-    - ./../group_vars/cluster_ndb_mgm.fea.yml
   vars_prompt:
     - name: branch
       prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
