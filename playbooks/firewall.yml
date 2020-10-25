@@ -14,6 +14,6 @@
       vars:
         bra: branch
   post_tasks:
-    - name: '开发 feature 环境，Redis 安装完毕'
+    - name: '{{ branch }} 环境，Redis 安装完毕'
       shell: echo 'playbook firewall ends'
   vars:

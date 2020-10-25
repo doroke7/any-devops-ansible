@@ -155,7 +155,7 @@
         mongodb: 1
 
   post_tasks:
-    - name: "本地 feature 环境，shoushou_video mongodb 安装完毕"
+    - name: "{{ branch }} 环境，shoushou_video mongodb 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'mongodb'

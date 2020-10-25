@@ -14,6 +14,6 @@
       vars: 
         bra: branch
   post_tasks:
-    - name: "feature 环境，Erlang 安装完毕"
+    - name: "{{ branch }}  环境，Erlang 安装完毕"
       shell: echo 'playbook Erlang ends'
   vars:

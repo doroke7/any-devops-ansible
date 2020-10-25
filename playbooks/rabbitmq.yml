@@ -14,6 +14,6 @@
       vars: 
         bra: branch
   post_tasks:
-    - name: "本地 feature 环境，Rabbitmq 安装开始"
+    - name: "{{ branch }} 环境，Rabbitmq 安装开始"
       shell: echo 'playbook Rabbitmq ends'
   vars:
