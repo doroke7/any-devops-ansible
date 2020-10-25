@@ -4,11 +4,22 @@
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
+      private: no
   vars_files:
-  - ./../group_vars/erlang.fea.yml
+    - ./../group_vars/erlang.{{ branch }}.yml
   pre_tasks:
-    - name: "本地 feature 环境，Erlang 安装开始"
-      shell: echo 'playbook Erlang starts'
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
+      pause:
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+      when: branch == 'mas'
+    - name: "{{ branch }} erlang 安装开始"
+      shell: echo 'playbook erlang starts'
   roles:
     - role: erlang
       vars: 

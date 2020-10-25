@@ -6,7 +6,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/shoushou_video.{{ branch }}.yml
@@ -15,9 +15,9 @@
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"
@@ -47,7 +47,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/shoushou_video.{{ branch }}.yml
@@ -56,9 +56,9 @@
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"
@@ -87,7 +87,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/shoushou_video.{{ branch }}.yml
@@ -96,9 +96,9 @@
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"
@@ -128,7 +128,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/shoushou_video.{{ branch }}.yml
@@ -137,9 +137,9 @@
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"
@@ -170,7 +170,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/shoushou_video.{{ branch }}.yml
@@ -179,9 +179,9 @@
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"
@@ -210,7 +210,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/shoushou_video.{{ branch }}.yml
@@ -219,9 +219,9 @@
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
-    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+    - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"
