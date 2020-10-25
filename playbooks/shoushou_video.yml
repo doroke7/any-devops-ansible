@@ -1,6 +1,6 @@
 ---
 - name: Install feature shoushou_video git
-  hosts: fea-shoushou_video-git
+  hosts: shoushou_video-git
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -12,14 +12,13 @@
   roles:
     - role: shoushou_video
       vars:
-        bra: fea
+        bra: branch
         git: 1
         nginx: 0
         mysql: 0
         rabbitmq: 0
         supervisor: 0
         mongodb: 0
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
@@ -28,7 +27,7 @@
 
 
 - name: Install feature shoushou_video nginx
-  hosts: fea-shoushou_video-nginx
+  hosts: shoushou_video-nginx
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -40,14 +39,13 @@
   roles:
     - role: shoushou_video
       vars:
-        bra: fea
+        bra: branch
         git: 0
         nginx: 1
         mysql: 0
         rabbitmq: 0
         supervisor: 0
         mongodb: 0
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video nginx 安装完毕"
       shell: echo 'playbook shoushou_video ends'
@@ -55,7 +53,7 @@
     - 'nginx'
 
 - name: Install feature shoushou_video mysql
-  hosts: fea-shoushou_video-mysql
+  hosts: shoushou_video-mysql
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -67,14 +65,13 @@
   roles:
     - role: shoushou_video
       vars:
-        bra: fea
+        bra: branch
         git: 0
         nginx: 0
         mysql: 1
         rabbitmq: 0
         supervisor: 0
         mongodb: 0
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video mysql 安装完毕"
       shell: echo 'playbook shoushou_video ends'
@@ -83,7 +80,7 @@
 
 
 - name: Install feature shoushou_video rabbitmq
-  hosts: fea-shoushou_video-rabbitmq
+  hosts: shoushou_video-rabbitmq
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -95,7 +92,7 @@
   roles:
     - role: shoushou_video
       vars:
-        bra: fea
+        bra: branch
         git: 0
         nginx: 0
         mysql: 0
@@ -103,7 +100,6 @@
         supervisor: 0
         mongodb: 0
 
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video rabbitmq 安装完毕"
       shell: echo 'playbook shoushou_video ends'
@@ -112,7 +108,7 @@
 
 
 - name: Install feature shoushou_video supervisor
-  hosts: fea-shoushou_video-supervisor
+  hosts: shoushou_video-supervisor
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -124,7 +120,7 @@
   roles:
     - role: shoushou_video
       vars:
-        bra: fea
+        bra: branch
         git: 0
         nginx: 0
         mysql: 0
@@ -132,14 +128,13 @@
         supervisor: 1
         mongodb: 0
 
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video supervisor 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'supervisor'
 - name: Install feature shoushou_video mongodb
-  hosts: fea-shoushou_video-mongodb
+  hosts: shoushou_video-mongodb
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -151,7 +146,7 @@
   roles:
     - role: shoushou_video
       vars:
-        bra: fea
+        bra: branch
         git: 0
         nginx: 0
         mysql: 0
@@ -159,7 +154,6 @@
         supervisor: 0
         mongodb: 1
 
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
   post_tasks:
     - name: "本地 feature 环境，shoushou_video mongodb 安装完毕"
       shell: echo 'playbook shoushou_video ends'

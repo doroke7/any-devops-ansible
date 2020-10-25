@@ -1,6 +1,6 @@
 ---
 - name: Install feature java
-  hosts: fea-java
+  hosts: java
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -9,8 +9,7 @@
   roles:
     - role: java
       vars:
-        bra: fea
-      when: branch == 'fea' or branch == 'feature' or branch == 'all' or branch is not defined
+        bra: branch
   post_tasks:
     - shell: echo 'playbook java ends'
   vars:

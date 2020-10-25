@@ -1,6 +1,6 @@
 ---
 - name: Install feature node
-  hosts: fea-node
+  hosts: node
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -12,8 +12,7 @@
   roles:
     - role: node
       vars:
-        bra: fea
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
+        bra: branch
   post_tasks:
     - name: "本地 feature 环境，Node 安装完毕"
       shell: echo 'playbook node ends'

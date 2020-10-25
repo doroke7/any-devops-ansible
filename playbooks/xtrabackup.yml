@@ -1,6 +1,6 @@
 ---
 - name: install feature xtrabackup
-  hosts: fea-xtrabackup
+  hosts: xtrabackup
   strategy: linear # free, debug
   serial:
     - 10
@@ -14,7 +14,6 @@
   roles:
     - role: xtrabackup
       vars:
-        bra: fea
-      when: branch == 'fea' or branch == 'feature' or branch == 'all' or branch is not defined
+        bra: branch
   post_tasks:
     - shell: echo 'playbook xtrabackup ends'

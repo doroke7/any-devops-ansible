@@ -1,6 +1,6 @@
 ---
 - name: Install feature redis
-  hosts: fea-redis
+  hosts: redis
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -12,8 +12,7 @@
   roles:
     - role: redis
       vars:
-        bra: fea
-      when: branch is defined and branch in ['fea', 'feature', 'all']
+        bra: branch
   post_tasks:
     - name: '开发 feature 环境，Redis 安装完毕'
       shell: echo 'playbook redis ends'

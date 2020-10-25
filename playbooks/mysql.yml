@@ -1,6 +1,6 @@
 ---
 - name: install feature mysql
-  hosts: fea-mysql
+  hosts: mysql
   strategy: linear # free, debug
   serial:
     - 10
@@ -23,8 +23,7 @@
   roles:
     - role: mysql
       vars:
-        bra: fea
-      when: (branch is not defined or branch in ['fea', 'feature', 'all'] )
+        bra: branch
   post_tasks:
     - name: "本地 feature 环境，MySQL 安装完毕"
       shell: echo 'playbook mysql ends'

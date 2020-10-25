@@ -1,7 +1,7 @@
 ---
 
 - name: install feature mmm_agent
-  hosts: fea-mmm_agent
+  hosts: mmm_agent
   strategy: linear # free, debug
   serial:
     - 10
@@ -19,8 +19,7 @@
   roles:
     - role: mmm_agent
       vars:
-        bra: fea
-      when: (branch is not defined or branch in ['fea', 'feature','all'] )
+        bra: branch
   post_tasks:
     - name: "本地 feature 环境，MMM Agent 安装完毕"
       shell: echo 'playbook mmm_agent ends'

@@ -1,7 +1,7 @@
 ---
 
 - name: install feature mha_manager
-  hosts: fea-mha_manager
+  hosts: mha_manager
   strategy: linear # free, debug
   serial:
     - 10
@@ -19,8 +19,7 @@
   roles:
     - role: mha_manager
       vars:
-        bra: fea
-      when: (branch is not defined or branch in ['fea', 'feature', 'all'] )
+        bra: branch
   post_tasks:
     - name: "本地 feature 环境，MHA Manager 安装完毕"
       shell: echo 'playbook mha_manager ends'   

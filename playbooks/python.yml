@@ -4,7 +4,7 @@
 # 请用 /usr/bin/python2 /usr/bin/python3
 
 - name: "Install feature python"
-  hosts: fea-python # Ansible tower cannt remove or reinstall python
+  hosts: python # Ansible tower cannt remove or reinstall python
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -18,8 +18,7 @@
   roles:
     - role: python
       vars:
-        bra: fea
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
+        bra: branch
   post_tasks:
     - name: "本地 feature 环境，Python 安装完毕"
       shell: echo 'playbook python ends'

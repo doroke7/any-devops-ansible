@@ -1,6 +1,6 @@
 ---
 - name: Install feature memcached
-  hosts: fea-memcached
+  hosts: memcached
   strategy: linear # free, debug
   gather_facts: true
   become: true

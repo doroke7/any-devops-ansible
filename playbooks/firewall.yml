@@ -1,6 +1,6 @@
 ---
 - name: Install feature firewall
-  hosts: fea-firewall
+  hosts: firewall
   strategy: linear # free, debug
   gather_facts: true
   become: true
@@ -12,8 +12,7 @@
   roles:
     - role: firewall
       vars:
-        bra: fea
-      when: branch == 'fea' or branch == 'feature' or branch == 'all' or branch is not defined
+        bra: branch
   post_tasks:
     - name: '开发 feature 环境，Redis 安装完毕'
       shell: echo 'playbook firewall ends'
