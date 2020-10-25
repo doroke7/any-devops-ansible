@@ -79,7 +79,10 @@ transaction_isolation = {{ MYSQL.TRANSACTION_ISOLATION }}  # 事务隔离级别
 character-set-server = {{ MYSQL.CHARACTER_SET }}
 collation-server = {{ MYSQL.COLLATION }}                 # 设置校对规则
 symbolic-links = 0                                       # Disabling symbolic-links is recommended to prevent assorted security risks
-lower_case_table_names = 1
+
+{% if  mysql_version == '5.6' or mysql_version == '5.7' %}
+lower_case_table_names = 1                               # 8.0 不作用
+{% endif %}
 
 # Recommended in standard MySQL setup
 #sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
@@ -96,14 +99,14 @@ validate_password.number_count = 1
 
 ############################# [mysqld] 效能 - 一般容量相关 #############################
 open_files_limit = 1024                                 # 打开文件的最大个数，如果出现too mantopen files之类的就需要调整该值了
-max_allowed_packet = 128M                                 # 服务器一次能处理的最大的查询包的值
+max_allowed_packet = 128M                               # 服务器一次能处理的最大的查询包的值
 # table_cache = 614                                     # 5.7 不作用, 表分配的内存，物理内存越大，设置就越大
 table_open_cache = 512                                  # 设置高速缓存表的数目
 thread_cache_size = 64                                  # 服务器线程缓存数，与内存大小有关(建议大于3G设置为64)
 # thread_concurrency = 32                               # 5.7 不作用, CPU核数的两倍
-query_cache_size = 32M                                  # 指定MySQL查询缓冲区的大小
-query_cache_limit = 2M                                  # 只有小于此设置值的结果才会被缓存
-query_cache_min_res_unit = 2k                           # 设置查询缓存分配内存的最小单位
+# query_cache_size = 32M                                # 8.0 不作用 指定MySQL查询缓冲区的大小
+# query_cache_limit = 2M                                # 8.0 不作用 只有小于此设置值的结果才会被缓存
+# query_cache_min_res_unit = 2k                         # 8.0 不作用 设置查询缓存分配内存的最小单位
 key_buffer_size = 512M                                  # 指定用于索引的缓冲区大小，增加它可得到更好的索引处理性能
 sort_buffer_size = 2M                                   # 设置查询排序时所能使用的缓冲区大小，系统默认大小为2MB
 join_buffer_size = 1M                                   # 联合查询操作所能使用的缓冲区大小
@@ -121,7 +124,7 @@ myisam_repair_threads = 1
 # myisam_recover                                        # 5.7 不作用,自动检查和修复没有适当关闭的MyISAM表
 
 ############################# [mysqld] 效能 - InnoDB 相关 #############################
-innodb_old_blocks_time =1000                            # 减小单次的大批量数据查询,默认为0，调整后性能提升80%                     http://www.cnblogs.com/cenalulu/archive/2012/10/10/2718585.html 
+innodb_old_blocks_time =1000                            # 减小单次的大批量数据查询,默认为0，调整后性能提升80%      
 innodb_flush_method = O_DIRECT                          # 从innode刷新到磁盘，不经过系统write,fdatasync(默认)，O_DSYNC，O_DIRECT http://blog.csdn.net/jiao_fuyou/article/details/16113403 
 # innodb_additional_mem_pool_size = 16M                 # 5.7 不作用, 设置InnoDB存储的数据目录信息和其他内部数据结构的内存池大小
 # innodb_buffer_pool_size = 51G                         # 5.7 不作用, InnoDB使用一个缓冲池来保存索引和原始数据，官方建议物理内存的80%
@@ -143,8 +146,13 @@ innodb_autoextend_increment = 256                       # 这个参数的作用�
 innodb_flush_log_at_trx_commit = 0
 innodb_io_capacity             = 2000
 binlog_error_action = ABORT_SERVER
-innodb_file_format=Barracuda
-innodb_support_xa=0
+
+
+{% if  mysql_version == '5.6' or mysql_version == '5.7' %}
+innodb_file_format=Barracuda                            # 8.0 不作用 
+{% endif %}
+
+# innodb_support_xa=0                                   # 8.0 不作用 
 innodb_buffer_pool_dump_at_shutdown = 1
 innodb_buffer_pool_load_at_startup = 1
 
