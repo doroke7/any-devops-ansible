@@ -1,4 +1,4 @@
-{% set i = groups[bra ~ '-mysql'].index(inventory_hostname) %}
+{% set i = groups['mysql'].index(inventory_hostname) %}
 
 
 {% if i + 1 == 1 %}

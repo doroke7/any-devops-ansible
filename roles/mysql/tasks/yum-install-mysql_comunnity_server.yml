@@ -32,10 +32,10 @@
     loop_var: package_name
 
 
-- name: "(file) rm -Rf {{ MYSQL.SERVERS[groups[bra ~ '-mysql'].index(inventory_hostname)].DATADIR }}"
+- name: "(file) rm -Rf {{ MYSQL.SERVERS[groups['mysql'].index(inventory_hostname)].DATADIR }}"
   file:
     state: absent
-    path: "{{ MYSQL.SERVERS[groups[bra ~ '-mysql'].index(inventory_hostname)].DATADIR }}"
+    path: "{{ MYSQL.SERVERS[groups['mysql'].index(inventory_hostname)].DATADIR }}"
 - name: (yum) yum install mysql-community-server
   yum: 
     name:

@@ -1,6 +1,6 @@
 #jinja2: lstrip_blocks: True
 
-{% set i =  groups[bra ~ '-mysql'].index(inventory_hostname) %}
+{% set i =  groups['mysql'].index(inventory_hostname) %}
 include mmm_common.conf
 
 # The 'this' variable refers to this server.  Proper operation requires

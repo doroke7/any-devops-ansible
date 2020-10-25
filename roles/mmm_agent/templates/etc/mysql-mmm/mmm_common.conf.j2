@@ -12,7 +12,7 @@ active_master_role      writer
     agent_password          {{ MYSQL.SERVERS[0].CONNECTIONS[7].PASSWORD }}
 </host>
 
-{% for host in groups[bra ~ '-mysql'] %}
+{% for host in groups['mysql'] %}
 <host {{ MYSQL.SERVERS[loop.index - 1].NAME }}>
     ip      {{ MYSQL.SERVERS[loop.index - 1].HOST }}
     mode    {{ 'master' if ( loop.index <= 2 ) else 'slave' }}
@@ -33,7 +33,7 @@ active_master_role      writer
 </role>
 
 <role reader>
-    hosts   {% for host in groups[bra ~ '-mysql'] %}{% if loop.index >= 2 and loop.index < groups[bra ~ '-mysql'] | length %}{{ MYSQL.SERVERS[loop.index - 1].NAME }}, {% elif loop.index >= 2 %}{{ MYSQL.SERVERS[loop.index - 1].NAME }}{% endif %}{% endfor %} 
+    hosts   {% for host in groups['mysql'] %}{% if loop.index >= 2 and loop.index < groups['mysql'] | length %}{{ MYSQL.SERVERS[loop.index - 1].NAME }}, {% elif loop.index >= 2 %}{{ MYSQL.SERVERS[loop.index - 1].NAME }}{% endif %}{% endfor %} 
     ips     10.0.0.200
     mode    balanced
 </role>
