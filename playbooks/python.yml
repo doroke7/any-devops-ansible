@@ -3,18 +3,31 @@
 # 不可随意改变 python 版本，
 # 请用 /usr/bin/python2 /usr/bin/python3
 
-- name: "Install feature python"
+- name: "Install python"
   hosts: python # Ansible tower cannt remove or reinstall python
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/python.fea.yml
-    - ./../group_vars/supervisor.fea.yml
-    - ./../group_vars/timedatectl.fea.yml
+    - ./../group_vars/python.{{ branch }}.yml
+    - ./../group_vars/timedatectl.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature 环境，Python 安装开始"
-      shell: "echo 'playbook python starts' "
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} 环境，python 安装开始"
+      shell: echo 'playbook python starts'
+      check_mode: no
   roles:
     - role: python
       vars:

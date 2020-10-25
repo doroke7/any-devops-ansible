@@ -1,14 +1,28 @@
 ---
-- name: Install feature shoushou_video git
+- name: Install shoushou_video git
   hosts: shoushou_video-git
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
+    - ./../group_vars/shoushou_video.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature shoushou_video 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
+      check_mode: no
   roles:
     - role: shoushou_video
       vars:
@@ -20,22 +34,36 @@
         supervisor: 0
         mongodb: 0
   post_tasks:
-    - name: "本地 feature 环境，shoushou_video 安装完毕"
+    - name: "{{ branch }} 环境，shoushou_video 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'git'
 
 
-- name: Install feature shoushou_video nginx
+- name: Install shoushou_video nginx
   hosts: shoushou_video-nginx
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
+    - ./../group_vars/shoushou_video.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature shoushou_video nginx 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
+      check_mode: no
   roles:
     - role: shoushou_video
       vars:
@@ -47,21 +75,35 @@
         supervisor: 0
         mongodb: 0
   post_tasks:
-    - name: "本地 feature 环境，shoushou_video nginx 安装完毕"
+    - name: "{{ branch }} 环境，shoushou_video nginx 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'nginx'
 
-- name: Install feature shoushou_video mysql
+- name: Install shoushou_video mysql
   hosts: shoushou_video-mysql
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
+    - ./../group_vars/shoushou_video.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature shoushou_video mysql 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
+      check_mode: no
   roles:
     - role: shoushou_video
       vars:
@@ -73,22 +115,36 @@
         supervisor: 0
         mongodb: 0
   post_tasks:
-    - name: "本地 feature 环境，shoushou_video mysql 安装完毕"
+    - name: "{{ branch }} 环境，shoushou_video mysql 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'mysql'
 
 
-- name: Install feature shoushou_video rabbitmq
+- name: Install shoushou_video rabbitmq
   hosts: shoushou_video-rabbitmq
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
+    - ./../group_vars/shoushou_video.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature shoushou_video rabbitmq 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
+      check_mode: no
   roles:
     - role: shoushou_video
       vars:
@@ -101,22 +157,36 @@
         mongodb: 0
 
   post_tasks:
-    - name: "本地 feature 环境，shoushou_video rabbitmq 安装完毕"
+    - name: "{{ branch }} 环境，shoushou_video rabbitmq 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'rabbitmq'
 
 
-- name: Install feature shoushou_video supervisor
+- name: Install shoushou_video supervisor
   hosts: shoushou_video-supervisor
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
+    - ./../group_vars/shoushou_video.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature shoushou_video supervisor 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
+      check_mode: no
   roles:
     - role: shoushou_video
       vars:
@@ -129,7 +199,7 @@
         mongodb: 0
 
   post_tasks:
-    - name: "本地 feature 环境，shoushou_video supervisor 安装完毕"
+    - name: "{{ branch }} 环境，shoushou_video supervisor 安装完毕"
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'supervisor'
@@ -138,11 +208,25 @@
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/shoushou_video.fea.yml
+    - ./../group_vars/shoushou_video.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature shoushou_video mongodb 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
+      check_mode: no
   roles:
     - role: shoushou_video
       vars:

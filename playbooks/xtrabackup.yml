@@ -1,5 +1,5 @@
 ---
-- name: install feature xtrabackup
+- name: install xtrabackup
   hosts: xtrabackup
   strategy: linear # free, debug
   serial:
@@ -7,10 +7,25 @@
     - 50%
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-    - ./../group_vars/xtrabackup.fea.yml
+    - ./../group_vars/xtrabackup.{{ branch }}.yml
+
   pre_tasks:
-    - shell: echo 'playbook xtrabackup starts'
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} xtrabackup 安装开始"
+      shell: echo 'playbook xtrabackup starts'
+      check_mode: no
   roles:
     - role: xtrabackup
       vars:

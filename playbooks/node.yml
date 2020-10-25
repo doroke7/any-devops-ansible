@@ -9,7 +9,7 @@
       prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
       private: no
   vars_files:
-    - ./../group_vars/node.fea.yml
+    - ./../group_vars/node.{{ branch }}.yml
   pre_tasks:
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
@@ -19,7 +19,7 @@
         prompt: 確定 要在 master 環境下嗎? 後果自行負責!
       when: branch == 'mas'
 
-    - name: "{{ branch }} 环境，MySQL 安装开始"
+    - name: "{{ branch }} 环境，Node 安装开始"
       shell: echo 'playbook node starts'
       check_mode: no
   roles:

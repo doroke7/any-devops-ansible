@@ -1,14 +1,28 @@
 ---
-- name: Install feature zookeeper
+- name: Install zookeeper
   hosts: zookeeper
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   vars_files:
-  - ./../group_vars/zookeeper.fea.yml
+    - ./../group_vars/zookeeper.{{ branch }}.yml
+
   pre_tasks:
-    - name: "本地 feature 环境，Zookeeper 安装开始"
-      shell: echo 'playbook Zookeeper starts'
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+
+    - name: "{{ branch }} zookeeper 安装开始"
+      shell: echo 'playbook zookeeper starts'
+      check_mode: no
   roles:
     - role: zookeeper
       vars: 
