@@ -1,52 +1,28 @@
 ---
-- name: Install feature certbot
-  hosts: fea-certbot
+- name: Install certbot
+  hosts: certbot
   strategy: linear # free, debug
   gather_facts: true
   become: true
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
   pre_tasks:
-    - name: "本地 feature 环境，Certbot 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+    - name: "{{ branch }} certbot 安装开始"
       shell: echo 'playbook certbot starts'
   roles:
     - role: certbot
       vars: 
-        bra: fea
-      when: branch is not defined or branch in ['fea', 'feature', 'all']
+        bra: branch
   post_tasks:
-    - name: "本地 feature 环境，Certbot 安装开始"
+    - name: "{{ branch }} 环境，Certbot 安装开始"
       shell: echo 'playbook certbot ends'
   vars:
-- name: Install develop certbot
-  hosts: dev-certbot
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  pre_tasks:
-    - name: "开发 devlop 环境，Certbot 安装开始"
-      shell: echo 'playbook certbot starts'
-  roles:
-    - role: certbot
-      vars:
-        bra: dev
-      when: branch is defined and branch in ['dev', 'develop', 'all']
-  post_tasks:
-    - name: "开发 devlop 环境，Certbot 安装完毕"
-      shell: echo 'playbook certbot ends'
-
-
-- name: Install release certbot
-  hosts: rel-certbot
-  strategy: linear # free, debug
-  gather_facts: true
-  become: true
-  pre_tasks:
-    - name: "开发 release 环境，Certbot 安装开始"
-      shell: echo 'playbook certbot starts'
-  roles:
-    - role: certbot
-      vars:
-        bra: rel
-      when: branch is defined and branch in ['rel', 'release', 'all']
-  post_tasks:
-    - name: "开发 release 环境，Certbot 安装完毕"
-      shell: echo 'playbook certbot ends'
