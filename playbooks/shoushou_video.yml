@@ -17,9 +17,12 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
+      register: confirmation
       when: branch == 'mas'
-
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and confirmation.user_input != 'yes'
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -58,9 +61,11 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       when: branch == 'mas'
-
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and confirmation.user_input != 'yes'
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -98,9 +103,11 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       when: branch == 'mas'
-
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and confirmation.user_input != 'yes'
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -139,9 +146,11 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       when: branch == 'mas'
-
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and confirmation.user_input != 'yes'
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -181,9 +190,12 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       when: branch == 'mas'
-
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -221,7 +233,7 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       when: branch == 'mas'
 
     - name: "{{ branch }} shoushou_video 安装开始"

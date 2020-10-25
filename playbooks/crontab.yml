@@ -16,7 +16,8 @@
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
     - name: "WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING"
       pause:
-        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責!"
+        prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
+      register: confirmation
       when: branch == 'mas'
     - name: "{{ branch }} crontab 安装开始"
       shell: echo 'playbook crontab starts'
