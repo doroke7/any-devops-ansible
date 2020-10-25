@@ -1,6 +1,6 @@
 ---
 
-- name: install feature cluster_ndb_mgm
+- name: install cluster_ndb_mgm
   hosts: fea-cluster_ndb_mgm
   strategy: linear # free, debug
   serial:

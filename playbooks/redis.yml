@@ -1,5 +1,5 @@
 ---
-- name: Install feature redis
+- name: install redis
   hosts: redis
   strategy: linear # free, debug
   gather_facts: true

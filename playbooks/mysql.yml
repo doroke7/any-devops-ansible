@@ -1,5 +1,5 @@
 ---
-- name: install feature mysql
+- name: install mysql
   hosts: mysql
   strategy: linear # free, debug
   serial:

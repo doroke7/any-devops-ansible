@@ -1,5 +1,5 @@
 ---
-- name: Install feature kibana
+- name: install kibana
   hosts: kibana
   strategy: linear # free, debug
   gather_facts: true

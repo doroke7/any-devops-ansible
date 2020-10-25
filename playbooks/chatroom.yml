@@ -1,5 +1,5 @@
 ---
-- name: Install feature chatroom-mongodb
+- name: install chatroom-mongodb
   hosts: fea-chatroom-mongodb
   strategy: linear # free, debug
   gather_facts: true

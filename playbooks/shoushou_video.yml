@@ -215,7 +215,7 @@
       shell: echo 'playbook shoushou_video ends'
   tags:
     - 'supervisor'
-- name: Install feature shoushou_video mongodb
+- name: install shoushou_video mongodb
   hosts: shoushou_video-mongodb
   strategy: linear # free, debug
   gather_facts: true

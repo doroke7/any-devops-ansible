@@ -1,5 +1,5 @@
 ---
-- name: "Install feature golang"
+- name: "install golang"
   hosts: golang
   strategy: linear # free, debug
   gather_facts: true
