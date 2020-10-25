@@ -1,7 +1,7 @@
 ---
 
-- name: install feature cluster_mysql
-  hosts: fea-cluster_mysql
+- name: install cluster_mysql
+  hosts: cluster_mysql
   strategy: linear # free, debug
   serial:
     - 10
@@ -13,76 +13,36 @@
     - ./../group_vars/masterha.fea.yml
     - ./../group_vars/cluster_ndb.fea.yml
     - ./../group_vars/cluster_ndb_mgm.fea.yml
+  vars_prompt:
+    - name: branch
+      prompt: 你要運行在那種模式下 fea, dev, rel, mas ?
+      private: no
+  vars_files:
+    - ./../group_vars/chrome.{{ branch }}.yml
+    - ./../group_vars/mysql.{{ branch }}.yml
+    - ./../group_vars/masterha.{{ branch }}.yml
+    - ./../group_vars/cluster_ndb.{{ branch }}.yml
+    - ./../group_vars/cluster_ndb_mgm.{{ branch }}.yml
   pre_tasks:
-    - name: "本地 feature 环境，Cluster MySQL 安装开始"
+    - name: "錯誤! 指定 host 與 branch 不一致"
+      meta: end_play
+      when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
+    - name: "!!!!!!!!!!!!!!!!!!!!嚴重警告!!!!!!!!!!!!!!!!!!!!"
+      pause:
+        prompt: 確定 要在 master 環境下嗎? 後果自行負責!
+      when: branch == 'mas'
+    - name: "{{ branch }} 环境 cluster_mysql 安装开始"
       shell: echo 'playbook cluster_mysql starts'
   roles:
     - role: cluster_mysql
       vars:
-        bra: fea
-      when: (branch is not defined or branch in ['fea', 'feature', 'all'] )
+        bra: branch
   post_tasks:
-    - name: "本地 feature 环境，Cluster MySQL 安装完毕"
+    - name: "{{ branch }} 环境，Cluster MySQL 安装完毕"
       shell: echo 'playbook cluster_mysql ends'
     
     
 
 ####################
 
-    
-- name: install develop cluster_mysql
-  hosts: dev-cluster_mysql
-  strategy: linear # free, debug
-  serial:
-    - 10
-    - 50%
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/mysql.dev.yml
-    - ./../group_vars/masterha.dev.yml
-    - ./../group_vars/cluster_ndb.dev.yml
-    - ./../group_vars/cluster_ndb_mgm.dev.yml
-  pre_tasks:
-    - name: "开发 develop 环境，Cluster MySQL 安装开始"
-      shell: echo 'playbook cluster_mysql starts'
-  roles:
-    - role: cluster_mysql
-      vars:
-        bra: dev
-      when: (branch is defined and branch in ['dev', 'develop', 'all'] )
-  post_tasks:
-    - name: "开发 develop 环境，Cluster MySQL 安装完毕"
-      shell: echo 'playbook cluster_mysql ends'
-    
-    
-      
-###################################################
-
-
-
-- name: install release cluster_mysql
-  hosts: rel-cluster_mysql
-  strategy: linear # free, debug
-  serial:
-    - 10
-    - 50%
-  gather_facts: true
-  become: true
-  vars_files:
-    - ./../group_vars/mysql.rel.yml
-    - ./../group_vars/masterha.rel.yml
-    - ./../group_vars/cluster_ndb.rel.yml
-    - ./../group_vars/cluster_ndb_mgm.rel.yml
-  pre_tasks:
-    - name: "开发 release 环境，Cluster MySQL 安装开始"
-      shell: echo 'playbook cluster_mysql starts'
-  roles:
-    - role: cluster_mysql
-      vars:
-        bra: rel
-      when: (branch is defined and branch in ['rel', 'release', 'all'] )
-  post_tasks:
-    - name: "开发 release 环境，Cluster MySQL 安装完毕"
-      shell: echo 'playbook cluster_mysql ends'
-   
+  
