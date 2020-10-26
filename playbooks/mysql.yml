@@ -9,11 +9,15 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
+      prompt: "[單選] 你要運行在那ddd種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/mysql.{{ branch }}.yml
   pre_tasks:
+    - name: "inventory_file  = {{ inventory_file }}, inventory_file | regex_replace =  {{ inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2') }}, branch = {{ branch }}"
+      shell: 'echo inventory_file'
+      check_mode: no
+
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
@@ -25,7 +29,7 @@
     - name: "錯誤! 客戶端 終止"
       meta: end_play
       when:  branch == 'mas' and confirmation.user_input != 'yes'
-      
+
     - name: "{{ branch }} 环境，MySQL 安装开始"
       shell: echo 'playbook mysql starts'
       check_mode: no
