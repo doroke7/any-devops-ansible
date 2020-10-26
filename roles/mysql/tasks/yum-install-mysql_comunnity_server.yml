@@ -1,7 +1,8 @@
 ---
-- name: (yum) yum remove mysql-community* mysql-cluster-community*
+- name: (yum) yum remove mysql* mysql-community* mysql-cluster-community*
   yum: 
     name:
+      - mysql*
       - mysql-cluster-community*
       - mysql-community*
     state: absent
