@@ -1,4 +1,11 @@
 ###
 {% set i =  groups['mysql'].index(inventory_hostname) %}
 
+## MYSQL 8.0 有坑， 需要同时加入 localhost 与 127.0.0.1
+
+{% if mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1' %}
 ALTER USER '{{ MYSQL.SERVERS[i].CONNECTIONS[0]['USER'] }}'@'{{ MYSQL.SERVERS[i].CONNECTIONS[0].HOSTS[1] }}' IDENTIFIED BY '{{ MYSQL.SERVERS[i].CONNECTIONS[0]['PASSWORD'] }}';
+ALTER USER '{{ MYSQL.SERVERS[i].CONNECTIONS[0]['USER'] }}'@'{{ MYSQL.SERVERS[i].CONNECTIONS[0].HOSTS[0] }}' IDENTIFIED BY '{{ MYSQL.SERVERS[i].CONNECTIONS[0]['PASSWORD'] }}';
+
+{% endif %}
+
