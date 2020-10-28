@@ -1,0 +1,23 @@
+---
+- name: (file) mkdir /opt/apktool/bin
+  file:
+    path: '/opt/apktool/bin'
+    state: 'directory'
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: (get_url) wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_{{ APKTOOL.VERSION }}.jar
+  get_url:
+    url: "https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_{{ APKTOOL.VERSION }}.jar"
+    dest: "/opt/apktool/bin/apktool"
+    mode: 0775
+
+
+- name: "(file) ln -sf /opt/apktool/bin/apktool /usr/bin/apktool"  
+  file:
+    src: "/opt/apktool/bin/apktool"
+    dest: "/usr/bin/apktool"
+    state: link
+    force: True
+    follow: False
