@@ -3,8 +3,9 @@
   yum:
     name: epel-release
     state: present
-    
-- name: (yum) yum install java
+
+# 如果要使用 jarsigner 的 套件就需要 安装 jdk     
+- name: (yum) yum install java java-1.8.0-openjdk-devel
   yum:
-    name: java
+    name: java java-1.8.0-openjdk-devel
     state: present
