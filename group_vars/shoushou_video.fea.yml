@@ -19,6 +19,14 @@ NGINX:
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
 
     - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_koa/'
+      SERVER_NAME: 'api.fea.yecaojule-07test.xyz'
+      INDEX: 'index.htm'
+      REWRITE: 0
+      PROXY_PORT: '4003'
+      # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
+
+    - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
       SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       INDEX: 'm_index.html m_index.htm'
@@ -34,7 +42,7 @@ NGINX:
       TRY_FILES: '$uri $uri/ /index.html?$query_string'
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_golang/dist'
-      SERVER_NAME: 'api.fea.ycdis-test.xyz api.fea.yecaojule-07test.xyz'
+      SERVER_NAME: 'api.fea.ycdis-test.xyz'
       INDEX: 'index.html index.htm'
       PROXY_PORT: '4001'
       REWRITE: 0
