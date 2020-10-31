@@ -9,7 +9,7 @@
   become: true
   vars_prompt:
     - name: branch
-      prompt: "[單選] 你要運行在那ddd種模式下 fea, dev, rel, mas ?"
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
     - ./../group_vars/mysql.{{ branch }}.yml

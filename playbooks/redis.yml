@@ -9,7 +9,7 @@
       prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
       private: no
   vars_files:
-    - ./../group_vars/rabbitmq.{{ branch }}.yml
+    - ./../group_vars/redis.{{ branch }}.yml
 
   pre_tasks:
     - name: "錯誤! 指定 host 與 branch 不一致"
