@@ -8,6 +8,14 @@ NGINX:
       PHP: '7.3'
       REWRITE: 1
       TRY_FILES: '$uri $uri/ /index.php?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
       
     - HTTP_PORT: 80
@@ -17,6 +25,14 @@ NGINX:
       M_SERVER_NAME: 'm.yecao07.me'
       REWRITE: 0
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -26,6 +42,14 @@ NGINX:
       WWW_SERVER_NAME: 'www.yecao07.me'
       REWRITE: 0
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -35,6 +59,14 @@ NGINX:
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -44,6 +76,14 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yehua07.com'
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
 
 
@@ -57,6 +97,14 @@ NGINX:
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -66,6 +114,14 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yh10.xyz'
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
 
     - HTTP_PORT: 80
@@ -76,6 +132,15 @@ NGINX:
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -85,6 +150,14 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yh11.xyz'
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
 
 
@@ -96,6 +169,15 @@ NGINX:
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -105,6 +187,14 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yh12.xyz'
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
 
     - HTTP_PORT: 80
@@ -115,6 +205,15 @@ NGINX:
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -124,6 +223,14 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yh13.xyz'
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
 
 
@@ -135,6 +242,15 @@ NGINX:
       REWRITE: 0
       # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
       TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
@@ -144,6 +260,14 @@ NGINX:
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
       WWW_SERVER_NAME: 'www.yh15.xyz'
       TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
 
 
     - HTTP_PORT: 80
@@ -152,18 +276,45 @@ NGINX:
       INDEX: 'index.html index.htm'
       REWRITE: 0
       TRY_FILES: '$uri $uri/ /index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_golang/dist'
       SERVER_NAME: 'api.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
       PROXY_PORT: '4001'
       REWRITE: 0
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '*'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_domain_socketio/dist'
       SERVER_NAME: 'socket.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
       PROXY_PORT: '4002'
       REWRITE: 0
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        #- "'Access-Control-Allow-Origin' '*'"
+        #- "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+
 
 RABBITMQ:
   VHOST: 'shoushou_video'
