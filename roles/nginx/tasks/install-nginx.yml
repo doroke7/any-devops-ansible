@@ -37,11 +37,13 @@
     mode: 0777
     recurse: yes
 
-- name: (yum) yum install openssl openssl-devel gcc-c++
+- name: (yum) yum install openssl openssl-devel gcc-c++ gcc
   yum:
     name: 
       - "openssl"
       - "openssl-devel"
+      - "gcc-c++"
+      - "gcc"
     state: present
 
 - name: "(git) git clone https://github.com/arut/nginx-rtmp-module.git /tmp/nginx-rtmp-module"
