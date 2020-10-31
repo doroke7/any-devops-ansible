@@ -1,5 +1,16 @@
 #jinja2: lstrip_blocks: True
 
+{% if VHOST['UPSTREAM']['NAME'] is defined %}
+upstream {{ VHOST['UPSTREAM']['NAME'] }} {
+    {% if VHOST['UPSTREAM']['SERVERS'] is defined %}
+    {% for SERVER in VHOST['UPSTREAM']['SERVERS'] %}
+    server {{ SERVER }};
+    {% endfor %}
+    {% endif %}
+}
+{% endif %}   
+
+
 server {
     listen       {{ VHOST['HTTP_PORT'] | default(80) }};
     listen       [::]:{{ VHOST['HTTP_PORT'] | default(80) }};
@@ -7,8 +18,6 @@ server {
     {% if VHOST['ROOT'] is defined %}
     root         {{ VHOST['ROOT'] }};
     {% endif %}
-
-
 
     charset utf-8;
     server_tokens off;
@@ -18,7 +27,6 @@ server {
     add_header {{ ADD_HEADER }};
     {% endfor %}
     {% endif %}    
-
 
     # We can not wire mime types scope here becasue the local scope will overwrite the global scoce
 
@@ -30,6 +38,7 @@ server {
     location = /robots.txt  { access_log off; log_not_found off; }
 	
     error_page 404 /index.php;
+
 
     location ~* \.(m3u8|ts|mp4|avi|wmv|rm|rmvb|mkv|mp3|wma|wav|aac|txt|pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar)(\?.+)?$ {
         max_ranges 0;
@@ -69,9 +78,8 @@ server {
         {% endif %}
 
         {% if VHOST['PROXY_PASS'] is defined %}
-        include conf.d/proxy.conf;
         proxy_pass {{ VHOST['PROXY_PASS'] }};
-
+        include conf.d/proxy.conf;
         {% endif %}
 
     }
@@ -79,7 +87,9 @@ server {
 
     {% if VHOST['PHP'] is defined %}
     location ~ \.php(.*)$ {
-        include conf.d/php{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}.conf;
+        fastcgi_pass   127.0.0.1:90{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2')}};
+        include conf.d/php.conf;
+
     }
     {% endif %}
 

@@ -40,7 +40,7 @@ NGINX:
       SERVER_NAME: 'api.yecaojule-07test.xyz'
       INDEX: 'index.htm'
       REWRITE: 0
-      PROXY_PORT: '4003'
+      PROXY_PASS: 'http://127.0.0.1:4003$request_uri'
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
         - "X-XSS-Protection '1; mode=block'"
@@ -91,7 +91,12 @@ NGINX:
       ROOT: '/var/www/shoushou_video_golang-domain/dist'
       SERVER_NAME: 'api.ycdis-test.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PASS: ' http://127.0.0.1:4001$request_uri'
+      PROXY_PASS: 'http://servers'
+      UPSTREAM:
+        NAME: 'servers'
+        SERVERS:
+          - '127.0.0.1:4011'
+          - '127.0.0.1:4012'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"

@@ -289,8 +289,9 @@ NGINX:
       ROOT: '/var/www/shoushou_video_golang/dist'
       SERVER_NAME: 'api.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PASS: ' http://127.0.0.1:4001$request_uri'
-      UPSTREAM: 'servers'
+      PROXY_PASS: 'http://servers'
+      UPSTREAM:
+        NAME: 'servers'
         SERVERS:
           - '127.0.0.1:4011'
           - '127.0.0.1:4012'
