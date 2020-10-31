@@ -68,8 +68,9 @@ server {
         }
         {% endif %}
 
-        {% if VHOST['PROXY_PORT'] is defined %}
-        include conf.d/proxy{{ VHOST['PROXY_PORT'] | default(4001) }}.conf;
+        {% if VHOST['PROXY_PASS'] is defined %}
+        include conf.d/proxy.conf;
+        proxy_pass {{ VHOST['PROXY_PASS'] }};
 
         {% endif %}
 

@@ -91,7 +91,7 @@ NGINX:
       ROOT: '/var/www/shoushou_video_golang-domain/dist'
       SERVER_NAME: 'api.ycdis-test.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PORT: '4001'
+      PROXY_PASS: ' http://127.0.0.1:4001$request_uri'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
@@ -107,7 +107,7 @@ NGINX:
       ROOT: '/var/www/shoushou_domain_socketio/dist'
       SERVER_NAME: 'socket.ycdis-test.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PORT: '4002'
+      PROXY_PASS: ' http://127.0.0.1:4002$request_uri'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
