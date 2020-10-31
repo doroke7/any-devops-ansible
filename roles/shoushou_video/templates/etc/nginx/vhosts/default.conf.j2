@@ -40,7 +40,7 @@ server {
         log_not_found off;
     }
 
-    location / {
+    location {{ VHOST['LOCATION'] | default('/') }} {
 
         {% if VHOST['TRY_FILES'] is defined %}
         try_files {{ VHOST['TRY_FILES'] }};
