@@ -12,27 +12,19 @@ server {
 
     charset utf-8;
     server_tokens off;
-	
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-XSS-Protection "1; mode=block";
-    add_header X-Content-Type-Options "nosniff";
-    add_header 'Access-Control-Allow-Origin' '*';
-    add_header 'Access-Control-Allow-Credentials' 'true';
-    add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
-    add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
-	
+
+    {% if VHOST['ADD_HEADERS'] is defined %}
+    {% for ADD_HEADER in VHOST['ADD_HEADERS'] %}
+    add_header {{ ADD_HEADER }};
+    {% endfor %}
+    {% endif %}    
+
 
     # We can not wire mime types scope here becasue the local scope will overwrite the global scoce
 
-  
-
-
-    
     index        {{ VHOST['INDEX'] | default('index.html index.htm') }}; 
-
     
     # Load configuration files for the default server block.
-	
 	
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt  { access_log off; log_not_found off; }

@@ -7,6 +7,7 @@ NGINX:
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
       REWRITE: 1
+      LOCATION: 
       TRY_FILES: '$uri $uri/ /index.php?$query_string'
 
 
