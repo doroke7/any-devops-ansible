@@ -18,6 +18,7 @@
   command: rabbitmqctl set_user_tags '{{ RABBITMQ.USERNAME }}' administrator
   ignore_errors: yes
 
+# enbable rabbitmq web mangement 之後 API 才會生效
 - name: rabbitmq-plugins enable rabbitmq_management
   command: rabbitmq-plugins enable rabbitmq_management
   ignore_errors: yes
