@@ -42,6 +42,15 @@
   with_fileglob: "./etc/nginx/conf.d/*.conf"
   # 读取的 是 files 目录下
 
+- name: (template) scp etc/nginx/mime.types.j2 /etc/nginx/mime.types
+  template:
+    src: etc/nginx/mime.types.j2
+    dest: /etc/nginx/mime.types
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+
 - name: (template) scp etc/nginx/nginx.conf.j2 /etc/nginx/nginx.conf
   template:
     src: etc/nginx/nginx.conf.j2
