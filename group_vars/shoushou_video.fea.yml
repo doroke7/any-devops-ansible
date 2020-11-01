@@ -5,6 +5,9 @@ NGINX:
       ROOT: '/var/www/shoushou_video_php'
       SERVER_NAME: 'fea.lives2-yc-test0708.xyz www.fea.lives2-yc-test0708.xyz fea.lives3-yec-sto07test.xyz www.fea.lives3-yec-sto07test.xyz'
       INDEX: 'index.php index.html index.htm'
+      # 根據 2020 CORS 策略, 瀏覽器 在請求 不同域名 且 具有 post 字節 時候,  瀏覽器 會 預先打 一個 options 請求
+      # 錯誤解法 把 post 值 轉為 query, 這個 不符合 cors 策略 減低 API 彈性
+      # 正確解法 首先 options 回 204 (試打立即回應 空), 且 Access-Control-Max-Age' 86400 (設定 試打的有效時間 為 1 day)
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
         - "X-XSS-Protection '1; mode=block'"
