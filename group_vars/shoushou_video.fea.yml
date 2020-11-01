@@ -7,7 +7,9 @@ NGINX:
       INDEX: 'index.php index.html index.htm'
       # 根據 2020 CORS 策略, 瀏覽器 在請求 不同域名 且 具有 post 字節 時候,  瀏覽器 會 預先打 一個 options 請求
       # 錯誤解法 把 post 值 轉為 query, 這個 不符合 cors 策略 減低 API 彈性
-      # 正確解法 首先 options 回 204 (試打立即回應 空), 且 Access-Control-Max-Age' 86400 (設定 試打的有效時間 為 1 day)
+      # 正確解法 首先 options 回 204 (試打立即回應 空), 且 Access-Control-Max-Age' 86400 (設定 試打的有效時間 為 1 day
+
+      # CORS 寫在 Nginx 的優點是 效能優, 避免 Go-Gin, PHP-laravel, Node-Koa 同一個機制要寫出數次, 找到的 middleware 也不一定完全相同
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
         - "X-XSS-Protection '1; mode=block'"
