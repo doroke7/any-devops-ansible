@@ -56,8 +56,7 @@ server {
 
 
     if ($request_method = OPTIONS ) {
-        add_header 'Access-Control-Max-Age' 2592000 always;
-        return 200;
+        return 204;
     }
 
 
