@@ -21,11 +21,12 @@ firewall-cmd --get-active-zones  # 查看区域信息
 
 
 firewall-cmd --zone=public --list-all
-
-
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload # 更新防火墙规则
 
 
 firewall-cmd --permanent --remove-source=192.168.1.100
 
 firewall-cmd --permanent --remove-port=**/tcp
+
