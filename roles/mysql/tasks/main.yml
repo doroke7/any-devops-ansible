@@ -17,8 +17,8 @@
 - import_tasks: service-mysqld-restarted.yml
 - import_tasks: shell-mysql-tmp_alter_user_sql.yml   # (B) 利用 A 的 空密碼 ， 設定 MYSQL root 密碼 為 mysql_pass_cli
 - import_tasks: shell-mysql-tmp_grant_sql.yml        # (C) 賦予全部 MYSQL 賬號權限， “此時部分 Mysql 已經有密碼 mysql_pass_cli”
-                                                     # (C-1) MYSQL 5.6 密碼是空
-                                                     # (C-2) MYSQL 5.7 8.0 密碼是 mysql_pass_cli
+                                                     # (C-1) 此時 MYSQL 5.5, 5.6 密碼是空
+                                                     # (C-2) 此時 MYSQL 5.7, 8.0 密碼是 mysql_pass_cli
 
 
 - import_tasks: shell-mysql-tmp_change_master_sql.yml
