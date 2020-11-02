@@ -76,4 +76,5 @@ ansible-playbook playbooks/main.yml --extra-vars "debug=true"
 4. 使用 Python 做运营自动化 脚本 （亦可使用 Golang）
 5. 自动化 脚本 使用 GIT并做版本控管
 6. 所有綫上項目保持與 GIT 最新版 保持一致
-7. 每一天需要做运维日志并交接
+7. 統一使用 GitLab CI 自動化 更新
+8. 每一天需要做运维日志并交接
