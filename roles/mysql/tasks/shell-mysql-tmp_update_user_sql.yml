@@ -8,8 +8,8 @@
     owner: mysql
     group: mysql
     mode: 0777
-- name: (shell) mysql --force < /tmp/update_user.sql
-  shell: mysql --force < /tmp/update_user.sql
+- name: (shell) mysql --user=root --force < /tmp/update_user.sql
+  shell: mysql --user=root --force < /tmp/update_user.sql
  # when: mysql_version == '5.5' or mysql_version == '5.6' or mysql_version == '5.7'
 # - name: (shell) mysqld --init-file=/tmp/update_user.sql
 #   shell: mysqld --init-file=/tmp/update_user.sql
