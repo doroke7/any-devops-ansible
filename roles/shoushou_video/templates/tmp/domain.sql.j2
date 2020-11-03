@@ -188,4 +188,32 @@ INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, 
 INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (12, 'http://lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:24', '1980-01-01 00:00:00', '2038-01-19 03:14:07', 99, NULL, 'GET', NULL);
 
 
+
+
+-- ----------------------------
+-- Table structure for devices
+-- ----------------------------
+DROP TABLE IF EXISTS `devices`;
+CREATE TABLE `devices`  (
+  `client_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `type` enum('WEB','ANDROID','IOS') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `added_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `removed_time` timestamp(0) NOT NULL DEFAULT '2038-01-19 03:14:07',
+  PRIMARY KEY (`client_id`) USING BTREE,
+  INDEX `type_status_weight`(`type`, `status`) USING BTREE,
+  INDEX `type_weight`(`type`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of devices
+-- ----------------------------
+INSERT INTO `devices` VALUES (1, '網頁', 'WEB', 1, '2020-11-03 09:45:55', '1980-01-01 00:00:00', '2038-01-19 03:14:07');
+INSERT INTO `devices` VALUES (2, '安卓', 'ANDROID', 1, '2020-11-03 09:45:59', '1980-01-01 00:00:00', '2038-01-19 03:14:07');
+INSERT INTO `devices` VALUES (3, '蘋果', 'IOS', 1, '2020-11-03 09:46:04', '1980-01-01 00:00:00', '2038-01-19 03:14:07');
+
+
+
 SET FOREIGN_KEY_CHECKS = 1;
