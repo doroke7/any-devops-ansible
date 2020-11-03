@@ -19,6 +19,9 @@ server {
     root         {{ VHOST['ROOT'] }};
     {% endif %}
 
+    {% if VHOST['RETURN'] is defined %}
+    return {{ VHOST['RETURN'] }};
+    {% endif %}
     charset utf-8;
     server_tokens off;
 
