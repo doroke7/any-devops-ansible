@@ -19,7 +19,7 @@
       when: branch == 'mas'
     - name: "錯誤! 客戶端 終止"
       meta: end_play
-      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
       
     - name: "{{ branch }} certbot 安装开始"
       shell: echo 'playbook certbot starts'

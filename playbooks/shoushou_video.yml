@@ -12,6 +12,10 @@
     - ./../group_vars/shoushou_video.{{ branch }}.yml
 
   pre_tasks:
+    - name: "inventory_file  = {{ inventory_file }}, inventory_file | regex_replace =  {{ inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2') }}, branch = {{ branch }}"
+      shell: 'echo inventory_file'
+      check_mode: no
+
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
@@ -22,7 +26,7 @@
       when: branch == 'mas'
     - name: "錯誤! 客戶端 終止"
       meta: end_play
-      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -56,6 +60,10 @@
     - ./../group_vars/shoushou_video.{{ branch }}.yml
 
   pre_tasks:
+    - name: "inventory_file  = {{ inventory_file }}, inventory_file | regex_replace =  {{ inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2') }}, branch = {{ branch }}"
+      shell: 'echo inventory_file'
+      check_mode: no
+
     - name: "錯誤! 指定 host 與 branch 不一致"
       meta: end_play
       when:  (inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2')) != branch
@@ -66,7 +74,7 @@
       when: branch == 'mas'
     - name: "錯誤! 客戶端 終止"
       meta: end_play
-      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -109,7 +117,7 @@
       when: branch == 'mas'
     - name: "錯誤! 客戶端 終止"
       meta: end_play
-      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -153,7 +161,7 @@
       when: branch == 'mas'
     - name: "錯誤! 客戶端 終止"
       meta: end_play
-      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no
@@ -198,7 +206,7 @@
       when: branch == 'mas'
     - name: "錯誤! 客戶端 終止"
       meta: end_play
-      when:  branch == 'mas' and confirmation.user_input != 'yes'
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
       
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
@@ -240,7 +248,9 @@
         prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       register: confirmation      
       when: branch == 'mas'
-
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
     - name: "{{ branch }} shoushou_video 安装开始"
       shell: echo 'playbook shoushou_video starts'
       check_mode: no

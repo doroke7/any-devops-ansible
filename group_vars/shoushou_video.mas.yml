@@ -93,57 +93,36 @@ NGINX:
 
 
 
-
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: 'www.yh10.xyz yh10.xyz'
-      INDEX: 'www_index.html www_index.htm'
-      M_SERVER_NAME: 'm.yh10.xyz'
-      REWRITE: 0
-      # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
-      TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
-      ADD_HEADERS:
-        - "X-Frame-Options 'SAMEORIGIN'"
-        - "X-XSS-Protection '1; mode=block'"
-        - "X-Content-Type-Options 'nosniff'"
-        - "'Access-Control-Allow-Origin' '$http_origin'"
-        - "'Access-Control-Allow-Credentials' 'true'"
-        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
-
-    - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: '*.yh10.xyz'
+      SERVER_NAME: 'yh10.xyz *.yh10.xyz'
       INDEX: 'm_index.html m_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/'
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: '*.yh11.xyz'
+      SERVER_NAME: 'yh11.xyz *.yh11.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201058'
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: '*.yh12.xyz'
+      SERVER_NAME: 'yh12.xyz *.yh12.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201054'
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: '*.yh13.xyz'
+      SERVER_NAME: 'yh13.xyz *.yh13.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201662'
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/'
-      SERVER_NAME: '*.yh15.xyz'
+      SERVER_NAME: 'yh15.xyz *.yh15.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201049'
-
-
-      # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
 
 
     - HTTP_PORT: 80
@@ -165,15 +144,18 @@ NGINX:
       ROOT: '/var/www/shoushou_video_golang/dist'
       SERVER_NAME: 'api.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PASS: 'http://servers'
+      PROXY_PASS: 'http://shoushou_video_golang_servers'
       UPSTREAM:
-        NAME: 'servers'
+        NAME: 'shoushou_video_golang_servers'
         SERVERS:
           - '127.0.0.1:4011'
           - '127.0.0.1:4012'
           - '127.0.0.1:4013'
           - '127.0.0.1:4014'
-
+          - '127.0.0.1:4015'
+          - '127.0.0.1:4016'
+          - '127.0.0.1:4017'
+          - '127.0.0.1:4018'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
@@ -243,7 +225,7 @@ SUPERVISOR:
         - NAME: 'shoushou_video_golang-dist_index'
           DIRECTORY: '/var/www/shoushou_video_golang'
           COMMAND: '/var/www/shoushou_video_golang/dist/index -number=%(process_num)s'
-          NUMPROCS: 4
+          NUMPROCS: 8
           STDOUT_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_index.stdout.log'
           STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_index.stderr.log'
 
@@ -307,7 +289,7 @@ MYSQL:
           HOSTS: 
             - 'localhost'
             - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
-          PASSWORD: 'mysql_pass_backend'
+          PASSWORD: 'mysql_pass_backend_CE2A3348D4FD9F8B6A22E96273FD8715'
           DATABASE: 'domain'
 
 
