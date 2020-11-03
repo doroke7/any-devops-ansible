@@ -194,18 +194,17 @@ INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, 
 -- Table structure for devices
 -- ----------------------------
 DROP TABLE IF EXISTS `devices`;
-CREATE TABLE `devices`  (
-  `client_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `type` enum('WEB','ANDROID','IOS') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  `added_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `removed_time` timestamp(0) NOT NULL DEFAULT '2038-01-19 03:14:07',
-  PRIMARY KEY (`client_id`) USING BTREE,
-  INDEX `type_status_weight`(`type`, `status`) USING BTREE,
-  INDEX `type_weight`(`type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+CREATE TABLE `devices` (
+  `device_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `type` enum('WEB','ANDROID','IOS') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `edited_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `added_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `removed_time` timestamp NOT NULL DEFAULT '2038-01-19 03:14:07',
+  PRIMARY KEY (`device_id`) USING BTREE,
+  UNIQUE KEY `type` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of devices

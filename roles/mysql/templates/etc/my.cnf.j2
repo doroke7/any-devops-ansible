@@ -70,7 +70,9 @@ skip-networking = 1
 init-connect='SET NAMES {{ MYSQL.CHARACTER_SET }}'
 skip-character-set-client-handshake                      # 此处是忽略客户端的字符集，使用服务器的设置
 skip-external-locking
-slave-parallel-workers=6
+{% if (mysql_version == '5.6' or mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
+slave-parallel-workers=6                                 # 5.5 不作用, 5.6 5.7 8.0 作用 
+{% endif %}
 
 # external-locking = FALSE                               # 5.7 不作用, 避免外部锁定(减少出错几率，增加稳定性)
 # skip-name-resolv                                       # 5.7 不作用, 禁止外部连接进行DNS解析
@@ -137,15 +139,25 @@ innodb_thread_concurrency = 8                           # 服务器有几个CPU�
 innodb_purge_threads = 1                                # 独线程,默认情况下参数设置为0(不使用单独线程),设置为 1 时表示使用单独的清除线程。
 innodb_flush_log_at_trx_commit = 2                      # 设置为0就等于innodb_log_buffer_size队列满后再统一存储，默认为1
 innodb_log_buffer_size = 16M                            # 默认为1MB，通常设置为6-8MB就足够
-innodb_log_file_size = 512M                             # 确定日志文件的大小，更大的设置可以提高性能，但也会增加恢复数据库的时间
-innodb_log_files_in_group = 3                           # 为提高性能，MySQL可以以循环方式将日志文件写到多个文件。推荐设置为3
+
+{% if (mysql_version == '5.6' or mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
+innodb_log_file_size = 512M                             # 5.5 不作用, 5.6 5.7 8.0 作用  确定日志文件的大小，更大的设置可以提高性能，但也会增加恢复数据库的时间
+binlog_error_action = ABORT_SERVER                      # 5.5 不作用, 5.6 5.7 8.0 作用 
+{% endif %}
+
+innodb_io_capacity             = 2000 
+
+{% if (mysql_version == '5.6' or mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
+innodb_log_files_in_group = 3                           # 为提高性能，MySQL可以以循环方式将日志文件写到多个文件。 5.7 推荐设置为3
+{% elif mysql_version == '5.5' %}
+innodb_log_files_in_group = 2                           # 为提高性能，MySQL可以以循环方式将日志文件写到多个文件。 5.5 最多2
+{% endif %}
+
+
 innodb_max_dirty_pages_pct = 90                         # InnoDB主线程刷新缓存池中的数据
 innodb_lock_wait_timeout = 120                          # InnoDB事务被回滚之前可以等待一个锁定的超时秒数
 innodb_file_per_table = 1                               # InnoDB为独立表空间模式，每个数据库的每个表都会生成一个数据空间,便於 xtrabackup 备份
 innodb_autoextend_increment = 256                       # 这个参数的作用是控制innodb 共享表空间文件自动扩展的大小
-innodb_flush_log_at_trx_commit = 0
-innodb_io_capacity             = 2000
-binlog_error_action = ABORT_SERVER
 
 
 {% if  mysql_version == '5.6' or mysql_version == '5.7' %}
@@ -153,8 +165,12 @@ innodb_file_format=Barracuda                            # 8.0 不作用
 {% endif %}
 
 # innodb_support_xa=0                                   # 8.0 不作用 
-innodb_buffer_pool_dump_at_shutdown = 1
-innodb_buffer_pool_load_at_startup = 1
+
+{% if (mysql_version == '5.6' or mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
+innodb_buffer_pool_dump_at_shutdown = 1                 # 5.5 不作用, 5.6 5.7 8.0 作用 
+innodb_buffer_pool_load_at_startup = 1                  # 5.5 不作用, 5.6 5.7 8.0 作用 
+{% endif %}
+
 
 {% if mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1' %}
 # innodb_undo_tablespaces=4                             # 5.7 不作用
@@ -243,10 +259,12 @@ log_bin_trust_function_creators = 1                     # 将函数复制到slav
 
 
 binlog-ignore-db = information_schema
-binlog-ignore-db = performace_schema
+binlog-ignore-db = performace_schema， 
 binlog-ignore-db = sys
 
-binlog_checksum = NONE                                   # MGR 模式必備  
+{% if (mysql_version == '5.6' or mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
+binlog_checksum = NONE                                   #  5.5 不作用, 5.6 5.7 8.0 作用 ， MGR 模式必備  
+{% endif %}
 
 ############################ [mysqld] Bin log 相关 - 主从问题 ############################
 ## 主从 MASTER_HOST 等资讯 建议不要写在 /etc/my.cnf，因为主从 可能会动态切换 
