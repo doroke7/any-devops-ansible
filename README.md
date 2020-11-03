@@ -73,5 +73,8 @@ ansible-playbook playbooks/main.yml --extra-vars "debug=true"
 1. 本地环境使用 Vagrant + CentOS7
 2. 统一使用 Ansilbe 管理工具
 3. 新的项目 禁止使用 PHPadmin, 宝塔 等 WEB 管理界面，WEB 界面 无非是开启了 端口给人攻击 （旧项目不管）
-4. 使用 Python 做运营自动化 脚本 并做版本控管 （亦可使用 Golang）
-5. 每一天需要做运维日志并交接
+4. 使用 Python 做运营自动化 脚本 （亦可使用 Golang）
+5. 自动化 脚本 使用 GIT并做版本控管
+6. 所有綫上項目保持與 GIT 最新版 保持一致
+7. 統一使用 GitLab CI 自動化 更新
+8. 每一天需要做运维日志并交接

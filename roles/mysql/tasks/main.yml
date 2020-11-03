@@ -11,16 +11,14 @@
 - import_tasks: set_fact-mysql_skip_true.yml
 - import_tasks: template-etc_my_cnf.yml
 - import_tasks: service-mysqld-restarted.yml
-- import_tasks: shell-mysql-tmp_update_user_sql.yml
+- import_tasks: shell-mysql-tmp_update_user_sql.yml  # (A) 根據 MySQL 5.5, 5.6, 5.7, 8.0 利用安全模式 把密碼設定爲空
 - import_tasks: set_fact-mysql_skip_false.yml
 - import_tasks: template-etc_my_cnf.yml
 - import_tasks: service-mysqld-restarted.yml
-- import_tasks: shell-mysql-tmp_alter_user_sql.yml
-- import_tasks: shell-mysql-tmp_grant_sql.yml
-
-
-
-
+- import_tasks: shell-mysql-tmp_alter_user_sql.yml   # (B) 利用 A 的 空密碼 ， 設定 MYSQL root 密碼 為 mysql_pass_cli
+- import_tasks: shell-mysql-tmp_grant_sql.yml        # (C) 賦予全部 MYSQL 賬號權限， “此時部分 Mysql 已經有密碼 mysql_pass_cli”
+                                                     # (C-1) 此時 MYSQL 5.5, 5.6 密碼是空
+                                                     # (C-2) 此時 MYSQL 5.7, 8.0 密碼是 mysql_pass_cli
 
 
 - import_tasks: shell-mysql-tmp_change_master_sql.yml
