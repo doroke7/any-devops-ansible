@@ -7,3 +7,4 @@
 secret.txt
 secret.txt
 /keys/*
+!/keys/git_for_keep
