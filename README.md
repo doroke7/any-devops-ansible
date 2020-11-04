@@ -66,7 +66,11 @@ ansible-playbook playbooks/main.yml --extra-vars "debug=true"
 `
 略
 `
+## 9. 安裝 獸獸項目 MYSQL 基本數據， 記得 務必  標識 mysql_version!!!!!!!!!!!!!!!!!!!!!!!!!
 
+`
+ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags "mysql" -e "mysql_version=8.0"
+`
 
 
 
