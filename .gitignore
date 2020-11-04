@@ -4,3 +4,5 @@
 /hosts/hosts
 .gitsecret/keys/random_seed
 !*.secret
+secret.txt
+secret.txt
