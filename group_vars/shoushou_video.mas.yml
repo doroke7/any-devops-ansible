@@ -130,7 +130,8 @@ NGINX:
       SERVER_NAME: 'admin.ycdis-pro.xyz'
       INDEX: 'index.html index.htm'
       REWRITE: 0
-      TRY_FILES: '$uri $uri/ /index.html?$query_string'
+      LOCATION: '~ ^/(\w+)'
+      TRY_FILES: '$uri $uri/ /$1/index.html'
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
         - "X-XSS-Protection '1; mode=block'"
