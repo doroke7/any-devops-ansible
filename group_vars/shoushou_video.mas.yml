@@ -1,128 +1,128 @@
 --- # 优先次序高
 NGINX:
   VHOSTS:
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_video_php'
-    #   SERVER_NAME: 'yecao-7k8s.xyz lives3-yec-sto07k8.xyz www.yecao-7k8s.xyz www.lives3-yec-sto07k8.xyz'
-    #   INDEX: 'index.php index.html index.htm'
-    #   PHP: '7.3'
-    #   REWRITE: 1
-    #   TRY_FILES: '$uri $uri/ /index.php?$query_string'
-    #   ADD_HEADERS:
-    #     - "X-Frame-Options 'SAMEORIGIN'"
-    #     - "X-XSS-Protection '1; mode=block'"
-    #     - "X-Content-Type-Options 'nosniff'"
-    #     - "'Access-Control-Allow-Origin' '$http_origin'"
-    #     - "'Access-Control-Allow-Credentials' 'true'"
-    #     - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-    #     - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-    #     - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_video_php'
+      SERVER_NAME: 'lives3-yec-sto07bp.xyz lives3-yec-07bp.xyz yecao-7k8s.xyz lives3-yec-sto07k8.xyz www.yecao-7k8s.xyz www.lives3-yec-sto07k8.xyz'
+      INDEX: 'index.php index.html index.htm'
+      PHP: '7.3'
+      REWRITE: 1
+      TRY_FILES: '$uri $uri/ /index.php?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
       
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'www.yecao07.me yecao07.me' 
-    #   INDEX: 'www_index.html www_index.htm'
-    #   M_SERVER_NAME: 'm.yecao07.me'
-    #   REWRITE: 0
-    #   TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
-    #   ADD_HEADERS:
-    #     - "X-Frame-Options 'SAMEORIGIN'"
-    #     - "X-XSS-Protection '1; mode=block'"
-    #     - "X-Content-Type-Options 'nosniff'"
-    #     - "'Access-Control-Allow-Origin' '$http_origin'"
-    #     - "'Access-Control-Allow-Credentials' 'true'"
-    #     - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-    #     - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-    #     - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'www.yecao07.me yecao07.me' 
+      INDEX: 'www_index.html www_index.htm'
+      M_SERVER_NAME: 'm.yecao07.me'
+      REWRITE: 0
+      TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'm.yecao07.me'
-    #   INDEX: 'm_index.html m_index.htm'
-    #   # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
-    #   WWW_SERVER_NAME: 'www.yecao07.me'
-    #   REWRITE: 0
-    #   TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
-    #   ADD_HEADERS:
-    #     - "X-Frame-Options 'SAMEORIGIN'"
-    #     - "X-XSS-Protection '1; mode=block'"
-    #     - "X-Content-Type-Options 'nosniff'"
-    #     - "'Access-Control-Allow-Origin' '$http_origin'"
-    #     - "'Access-Control-Allow-Credentials' 'true'"
-    #     - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-    #     - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-    #     - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'm.yecao07.me'
+      INDEX: 'm_index.html m_index.htm'
+      # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
+      WWW_SERVER_NAME: 'www.yecao07.me'
+      REWRITE: 0
+      TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'www.yehua07.com yehua07.com'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   M_SERVER_NAME: 'm.yehua07.com'
-    #   REWRITE: 0
-    #   # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
-    #   TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
-    #   ADD_HEADERS:
-    #     - "X-Frame-Options 'SAMEORIGIN'"
-    #     - "X-XSS-Protection '1; mode=block'"
-    #     - "X-Content-Type-Options 'nosniff'"
-    #     - "'Access-Control-Allow-Origin' '$http_origin'"
-    #     - "'Access-Control-Allow-Credentials' 'true'"
-    #     - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-    #     - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-    #     - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'www.yehua07.com yehua07.com'
+      INDEX: 'www_index.html www_index.htm'
+      M_SERVER_NAME: 'm.yehua07.com'
+      REWRITE: 0
+      # WWW_SERVER_NAME: 'www.fea.yecaojule-07test.xyz'
+      TRY_FILES: '$uri $uri/ /www_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'm.yehua07.com'
-    #   INDEX: 'm_index.html m_index.htm'
-    #   REWRITE: 0
-    #   # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
-    #   WWW_SERVER_NAME: 'www.yehua07.com'
-    #   TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
-    #   ADD_HEADERS:
-    #     - "X-Frame-Options 'SAMEORIGIN'"
-    #     - "X-XSS-Protection '1; mode=block'"
-    #     - "X-Content-Type-Options 'nosniff'"
-    #     - "'Access-Control-Allow-Origin' '$http_origin'"
-    #     - "'Access-Control-Allow-Credentials' 'true'"
-    #     - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-    #     - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-    #     - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
-
-
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'm.yehua07.com'
+      INDEX: 'm_index.html m_index.htm'
+      REWRITE: 0
+      # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
+      WWW_SERVER_NAME: 'www.yehua07.com'
+      TRY_FILES: '$uri $uri/ /m_index.html?$query_string'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'yh10.xyz *.yh10.xyz'
-    #   INDEX: 'm_index.html m_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://www.yecao07.me/'
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'yh11.xyz *.yh11.xyz'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://www.yecao07.me/?code=201058'
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'yh12.xyz *.yh12.xyz'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://www.yecao07.me/?code=201054'
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'yh13.xyz *.yh13.xyz'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://www.yecao07.me/?code=201662'
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/'
-    #   SERVER_NAME: 'yh15.xyz *.yh15.xyz'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://www.yecao07.me/?code=201049'
+
+
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'yh10.xyz *.yh10.xyz'
+      INDEX: 'm_index.html m_index.htm'
+      REWRITE: 0
+      RETURN: '301 $scheme://www.yecao07.me/'
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'yh11.xyz *.yh11.xyz'
+      INDEX: 'www_index.html www_index.htm'
+      REWRITE: 0
+      RETURN: '301 $scheme://www.yecao07.me/?code=201058'
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'yh12.xyz *.yh12.xyz'
+      INDEX: 'www_index.html www_index.htm'
+      REWRITE: 0
+      RETURN: '301 $scheme://www.yecao07.me/?code=201054'
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'yh13.xyz *.yh13.xyz'
+      INDEX: 'www_index.html www_index.htm'
+      REWRITE: 0
+      RETURN: '301 $scheme://www.yecao07.me/?code=201662'
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/'
+      SERVER_NAME: 'yh15.xyz *.yh15.xyz'
+      INDEX: 'www_index.html www_index.htm'
+      REWRITE: 0
+      RETURN: '301 $scheme://www.yecao07.me/?code=201049'
 
 
     - HTTP_PORT: 80
@@ -138,7 +138,7 @@ NGINX:
         - "'Access-Control-Allow-Origin' '$http_origin'"
         - "'Access-Control-Allow-Credentials' 'true'"
         - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_golang/dist'
@@ -164,7 +164,7 @@ NGINX:
         - "'Access-Control-Allow-Origin' '$http_origin'"
         - "'Access-Control-Allow-Credentials' 'true'"
         - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_domain_socketio/dist'
@@ -179,23 +179,23 @@ NGINX:
         #- "'Access-Control-Allow-Origin' '*'"
         #- "'Access-Control-Allow-Credentials' 'true'"
         - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_koa/'
-    #   SERVER_NAME: 'api.yecao07.me api.yehua07.com'
-    #   INDEX: 'index.htm'
-    #   REWRITE: 0
-    #   PROXY_PASS: 'http://127.0.0.1:4003$request_uri'
-    #   ADD_HEADERS:
-    #     - "X-Frame-Options 'SAMEORIGIN'"
-    #     - "X-XSS-Protection '1; mode=block'"
-    #     - "X-Content-Type-Options 'nosniff'"
-    #     - "'Access-Control-Allow-Origin' '$http_origin'"
-    #     - "'Access-Control-Allow-Credentials' 'true'"
-    #     - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-    #     - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
-    #     - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'"
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_koa/'
+      SERVER_NAME: 'api.yecao07.me api.yehua07.com'
+      INDEX: 'index.htm'
+      REWRITE: 0
+      PROXY_PASS: 'http://127.0.0.1:4003$request_uri'
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'"
+        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
 
 RABBITMQ:
