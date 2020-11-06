@@ -20,7 +20,7 @@ NGINX:
 
       
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'www.yecao07.me yecao07.me' 
       INDEX: 'www_index.html www_index.htm'
       M_SERVER_NAME: 'm.yecao07.me'
@@ -37,7 +37,7 @@ NGINX:
         - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'm.yecao07.me'
       INDEX: 'm_index.html m_index.htm'
       # M_SERVER_NAME: 'm.fea.yecaojule-07test.xyz'
@@ -73,7 +73,7 @@ NGINX:
         - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'm.yehua07.com'
       INDEX: 'm_index.html m_index.htm'
       REWRITE: 0
@@ -94,31 +94,31 @@ NGINX:
 
 
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'yh10.xyz *.yh10.xyz'
       INDEX: 'm_index.html m_index.htm'
       REWRITE: 0
-      RETURN: '301 $scheme://www.yecao07.me/'
+      RETURN: '301 $scheme://www.yecao07.me/dist'
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'yh11.xyz *.yh11.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201058'
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'yh12.xyz *.yh12.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201054'
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'yh13.xyz *.yh13.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
       RETURN: '301 $scheme://www.yecao07.me/?code=201662'
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_js/'
+      ROOT: '/var/www/shoushou_download_js/dist'
       SERVER_NAME: 'yh15.xyz *.yh15.xyz'
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
@@ -182,7 +182,7 @@ NGINX:
         - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
     - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_download_koa/'
+      ROOT: '/var/www/shoushou_download_koa/dist'
       SERVER_NAME: 'api.yecao07.me api.yehua07.com'
       INDEX: 'index.htm'
       REWRITE: 0
