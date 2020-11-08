@@ -90,20 +90,20 @@ server {
         # 11 user_agent is mobile and domain is m.*
         if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             set $b_user_agent_mobile '1';
-            set $s_condition 1{$s_condition};
+            set $s_condition "1{$s_condition}";
         }
 
         if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             set $b_user_agent_mobile '1';
-            set $s_condition 0{$s_condition};
+            set $s_condition "0{$s_condition}";
         }
 
         if ($hotst == m.$domain ) {
-            set $s_condition {$s_condition}1;
+            set $s_condition "{$s_condition}1";
         }
 
         if ($hotst != m.$domain ) {
-            set $s_condition {$s_condition}0;
+            set $s_condition "{$s_condition}0";
         }
 
         if ($s_condition == '00') {
