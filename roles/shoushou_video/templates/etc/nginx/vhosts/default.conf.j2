@@ -80,15 +80,14 @@ server {
         }
         {% endif %}
 
-        {% if VHOST['M_SERVER_NAME'] is defined %}
-        if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
-            return 301 $scheme://{{ VHOST['M_SERVER_NAME'] }}$request_uri;
-        }
-        {% endif %}
 
-        {% if VHOST['WWW_SERVER_NAME'] is defined %}
-        if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
-            return 301 $scheme://{{ VHOST['WWW_SERVER_NAME'] }}$request_uri;
+        {% if VHOST['REDIRECT'] is defined %}
+        if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)' && $host == m.$domain ) {
+            return 301 $scheme://$domain/$request_uri;
+        }
+
+        if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)' && $host != m.$domain ) {
+            return 301 $scheme://m.$domain/$request_uri;
         }
         {% endif %}
 
