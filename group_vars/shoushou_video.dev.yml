@@ -7,7 +7,6 @@ NGINX:
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
       REWRITE: 1
-      LOCATION: 
       TRY_FILES: '$uri $uri/ /index.php?$query_string'
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
@@ -97,7 +96,7 @@ NGINX:
       ROOT: '/var/www/shoushou_video_golang-domain/dist'
       SERVER_NAME: 'api.ycdis-test.xyz'
       INDEX: 'index.html index.htm'
-      PROXY_PASS: 'http://servers'
+      PROXY_PASS: 'http://shoushou_video_golang_servers'
       UPSTREAM:
         NAME: 'shoushou_video_golang_servers'
         SERVERS:

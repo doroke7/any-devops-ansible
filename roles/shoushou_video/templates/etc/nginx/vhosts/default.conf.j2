@@ -90,20 +90,20 @@ server {
         # 11 user_agent is mobile and domain is m.*
         if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             set $b_user_agent_mobile '1';
-            set $s_condition "1{$s_condition}";
+            set $s_condition "1${s_condition}";
         }
 
         if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             set $b_user_agent_mobile '1';
-            set $s_condition "0{$s_condition}";
+            set $s_condition "0${s_condition}";
         }
 
         if ($host = m.$domain ) {
-            set $s_condition "{$s_condition}1";
+            set $s_condition "${s_condition}1";
         }
 
         if ($host != m.$domain ) {
-            set $s_condition "{$s_condition}0";
+            set $s_condition "${s_condition}0";
         }
 
         if ($s_condition = '00') {
@@ -111,11 +111,12 @@ server {
         }
 
         if ($s_condition = '01') {
-            return 301 $scheme://www.$domain/$request_uri;
+                                          # without /  --------------------------------------------
+            return 301 $scheme://www.$domain$request_uri;
         }
 
         if ($s_condition = '10') {
-            return 301 $scheme://m.$domain/$request_uri;
+            return 301 $scheme://m.$domain$request_uri;
         }
 
         if ($s_condition = '11') {
