@@ -82,11 +82,11 @@ server {
 
 
         {% if VHOST['REDIRECT'] is defined %}
-        if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)' && $host == m.$domain ) {
+        if ($http_user_agent !~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             return 301 $scheme://$domain/$request_uri;
         }
 
-        if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)' && $host != m.$domain ) {
+        if ($http_user_agent ~* '(iPhone|iPod|iPad|Android|BlackBerry|webOS|Windows Phone)') {
             return 301 $scheme://m.$domain/$request_uri;
         }
         {% endif %}
