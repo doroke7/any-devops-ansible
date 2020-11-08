@@ -98,11 +98,11 @@ server {
             set $s_condition "0{$s_condition}";
         }
 
-        if ($hotst = m.$domain ) {
+        if ($host = m.$domain ) {
             set $s_condition "{$s_condition}1";
         }
 
-        if ($hotst != m.$domain ) {
+        if ($host != m.$domain ) {
             set $s_condition "{$s_condition}0";
         }
 
