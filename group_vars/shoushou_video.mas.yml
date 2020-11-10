@@ -146,7 +146,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_koa/dist'
-      SERVER_NAME: 'api.yecao07.me api.yehua07.com api.se-yh02.xyz api.se-yh03.xyz'
+      SERVER_NAME: '~^(api\.)(?<domain>.+)$'
       INDEX: 'index.htm'
       REWRITE: 0
       PROXY_PASS: 'http://127.0.0.1:4003$request_uri'
