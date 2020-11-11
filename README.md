@@ -76,10 +76,10 @@ ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags
 
 1. 本地环境使用 Vagrant + CentOS7
 2. 统一使用 Ansilbe 管理工具
-3. 新的项目 禁止使用 PHPadmin, 宝塔 等 WEB 管理界面，WEB 界面 无非是开启了 端口给人攻击 （旧项目不管）
+3. 研发项目 禁止使用 PHPadmin, 宝塔 等 WEB 管理界面，WEB 界面 无非是开启了 端口给人攻击
 4. 使用 Python 做运营自动化 脚本 （亦可使用 Golang）
 5. 自动化 脚本 使用 GIT并做版本控管
-6. 所有綫上項目保持與 GIT 最新版 保持一致
+6. 所有綫上項目保持與 GIT 最当前版本 保持一致
 7. 統一使用 GitLab CI 自動化 更新
 8. 所有服務機 【外網】 使用 SSH KEY 登入 （例如 MYSQL 使用 SSH 登入后 再 連綫 localhost）
 9. 每一天需要做运维日志并交接
