@@ -42,13 +42,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `administrator_authorizations`;
 CREATE TABLE `administrator_authorizations`  (
-  `administrator_authorization_id` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `administrator_authorization_id` int(0) UNSIGNED NOT NULL,
   `route` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `methods` set('GET','POST','PUT','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '',
-  `administrator_group_id` int(12) NOT NULL,
+  `administrator_group_id` int(0) NOT NULL,
   `status` tinyint(1) NULL DEFAULT NULL,
-  `added_time` timestamp(0) NULL DEFAULT NULL,
-  `edited_time` timestamp(0) NULL DEFAULT NULL,
+  `added_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `edited_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
   `removed_time` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`administrator_authorization_id`) USING BTREE,
   UNIQUE INDEX `administrator_group_id_route`(`administrator_group_id`, `route`) USING BTREE
@@ -65,7 +65,7 @@ INSERT INTO `administrator_authorizations` VALUES (2, '/admin/resource/word', 'D
 -- ----------------------------
 DROP TABLE IF EXISTS `administrator_groups`;
 CREATE TABLE `administrator_groups`  (
-  `administrator_group_id` int(12) NOT NULL,
+  `administrator_group_id` int(0) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `status` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '状态',
   `added_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
@@ -87,8 +87,8 @@ INSERT INTO `administrator_groups` VALUES (4, '空部门', 0, NULL, NULL, NULL);
 -- ----------------------------
 DROP TABLE IF EXISTS `administrator_to_administrator_group`;
 CREATE TABLE `administrator_to_administrator_group`  (
-  `administrator_id` int(12) UNSIGNED NOT NULL,
-  `administrator_group_id` int(12) UNSIGNED NOT NULL,
+  `administrator_id` int(0) UNSIGNED NOT NULL,
+  `administrator_group_id` int(0) UNSIGNED NOT NULL,
   `added_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `edited_time` timestamp(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   `removed_time` timestamp(0) NULL DEFAULT NULL,
@@ -108,7 +108,7 @@ INSERT INTO `administrator_to_administrator_group` VALUES (2, 2, NULL, NULL, NUL
 -- ----------------------------
 DROP TABLE IF EXISTS `administrators`;
 CREATE TABLE `administrators`  (
-  `administrator_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `administrator_id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `nickname` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '昵称',
   `password` char(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
@@ -135,7 +135,7 @@ INSERT INTO `administrators` VALUES (4, 'usher', '亚索', 'nhmbWpbnUCKOg3JOE6AN
 -- ----------------------------
 DROP TABLE IF EXISTS `configs`;
 CREATE TABLE `configs`  (
-  `config_id` int(12) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `config_id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
   `key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`config_id`) USING BTREE,
@@ -150,73 +150,67 @@ INSERT INTO `configs` VALUES (2, 'chargeMoney', '0');
 INSERT INTO `configs` VALUES (3, 'day', '2');
 
 -- ----------------------------
--- Table structure for domains
--- ----------------------------
-DROP TABLE IF EXISTS `domains`;
-CREATE TABLE `domains`  (
-  `domain_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `server` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `path` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
-  `type` enum('API','STORAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1,
-  `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  `added_time` timestamp(0) NOT NULL DEFAULT '1980-01-01 00:00:00',
-  `removed_time` timestamp(0) NOT NULL DEFAULT '2038-01-18 22:14:07',
-  `weight` smallint(2) UNSIGNED NOT NULL DEFAULT 0,
-  `response` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `method` enum('GET','POST','PUT','PATCH','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'GET',
-  `error` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
-  PRIMARY KEY (`domain_id`) USING BTREE,
-  INDEX `type_status_weight`(`type`, `status`, `weight`) USING BTREE,
-  INDEX `type_weight`(`type`, `weight`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
-
--- MYSQL 8.0 最大時間 為 2038-01-18 22:14:07
--- MYSQL 5.7 最大時間 為 2038-01-19 03:14:07
-
-
--- ----------------------------
--- Records of domains
--- ----------------------------
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (1, 'http://a.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:18', '2020-10-23 13:34:11', '2038-01-01 00:00:00', 1, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (2, 'http://b.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:52:19', '2020-10-23 10:41:13', '2038-01-18 22:14:07', 1, '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '[错误]: lives3-yec-sto07test.xyz/result.json \n');
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (3, 'http://c.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:18', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (4, 'http://d.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:18', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (5, 'http://e.lives3-yec-sto07test.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (6, 'http://a.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (7, 'http://b.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (8, 'http://c.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (9, 'http://d.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (10, 'http://e.lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:19', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 1, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (11, 'http://99percent.xyz', '/result.json', 'STORAGE', 1, '2020-10-24 20:43:24', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 99, NULL, 'GET', NULL);
-INSERT INTO `domain`.`domains`(`domain_id`, `server`, `path`, `type`, `status`, `edited_time`, `added_time`, `removed_time`, `weight`, `response`, `method`, `error`) VALUES (12, 'http://lives2-yc-test0708.xyz', '/result.json', 'API', 1, '2020-10-24 20:43:24', '1980-01-01 00:00:00', '2038-01-18 22:14:07', 99, NULL, 'GET', NULL);
-
-
-
-
--- ----------------------------
 -- Table structure for devices
 -- ----------------------------
 DROP TABLE IF EXISTS `devices`;
-CREATE TABLE `devices` (
-  `device_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `type` enum('WEB','ANDROID','IOS') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `edited_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `added_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `removed_time` timestamp NOT NULL DEFAULT '2038-01-18 22:14:07',
+CREATE TABLE `devices`  (
+  `device_id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `type` enum('WEB','ANDROID','IOS') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `added_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  `removed_time` timestamp(0) NOT NULL DEFAULT '2038-01-18 22:14:07',
   PRIMARY KEY (`device_id`) USING BTREE,
-  UNIQUE KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
+  UNIQUE INDEX `type`(`type`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of devices
 -- ----------------------------
 INSERT INTO `devices` VALUES (1, '網頁', 'WEB', 1, '2020-11-03 09:45:55', '1980-01-01 00:00:00', '2038-01-18 22:14:07');
 INSERT INTO `devices` VALUES (2, '安卓', 'ANDROID', 1, '2020-11-03 09:45:59', '1980-01-01 00:00:00', '2038-01-18 22:14:07');
-INSERT INTO `devices` VALUES (3, '蘋果', 'IOS', 1, '2020-11-03 09:46:04', '1980-01-01 00:00:00', '2038-01-18 22:14:07');
+INSERT INTO `devices` VALUES (3, '蘋果', 'IOS', -1, '2020-11-03 08:04:51', '1980-01-01 00:00:00', '2038-01-18 22:14:07');
 
+-- ----------------------------
+-- Table structure for domains
+-- ----------------------------
+DROP TABLE IF EXISTS `domains`;
+CREATE TABLE `domains`  (
+  `domain_id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `server` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `path` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '/',
+  `type` enum('API','STORAGE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `weight` smallint(0) UNSIGNED NOT NULL DEFAULT 0,
+  `edited_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  `added_time` timestamp(0) NOT NULL DEFAULT '1980-01-01 00:00:00',
+  `removed_time` timestamp(0) NOT NULL DEFAULT '2038-01-18 22:14:07',
+  `response` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `method` enum('GET','POST','PUT','PATCH','DELETE') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'GET',
+  `error` tinytext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
+  PRIMARY KEY (`domain_id`) USING BTREE,
+  INDEX `type_status_weight`(`type`, `status`, `weight`) USING BTREE,
+  INDEX `type_weight`(`type`, `weight`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of domains
+-- ----------------------------
+INSERT INTO `domains` VALUES (11, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, 99, '2020-11-11 22:40:28', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (12, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, 99, '2020-11-11 22:40:28', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (13, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, 99, '2020-11-11 22:54:12', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (14, 'https://yecao-7k8s.xyz', '/result.json', 'API', 1, 99, '2020-11-11 23:06:00', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (15, 'https://lives3-yec-07bp.xyz', '/result.json', 'API', 1, 1, '2020-11-11 22:21:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (16, 'https://lives3-yec-07bp.xyz', '/result.json', 'API', 1, 1, '2020-11-11 23:00:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (17, 'https://lives3-yec-07bp.xyz', '/result.json', 'API', 1, 1, '2020-11-11 23:05:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (18, 'https://lives3-yec-07bp.xyz', '/result.json', 'API', 1, 1, '2020-11-11 23:00:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (21, 'https://ckhomepage.xyz', '/result.json', 'STORAGE', 1, 99, '2020-11-11 22:40:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (22, 'https://ckhomepage.xyz', '/result.json', 'STORAGE', 1, 99, '2020-11-11 22:40:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (23, 'https://ckhomepage.xyz', '/result.json', 'STORAGE', 1, 99, '2020-11-11 22:40:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (24, 'https://zhaoxiongjie.xyz', '/result.json', 'STORAGE', 1, 1, '2020-11-11 22:21:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (25, 'https://zhaoxiongjie.xyz', '/result.json', 'STORAGE', 1, 1, '2020-11-11 22:21:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
+INSERT INTO `domains` VALUES (26, 'https://zhaoxiongjie.xyz', '/result.json', 'STORAGE', 1, 1, '2020-11-11 22:21:27', '1980-01-01 00:00:00', '2038-01-18 22:14:07', '{\n  \"status\": 1,\n  \"message\": \"可以正常访问资源\"\n}', 'GET', '错误 , 爬取多次失败 \n');
 
 
 SET FOREIGN_KEY_CHECKS = 1;
