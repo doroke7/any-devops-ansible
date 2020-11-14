@@ -19,4 +19,4 @@
   service:
     name: nginx
     state: restarted
-  when: (nginx is not undefined and nginx == 1) and (nginx_restart is not undefined nginx_restart == 1)
+  when: (nginx is not undefined and nginx == 1) and (nginx_restart is not undefined and nginx_restart == 1)

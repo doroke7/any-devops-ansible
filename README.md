@@ -83,3 +83,14 @@ ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags
 7. 統一使用 GitLab CI 自動化 更新
 8. 所有服務機 【外網】 使用 SSH KEY 登入 （例如 MYSQL 使用 SSH 登入后 再 連綫 localhost）
 9. 每一天需要做运维日志并交接
+
+
+1. 安装 Vagrant
+2. 安装 VirtualBox
+3. 安装 Xshell
+4. 安装 Navicat
+5. 安装 Notepadd++
+6. 安装 Postman
+7. 安装 Pycharm
+8. 安装 Git for Win
+9. 安装 Git tortoise

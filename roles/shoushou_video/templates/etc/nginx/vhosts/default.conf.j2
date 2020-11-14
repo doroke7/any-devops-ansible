@@ -81,7 +81,7 @@ server {
         {% endif %}
 
 
-        {% if VHOST['REDIRECT'] is defined %}
+        {% if VHOST['REDIRECT'] is defined and VHOST['REDIRECT'] == 1 %}
         set $s_condition '';
 
         # 00 user_agent is PC and domain is not  m.*
