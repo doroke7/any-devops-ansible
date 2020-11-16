@@ -73,7 +73,7 @@ ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags
 `
 
 
-
+## 运维注意事项
 1. 本地环境使用 Vagrant + CentOS7
 2. 统一使用 Ansilbe 管理工具
 3. 研发项目 禁止使用 PHPadmin, 宝塔 等 WEB 管理界面，WEB 界面 无非是开启了 端口给人攻击
@@ -84,13 +84,15 @@ ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags
 8. 所有服務機 【外網】 使用 SSH KEY 登入 （例如 MYSQL 使用 SSH 登入后 再 連綫 localhost）
 9. 每一天需要做运维日志并交接
 
-
-1. 安装 Vagrant
-2. 安装 VirtualBox
-3. 安装 Xshell
-4. 安装 Navicat
-5. 安装 Notepadd++
-6. 安装 Postman
-7. 安装 Pycharm
-8. 安装 Git for Win
-9. 安装 Git tortoise
+## 运维必备环境
+ 1. 安装 Vagrant
+ 2. 安装 VirtualBox
+ 3. 安装 Xshell
+ 4. 安装 Navicat
+ 5. 安装 Notepad++
+ 6. 安装 Sublime
+ 7. 安装 Postman
+ 8. 安装 Pycharm
+ 9. 安装 Git for Win
+10. 安装 Git tortoise
+10. 安装 Source Tree
