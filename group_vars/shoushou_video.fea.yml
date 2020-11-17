@@ -161,6 +161,13 @@ SUPERVISOR:
           STDOUT_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-domain.stdout.log'
           STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-domain.stderr.log'
 
+        - NAME: 'shoushou_video_golang-dist_command-transaction'
+          DIRECTORY: '/var/www/shoushou_video_golang'
+          COMMAND: '/var/www/shoushou_video_golang/dist/command -command=transaction'
+          NUMPROCS: 1
+          STDOUT_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-transaction.stdout.log'
+          STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-transaction.stderr.log'
+
         - NAME: 'shoushou_video_golang-dist_index'
           DIRECTORY: '/var/www/shoushou_video_golang'
           COMMAND: '/var/www/shoushou_video_golang/dist/index -number=%(process_num)s'
