@@ -18,23 +18,23 @@ ansible fea_nginx -a "/sbin/nginx -v"
 
 ## 4. install nginx of feature environtment via ansible
 `
-ansible-playbook -i host/host.fea playbooks/php.yml -e "php_version=7.3"
+ansible-playbook -i hosts/hosts.fea playbooks/php.yml -e "php_version=7.3"
 
-ansible-playbook -i host/host.fea playbooks/mysql.yml -e "mysql_version=5.6"
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=5.6"
 
-ansible-playbook -i host/host.fea playbooks/git.yml
+ansible-playbook -i hosts/hosts.fea playbooks/git.yml
 
-ansible-playbook -i host/host.fea playbooks/nginx.yml
+ansible-playbook -i hosts/hosts.fea playbooks/nginx.yml
 
-ansible-playbook -i host/host.fea playbooks/redis.yml
+ansible-playbook -i hosts/hosts.fea playbooks/redis.yml
 
-ansible-playbook -i host/host.fea playbooks/memcached.yml
+ansible-playbook -i hosts/hosts.fea playbooks/memcached.yml
 
-ansible-playbook -i host/host.fea playbooks/mongodb.yml
+ansible-playbook -i hosts/hosts.fea playbooks/mongodb.yml
 
-ansible-playbook -i host/host.fea playbooks/python.yml -e "python_version=3.6"
+ansible-playbook -i hosts/hosts.fea playbooks/python.yml -e "python_version=3.6"
 
-ansible-playbook -i host/host.fea playbooks/node.yml
+ansible-playbook -i hosts/hosts.fea playbooks/node.yml
 `
 ## 8. ansilbe host 是有 cache 机制 如果换了 ssh key 还是 无法连， 试试改个 host 名
 `
