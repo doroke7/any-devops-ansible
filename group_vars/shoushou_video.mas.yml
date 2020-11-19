@@ -104,18 +104,16 @@ NGINX:
     #   INDEX: 'www_index.html www_index.htm'
     #   REWRITE: 0
     #   RETURN: '301 $scheme://www.yecao07.me/?code=201049'
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/dist'
-    #   SERVER_NAME: 'se-yh02.xyz *.se-yh02.xyz'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://yehua07.com/seroot'
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/dist'
-    #   SERVER_NAME: 'se-yh03.xyz *.se-yh03.xyz'
-    #   INDEX: 'www_index.html www_index.htm'
-    #   REWRITE: 0
-    #   RETURN: '301 $scheme://yehua07.com/sepang'
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/dist'
+      SERVER_NAME: 'se-yh02.xyz *.se-yh02.xyz'
+      INDEX: 'menu.html menu.htm'
+      REWRITE: 0
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/dist'
+      SERVER_NAME: 'se-yh03.xyz *.se-yh03.xyz'
+      INDEX: 'menu.html menu.htm'
+      REWRITE: 0
 
       # RETURN: '301 $scheme://yehua07.com/seroot'
     # - HTTP_PORT: 80
