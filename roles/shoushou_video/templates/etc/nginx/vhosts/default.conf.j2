@@ -50,7 +50,7 @@ server {
 
     location ~* \.(m3u8|ts|mp4|avi|wmv|rm|rmvb|mkv|mp3|wma|wav|aac|txt|pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar)(\?.+)?$ {
         expires max;
-        max_ranges 0;
+        max_ranges 100; # cannot use 0
     }
 
     location ~* \.(ico|bmp|bmp4|css|js|gif|jpe?g|png|ogg|ogv|svg|svgz|eot|otf|woff)(\?.+)?$ {
