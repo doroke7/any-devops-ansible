@@ -1477,7 +1477,7 @@ session.sid_bits_per_character = 5
 
 ; Only write session data when session data is changed. Enabled by default.
 ; http://php.net/session.lazy-write
-;session.lazy_write = On
+session.lazy_write = Off
 
 [Assertion]
 ; Switch whether to compile assertions at all (to have no overhead at run-time)
@@ -1697,6 +1697,10 @@ memcache.redundancy=1
 memcache.session_redundancy=2
 memcache.compress_threshold=20000
 memcache.lock_timeout=15
+memcached.sess_lock_wait_min=1000
+memcached.sess_lock_wait_max=30000
+
+
 
 [xdebug]
 zend_extension="xdebug.so"
