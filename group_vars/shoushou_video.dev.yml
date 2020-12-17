@@ -3,7 +3,7 @@ NGINX:
   VHOSTS:
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_php'
-      SERVER_NAME: 'lives2-yc-test0708.xyz lives3-yec-sto07test.xyz'
+      SERVER_NAME: 'lives3-yc-test07.xyz lives3-yc-sto09test.xyz'
       INDEX: 'index.php index.html index.htm'
       PHP: '7.3'
       REWRITE: 1
@@ -21,7 +21,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/dist'
-      SERVER_NAME: '~^(www\.)?(?<domain>.+)$'
+      SERVER_NAME: 'yecaojl-07test.xyz www.yecaojl-07test.xyz ~^(www\.)?(?<domain>.+)$'
       REDIRECT: 1
       INDEX: 'www_index.html www_index.htm'
       REWRITE: 0
@@ -38,7 +38,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_js/dist'
-      SERVER_NAME: '~^(m\.)(?<domain>.+)$'
+      SERVER_NAME: 'm.yecaojl-07test.xyz ~^(m\.)(?<domain>.+)$'
       REDIRECT: 1
       INDEX: 'm_index.html m_index.htm'
       REWRITE: 0
@@ -56,7 +56,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_download_koa/dist'
-      SERVER_NAME: '~^(api\.)(?<domain>.+)$'
+      SERVER_NAME: 'api.yecaojl-07test.xyz ~^(api\.)(?<domain>.+)$'
       INDEX: 'index.htm'
       REWRITE: 0
       PROXY_PASS: 'http://127.0.0.1:4003$request_uri'
@@ -76,7 +76,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_domain_react/dist'
-      SERVER_NAME: 'admin.ycdis-test.xyz'
+      SERVER_NAME: 'admin.yecdis-test.xyz'
       INDEX: 'index.html index.htm'
       REWRITE: 0
       LOCATION: '~ ^/(\w+)'
@@ -94,7 +94,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_golang-domain/dist'
-      SERVER_NAME: 'api.ycdis-test.xyz'
+      SERVER_NAME: 'api.yecdis-test.xyz'
       INDEX: 'index.html index.htm'
       PROXY_PASS: 'http://shoushou_video_golang_servers'
       UPSTREAM:
@@ -115,7 +115,7 @@ NGINX:
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_domain_socketio/dist'
-      SERVER_NAME: 'socket.ycdis-test.xyz'
+      SERVER_NAME: 'socket.yecdis-test.xyz'
       INDEX: 'index.html index.htm'
       PROXY_PASS: ' http://127.0.0.1:4002$request_uri'
       REWRITE: 0
