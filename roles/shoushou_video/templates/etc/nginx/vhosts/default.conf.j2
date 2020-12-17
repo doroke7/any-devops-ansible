@@ -68,6 +68,8 @@ server {
     {% if VHOST['REDIRECT'] is defined and VHOST['REDIRECT'] == 1 %}
     set $s_condition '';
 
+    # You must to clear cache of browser when you fix 301 problems.
+
     # 00 user_agent is PC and domain is not  m.*
     # 01 user_agent is PC and domain is m.*
     # 10 user_agent is mobile and domain is not  m.*
