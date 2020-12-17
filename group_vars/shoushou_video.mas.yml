@@ -222,17 +222,19 @@ NGINX:
     #   INDEX: 'menu.html menu.htm'
     #   REWRITE: 0
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/dist'
-    #   SERVER_NAME: 'se-yh03.xyz se-yh030.xyz *.se-yh03.xyz *.se-yh030.xyz'
-    #   INDEX: 'sepang.html sepang.htm'
-    #   REWRITE: 0
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/dist'
+      SERVER_NAME: 'se-yh031.xyz *.se-yh031.xyz'
+      INDEX: 'sepang.html sepang.htm'
+      REWRITE: 0
 
-    # - HTTP_PORT: 80
-    #   ROOT: '/var/www/shoushou_download_js/dist'
-    #   SERVER_NAME: 'se-yh05.xyz *.se-yh05.xyz *.se-yh050.xyz se-yh050.xyz'
-    #   INDEX: 'sesirui.html sesirui.htm'
-    #   REWRITE: 0
+#
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_download_js/dist'
+      SERVER_NAME: 'se-yh051.xyz *.se-yh051.xyz se-yh021.xyz *.se-yh021.xyz'
+      INDEX: 'sesirui.html sesirui.htm'
+      REWRITE: 0
+
 
 
     # - HTTP_PORT: 80
