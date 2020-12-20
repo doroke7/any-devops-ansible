@@ -2,7 +2,7 @@
 - name: (template) scp etc/nginx/vhosts/default.conf.j2 /etc/nginx/vhosts/*.conf
   template:
     src: etc/nginx/vhosts/default.conf.j2
-    dest: "/etc/nginx/vhosts/{{ VHOST['SERVER_NAME'] | replace(' ', '___') }}.conf"
+    dest: "/etc/nginx/vhosts/{{ VHOST['SERVER_NAME'] | replace(' ', '_') }}.conf"
     owner: root
     group: root
     mode: 0644

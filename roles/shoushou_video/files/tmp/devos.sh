@@ -1,4 +1,7 @@
-# https://certbot.eff.org/lets-encrypt/centosrhel7-nginx
-
-# USER: admin
-# PASSWORD: admin_pass_01B7C1E5AA69536D2AF1E7598A5B266C
+1. 更新线上 队列 代码
+2. 切片功能 支援 所有 视频格式
+3. 更新 MySQL 数据库
+4. 更新 PHP 代码
+5. 线上 测试 PHP BUG 排查
+6. 线上域名更换
+7. 新功能开发
