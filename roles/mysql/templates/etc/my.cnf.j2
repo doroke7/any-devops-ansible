@@ -80,7 +80,7 @@ slave-parallel-workers=6                                 # 5.5 不作用, 5.6 5.
 
 # external-locking = FALSE                               # 5.7 不作用, 避免外部锁定(减少出错几率，增加稳定性)
 # skip-name-resolv                                       # 5.7 不作用, 禁止外部连接进行DNS解析
-transaction_isolation = {{ MYSQL.TRANSACTION_ISOLATION }}  # 事务隔离级别
+transaction_isolation = {{ MYSQL.TRANSACTION_ISOLATION }} # 事务隔离级别
 
 character-set-server = {{ MYSQL.CHARACTER_SET }}
 collation-server = {{ MYSQL.COLLATION }}                 # 设置校对规则
@@ -135,7 +135,7 @@ innodb_flush_method = O_DIRECT                          # 从innode刷新到磁�
 # innodb_additional_mem_pool_size = 16M                 # 5.7 不作用, 设置InnoDB存储的数据目录信息和其他内部数据结构的内存池大小
 # innodb_buffer_pool_size = 51G                         # 5.7 不作用, InnoDB使用一个缓冲池来保存索引和原始数据，官方建议物理内存的80%
 # innodb_data_file_path = ibdata1:128M:autoextend       # 5.7 不作用, 表空间
-# innodb_file_io_threads = 4                            #  5.7 不作用, InnoDB中的文件I/O线程，通常设置为4，innodb除master线程外，还有insert buffer, log, read, write这4种线程，默认各有一个
+# innodb_file_io_threads = 4                            # 5.7 不作用, InnoDB中的文件I/O线程，通常设置为4，innodb除master线程外，还有insert buffer, log, read, write这4种线程，默认各有一个
 innodb_open_files = 500                                 # 限制Innodb能打开的表的数据，如果库里的表特别多的情况，请增加这个。这个值默认是300  
 innodb_read_io_threads = 8
 innodb_write_io_threads = 8
