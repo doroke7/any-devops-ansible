@@ -4,30 +4,57 @@ NGINX:
 
 # ######################### PHP    
 
-#     - HTTP_PORT: 80
-#       ROOT: '/var/www/shoushou_video_php'
-#       SERVER_NAME: 'lives3-yc-07ks.xyz lives3-yc-07bp.xyz lives3-yc-sto07k8.xyz lives3-yc-sto07bp.xyz'
-#       INDEX: 'index.php index.html index.htm'
-#       # 根據 2020 CORS 策略, 瀏覽器 在請求 不同域名 且 具有 post 字節 時候,  瀏覽器 會 預先打 一個 options 請求
-#       # 錯誤解法 把 post 值 轉為 query, 這個 不符合 cors 策略 減低 API 彈性
-#       # 正確解法 首先 options 回 204 (試打立即回應 空), 且 Access-Control-Max-Age' 86400 (設定 試打的有效時間 為 1 day
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_video_php'
+      SERVER_NAME: 'lives3-yc-07ks.xyz lives3-yc-07bp.xyz lives3-yc-sto07k8.xyz lives3-yc-sto07bp.xyz'
+      INDEX: 'index.php index.html index.htm'
+      # 根據 2020 CORS 策略, 瀏覽器 在請求 不同域名 且 具有 post 字節 時候,  瀏覽器 會 預先打 一個 options 請求
+      # 錯誤解法 把 post 值 轉為 query, 這個 不符合 cors 策略 減低 API 彈性
+      # 正確解法 首先 options 回 204 (試打立即回應 空), 且 Access-Control-Max-Age' 86400 (設定 試打的有效時間 為 1 day
 
-#       # CORS 寫在 Nginx 的優點是 效能優, 避免 Go-Gin, PHP-laravel, Node-Koa 同一個機制要寫出數次, 找到的 middleware 也不一定完全相同
-#       ADD_HEADERS:
-#         - "X-Frame-Options 'SAMEORIGIN'"
-#         - "X-XSS-Protection '1; mode=block'"
-#         - "X-Content-Type-Options 'nosniff'"
-#         - "'Access-Control-Allow-Origin' '$http_origin'"
-#         - "'Access-Control-Allow-Credentials' 'true'"  #表明 Server 是否允許發送Cookie，預設是 False。如果要發送Cookie，Access-Control-Allow-Origin 就不能設為 * ，就必須要明確指定
-#         - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-#         - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
-#         # Nginx HTTP 可以在 跨域请求时候 可以 接受的 header
-#         # 已 JWT 为例， 就需要开启 Authorization
-#         - "'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
+      # CORS 寫在 Nginx 的優點是 效能優, 避免 Go-Gin, PHP-laravel, Node-Koa 同一個機制要寫出數次, 找到的 middleware 也不一定完全相同
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"  #表明 Server 是否允許發送Cookie，預設是 False。如果要發送Cookie，Access-Control-Allow-Origin 就不能設為 * ，就必須要明確指定
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        # Nginx HTTP 可以在 跨域请求时候 可以 接受的 header
+        # 已 JWT 为例， 就需要开启 Authorization
+        - "'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
-#       PHP: '7.3'
-#       REWRITE: 1
-#       TRY_FILES: '$uri $uri/ /index.php?$query_string'
+      PHP: '7.3'
+      REWRITE: 1
+      TRY_FILES: '$uri $uri/ /index.php?$query_string'
+
+
+    - HTTP_PORT: 80
+      ROOT: '/var/www/shoushou_video_php'
+      SERVER_NAME: 'rel.lives3-yc-07ks.xyz rel.lives3-yc-07bp.xyz rel.lives3-yc-sto07k8.xyz rel.lives3-yc-sto07bp.xyz'
+      INDEX: 'index.php index.html index.htm'
+      # 根據 2020 CORS 策略, 瀏覽器 在請求 不同域名 且 具有 post 字節 時候,  瀏覽器 會 預先打 一個 options 請求
+      # 錯誤解法 把 post 值 轉為 query, 這個 不符合 cors 策略 減低 API 彈性
+      # 正確解法 首先 options 回 204 (試打立即回應 空), 且 Access-Control-Max-Age' 86400 (設定 試打的有效時間 為 1 day
+
+      # CORS 寫在 Nginx 的優點是 效能優, 避免 Go-Gin, PHP-laravel, Node-Koa 同一個機制要寫出數次, 找到的 middleware 也不一定完全相同
+      ADD_HEADERS:
+        - "X-Frame-Options 'SAMEORIGIN'"
+        - "X-XSS-Protection '1; mode=block'"
+        - "X-Content-Type-Options 'nosniff'"
+        - "'Access-Control-Allow-Origin' '$http_origin'"
+        - "'Access-Control-Allow-Credentials' 'true'"  #表明 Server 是否允許發送Cookie，預設是 False。如果要發送Cookie，Access-Control-Allow-Origin 就不能設為 * ，就必須要明確指定
+        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+        # Nginx HTTP 可以在 跨域请求时候 可以 接受的 header
+        # 已 JWT 为例， 就需要开启 Authorization
+        - "'Access-Control-Allow-Headers' 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
+
+      PHP: '7.3'
+      REWRITE: 1
+      TRY_FILES: '$uri $uri/ /index.php?$query_string'
+
 
 # ######################### 下载页
 

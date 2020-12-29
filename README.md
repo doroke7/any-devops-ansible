@@ -13,7 +13,7 @@ ansible-playbook playbooks/nginx.yml -vvv
 
 ## 3. command line in remote server via ansible
 `
-ansible fea_nginx -a "/sbin/nginx -v"
+ansible nginx -a "/sbin/nginx -v"
 `
 
 ## 4. install nginx of feature environtment via ansible
@@ -35,6 +35,13 @@ ansible-playbook -i hosts/hosts.fea playbooks/mongodb.yml
 ansible-playbook -i hosts/hosts.fea playbooks/python.yml -e "python_version=3.6"
 
 ansible-playbook -i hosts/hosts.fea playbooks/node.yml
+
+ansible-playbook -i hosts/hosts.fea playbooks/erlang.yml
+
+ansible-playbook -i hosts/hosts.fea playbooks/rabbitmq.yml
+
+ansible-playbook -i hosts/hosts.fea playbooks/golang.yml
+
 `
 ## 8. ansilbe host 是有 cache 机制 如果换了 ssh key 还是 无法连， 试试改个 host 名
 `
@@ -61,12 +68,11 @@ ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags
 ## 运维必备环境
  1. 安装 Vagrant
  2. 安装 VirtualBox
- 3. 安装 Xshell
+ 3. 安装 MobaXterm
  4. 安装 Navicat
  5. 安装 Notepad++
- 6. 安装 Sublime
- 7. 安装 Postman
- 8. 安装 Pycharm
- 9. 安装 Git for Win
-10. 安装 Git tortoise
+ 6. 安装 Postman
+ 7. 安装 Pycharm
+ 8. 安装 Git for Win
+ 9. 安装 Git tortoise
 10. 安装 Source Tree
