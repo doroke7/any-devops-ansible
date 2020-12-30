@@ -141,61 +141,61 @@ NGINX:
         - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
 
 
-
-    - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_domain_react/dist'
-      SERVER_NAME: 'admin.yecdis-test.xyz'
-      INDEX: 'index.html index.htm'
-      REWRITE: 0
-      LOCATION: '~ ^/(\w+)'
-      TRY_FILES: '$uri $uri/ /$1/index.html'
-      ADD_HEADERS:
-        - "X-Frame-Options 'SAMEORIGIN'"
-        - "X-XSS-Protection '1; mode=block'"
-        - "X-Content-Type-Options 'nosniff'"
-        - "'Access-Control-Allow-Origin' '$http_origin'"
-        - "'Access-Control-Allow-Credentials' 'true'"
-        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
-
-
-    - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_video_golang-domain/dist'
-      SERVER_NAME: 'api.yecdis-test.xyz'
-      INDEX: 'index.html index.htm'
-      PROXY_PASS: 'http://shoushou_video_golang_servers'
-      UPSTREAM:
-        NAME: 'shoushou_video_golang_servers'
-        SERVERS:
-          - '127.0.0.1:4011'
-          - '127.0.0.1:4012'
-      REWRITE: 0
-      ADD_HEADERS:
-        - "X-Frame-Options 'SAMEORIGIN'"
-        - "X-XSS-Protection '1; mode=block'"
-        - "X-Content-Type-Options 'nosniff'"
-        - "'Access-Control-Allow-Origin' '$http_origin'"
-        - "'Access-Control-Allow-Credentials' 'true'"
-        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
-
-
-    - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_domain_socketio/dist'
-      SERVER_NAME: 'socket.yecdis-test.xyz'
-      INDEX: 'index.html index.htm'
-      PROXY_PASS: ' http://127.0.0.1:4002$request_uri'
-      REWRITE: 0
-      ADD_HEADERS:
-        - "X-Frame-Options 'SAMEORIGIN'"
-        - "X-XSS-Protection '1; mode=block'"
-        - "X-Content-Type-Options 'nosniff'"
-        #- "'Access-Control-Allow-Origin' '*'"
-        #- "'Access-Control-Allow-Credentials' 'true'"
-        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
-
+#
+#    - HTTP_PORT: 80
+#      ROOT: '/var/www/shoushou_domain_react/dist'
+#      SERVER_NAME: 'admin.yecdis-test.xyz'
+#      INDEX: 'index.html index.htm'
+#      REWRITE: 0
+#      LOCATION: '~ ^/(\w+)'
+#      TRY_FILES: '$uri $uri/ /$1/index.html'
+#      ADD_HEADERS:
+#        - "X-Frame-Options 'SAMEORIGIN'"
+#        - "X-XSS-Protection '1; mode=block'"
+#        - "X-Content-Type-Options 'nosniff'"
+#        - "'Access-Control-Allow-Origin' '$http_origin'"
+#        - "'Access-Control-Allow-Credentials' 'true'"
+#        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
+#        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+#        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
+#
+#
+#    - HTTP_PORT: 80
+#      ROOT: '/var/www/shoushou_video_golang-domain/dist'
+#      SERVER_NAME: 'api.yecdis-test.xyz'
+#      INDEX: 'index.html index.htm'
+#      PROXY_PASS: 'http://shoushou_video_golang_servers'
+#      UPSTREAM:
+#        NAME: 'shoushou_video_golang_servers'
+#        SERVERS:
+#          - '127.0.0.1:4011'
+#          - '127.0.0.1:4012'
+#      REWRITE: 0
+#      ADD_HEADERS:
+#        - "X-Frame-Options 'SAMEORIGIN'"
+#        - "X-XSS-Protection '1; mode=block'"
+#        - "X-Content-Type-Options 'nosniff'"
+#        - "'Access-Control-Allow-Origin' '$http_origin'"
+#        - "'Access-Control-Allow-Credentials' 'true'"
+#        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+#        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
+#
+#
+#    - HTTP_PORT: 80
+#      ROOT: '/var/www/shoushou_domain_socketio/dist'
+#      SERVER_NAME: 'socket.yecdis-test.xyz'
+#      INDEX: 'index.html index.htm'
+#      PROXY_PASS: ' http://127.0.0.1:4002$request_uri'
+#      REWRITE: 0
+#      ADD_HEADERS:
+#        - "X-Frame-Options 'SAMEORIGIN'"
+#        - "X-XSS-Protection '1; mode=block'"
+#        - "X-Content-Type-Options 'nosniff'"
+#        #- "'Access-Control-Allow-Origin' '*'"
+#        #- "'Access-Control-Allow-Credentials' 'true'"
+#        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
+#        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
+#
 
 RABBITMQ:
   VHOST: 'shoushou_video'
