@@ -1,0 +1,97 @@
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+# We cannot put any Chinese words in Nginx beacause it must cause SSL robot fail
+
+user {{ NGINX['USER'] | default('nginx') }};
+worker_processes {{ NGINX['WORKER_PROCESSES'] | default(4) }};  # same as CPU nmber
+error_log /var/log/nginx/error.log;
+pid /var/run/nginx/nginx.pid;
+
+# Load dynamic modules. See /usr/share/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
+
+events {
+    use {{ NGINX['USE'] | default(4) }};
+    worker_connections {{ NGINX['WORKER_CONNECTIONS'] | default(1024) }};
+}
+
+
+
+rtmp {
+   server{
+     listen 1935;
+     chunk_size 4096;
+     application hls {
+       live off;
+       hls_type event;  # MUST BE event, if not event, m3u8 will be removed affter being played
+       hls on;
+       hls_path /var/www/shoushou_video_php;   # rtmp pushed directory, from client to server
+       hls_fragment 5s;
+       hls_cleanup  off;
+       hls_playlist_length 60s;
+       allow play all;
+     }
+   }
+}
+
+
+
+http {
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request_method $scheme://$host$request_uri $server_protocol" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+
+    open_log_file_cache max=1000 inactive=20s valid=1m min_uses=2;
+    access_log /var/log/nginx/$host.access.log;
+    # error_log /var/log/nginx/error.log;  # $host will not work in error_log
+
+    sendfile              on;
+    tcp_nopush            on;
+    tcp_nodelay           on;
+    proxy_hide_header X-Powered-By;
+    proxy_hide_header Server;        # hide PHP version
+    keepalive_timeout     120;
+    client_header_timeout 60;
+    client_body_timeout   120;
+    send_timeout          120;
+    types_hash_max_size  2048;
+    
+    limit_rate_after 20M;  # After 20M size file, download in 10M/sec
+    limit_rate 10M; 
+
+
+
+    ssl_session_cache shared:SSL:1m;
+    
+    gzip on;
+    gzip_http_version 1.1;
+    gzip_types text/plain application/x-javascript application/javascript text/css application/xml text/javascript application/json text/xml application/xml+rss image/jpeg image/gif image/png;
+    gzip_disable "MSIE [1-6].(?!.*SV1)";
+    gzip_comp_level 9;
+    gzip_min_length 1k; # Compressed if the size is over 1k
+    gzip_buffers 4 32k;
+    gzip_vary on;
+
+    client_max_body_size 20M;
+    client_header_buffer_size 32k;
+    large_client_header_buffers 4 128k;
+
+    
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
+
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+
+    
+    include /etc/nginx/vhosts/*.conf;
+
+}
+
+
+
+# templates
