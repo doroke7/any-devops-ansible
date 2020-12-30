@@ -1,0 +1,18 @@
+- name: (yum) yum remove httpd*
+  yum:
+    name: hpptd*
+    state: absent
+
+- name: (service) service httpd stop
+  service:
+    name: httpd
+    state: stopped
+  ignore_errors: yes
+
+- name: (user) useradd apache -G root
+  user:
+    name: apache
+    shell: /bin/bash
+    groups: root
+    append: yes
+
