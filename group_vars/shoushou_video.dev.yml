@@ -77,7 +77,7 @@ NGINX:
       ROOT: '/var/www/shoushou_video_apidoc/dist-1'
       SERVER_NAME: 'document.yecdis-test.xyz'
       #SERVER_NAME: '~^(api\.)(?<domain>.+)$'
-      INDEX: 'index.htm'
+      INDEX: 'index.html'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
@@ -95,7 +95,7 @@ NGINX:
       ROOT: '/var/www/shoushou_video_apidoc/dist-2'
       SERVER_NAME: 'document.lives3-yc-test07.xyz'
       #SERVER_NAME: '~^(api\.)(?<domain>.+)$'
-      INDEX: 'index.htm'
+      INDEX: 'index.html'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
@@ -106,29 +106,12 @@ NGINX:
         - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
         - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
         - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
-
-    - HTTP_PORT: 80
-      ROOT: '/var/www/shoushou_video_apidoc/dist-2'
-      SERVER_NAME: 'document.yecaojl-07test.xyz'
-      #SERVER_NAME: '~^(api\.)(?<domain>.+)$'
-      INDEX: 'index.htm'
-      REWRITE: 0
-      ADD_HEADERS:
-        - "X-Frame-Options 'SAMEORIGIN'"
-        - "X-XSS-Protection '1; mode=block'"
-        - "X-Content-Type-Options 'nosniff'"
-        - "'Access-Control-Allow-Origin' '$http_origin'"
-        - "'Access-Control-Allow-Credentials' 'true'"
-        - "'Access-Control-Max-Age' 86400"             # 本次 Preflight Request 的有效期限，以秒為單
-        - "'Access-Control-Allow-Methods' 'GET, POST, PUT, PATCH, DELETE, OPTIONS'"
-        - "'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization'"
-
 
     - HTTP_PORT: 80
       ROOT: '/var/www/shoushou_video_apidoc/dist-3'
       SERVER_NAME: 'document.yecaojl-07test.xyz'
       #SERVER_NAME: '~^(api\.)(?<domain>.+)$'
-      INDEX: 'index.htm'
+      INDEX: 'index.html'
       REWRITE: 0
       ADD_HEADERS:
         - "X-Frame-Options 'SAMEORIGIN'"
