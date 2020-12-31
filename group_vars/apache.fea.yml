@@ -1,0 +1,6 @@
+--- # 优先次序高
+APACHE:
+  VERSION: '1.18.0'
+  USER: 'apache'
+  WORKER_PROCESSES: 2
+  WORKER_CONNEC/TIONS: 1024  # 併發 = 4 X 1024
