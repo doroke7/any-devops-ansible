@@ -4,7 +4,10 @@
   strategy: linear # free, debug
   gather_facts: true
   become: true
-
+  vars_prompt:
+    - name: branch
+      prompt: "[單選] 你要運行在那種模式下 fea, dev, rel, mas ?"
+      private: no
   pre_tasks:
 
     - name: "錯誤! 指定 host 與 branch 不一致"

@@ -21,6 +21,10 @@
         prompt: "[警告] 確定 要在 master 環境下嗎? 後果自行負責! (yes/no)"
       register: confirmation
       when: branch == 'mas'
+    - name: "錯誤! 客戶端 終止"
+      meta: end_play
+      when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
+      
 
     - name: "{{ branch }} 环境，php 安装开始"
       shell: echo 'playbook php starts'

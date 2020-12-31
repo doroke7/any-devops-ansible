@@ -258,7 +258,7 @@ pm.max_spare_servers = {{ FPM.MAX_SPARE_SERVERS | default(30) }}
 
 ; The access log file
 ; Default: not set
-;access.log = /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/$pool.access.log
+access.log = /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/pool.access.log
 
 
 
@@ -342,6 +342,10 @@ request_slowlog_timeout = 0.5s
 ;env[TMPDIR] = /tmp
 ;env[TEMP] = /tmp
 
+
+
+
+
 ; Additional php.ini defines, specific to this pool of workers. These settings
 ; overwrite the values previously defined in the php.ini. The directives are the
 ; same as the PHP SAPI:
@@ -350,6 +354,27 @@ request_slowlog_timeout = 0.5s
 ;   php_admin_value/php_admin_flag - these directives won't be overwritten by
 ;                                     PHP call 'ini_set'
 ; For php_*flag, valid values are on, off, 1, 0, true, false, yes or no.
+
+
+
+
+
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+; 这里的 php_admin_value 会覆盖 php.ini 的配置
+
+
+
+
+
+
 
 ; Defining 'extension' will load the corresponding shared extension from
 ; extension_dir. Defining 'disable_functions' or 'disable_classes' will not
@@ -363,8 +388,10 @@ request_slowlog_timeout = 0.5s
 ;                specified at startup with the -d argument
 ;php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com
 ;php_flag[display_errors] = off
-php_admin_value[error_log] = /var/opt/remi/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/log/php-fpm/www-error.log
-php_admin_flag[log_errors] = on
+
+; 我们不用 PHP FPM 去控制 php.ini 的设定
+;php_admin_value[error_log] = /var/log/php{{ php_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}/php-error.log
+;php_admin_flag[log_errors] = on
 ;php_admin_value[memory_limit] = 128M
 
 ; Set the following data paths to directories owned by the FPM process user.
