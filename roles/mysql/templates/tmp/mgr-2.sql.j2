@@ -1,0 +1,24 @@
+{% set i =  groups['mysql'].index(inventory_hostname) %}
+
+
+# 我们的 i = {{i}}
+
+
+
+{% if i == 0 %} 
+SHOW GLOBAL variables like 'gtid_purged';
+
+SET GLOBAL group_replication_bootstrap_group=ON;
+START GROUP_REPLICATION;
+SET GLOBAL group_replication_bootstrap_group=OFF;
+SELECT * FROM performance_schema.replication_group_members;
+{% endif %}
+
+
+{% if  i > 0 %}               
+SET GLOBAL group_replication_allow_local_disjoint_gtids_join=ON;
+
+START GROUP_REPLICATION;
+{% endif %}
+
+

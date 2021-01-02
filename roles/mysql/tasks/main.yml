@@ -21,6 +21,6 @@
                                                      # (C-2) 此時 MYSQL 5.7, 8.0 密碼是 mysql_pass_cli
 
 
-- import_tasks: shell-mysql-tmp_change_master_sql.yml
-- import_tasks: shell-mysql-tmp_mgr2_sql.yml
-- import_tasks: shell-mysql-tmp_mgr_sql.yml
+- import_tasks: shell-mysql-tmp_master-slave_sql.yml
+- import_tasks: shell-mysql-tmp_mgr-1_sql.yml
+- import_tasks: shell-mysql-tmp_mgr-2_sql.yml

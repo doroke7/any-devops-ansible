@@ -115,3 +115,14 @@ ALTER TABLE users IMPORT TABLESPACE;
 
 FLUSH TABLES WITH READ LOCK; 
 UNLOCK TABLES;
+
+
+show global variables like 'gtid_purged';
+
+STOP GROUP_REPLICATION;
+  
+reset master;
+  
+ set global gtid_purged = '8769f936-3e51-11e9-acaa-005056ac6820:1-2';
+  
+START GROUP_REPLICATION;

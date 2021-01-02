@@ -1,0 +1,14 @@
+---
+# - name: command mysql_upgrade --force -uroot
+#   command: mysql_upgrade --force -u root
+- name: (template) scp tmp/master-slave.sql.j2 /tmp/master-slave.sql
+  template:
+    src: tmp/master-slave.sql.j2
+    dest: /tmp/master-slave.sql
+    owner: mysql
+    group: mysql
+    mode: 0777
+- name: (shell) mysql --force < /tmp/master-slave.sql
+  shell: mysql --force < /tmp/master-slave.sql
+  when: mysql_ha == 'master-slave'
+

@@ -1,0 +1,13 @@
+---
+# - name: command mysql_upgrade --force -uroot
+#   command: mysql_upgrade --force -u root
+- name: (template) scp tmp/mgr-1.sql.j2 /tmp/mgr-1.sql
+  template:
+    src: tmp/mgr-1.sql.j2
+    dest: /tmp/mgr-1.sql
+    owner: mysql
+    group: mysql
+    mode: 0777
+- name: (shell) mysql --force < /tmp/mgr-1.sql
+  shell: mysql --force < /tmp/mgr-1.sql
+  when: mysql_ha == 'mgr'

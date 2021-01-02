@@ -18,3 +18,5 @@ mysqldump -uroot -T /tmp/ landan users --fields-terminated-by="," --where
 
 mysqldump -uroot --databases ga --tables transactions --where="created_at >= '2019-01-22 00:00:00'"> transactions.sql
 mysqlbinlog --no-defaults mysql-bin.000001 --database=landan --start-datetime='2019/01/01 00:00:00' --stop-datetime='2019/02/01 00:00:00' 
+
+
