@@ -11,7 +11,13 @@
   when: mysql_version == '5.5' or mysql_version == '5.6'
 
 
+
+- name: "(shell) mysql --force < /tmp/grant.sql"
+  shell: "mysql --force < /tmp/grant.sql"
+  when: mysql_version == '5.7'
+
+
 - name: "(shell) mysql --user='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }}' --password='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['PASSWORD'] }}'--force < /tmp/grant.sql"
-  shell: "mysql --user='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }}' --password='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['PASSWORD'] }}' --force < /tmp/alter_user.sql"
+  shell: "mysql --user='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['USER'] }}' --password='{{ MYSQL.SERVERS[0].CONNECTIONS[0]['PASSWORD'] }}' --force < /tmp/grant.sql"
   run_once: no
-  when: mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1'
+  when: mysql_version == '8.0' or mysql_version == '8.1'
