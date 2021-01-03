@@ -30,7 +30,7 @@
       meta: end_play
       when:  branch == 'mas' and (confirmation is defined and confirmation.user_input is defined and confirmation.user_input != 'yes')
 
-    - name: "{{ branch }} 环境，MySQL 安装开始"
+    - name: "{{ branch }} 环境，MySQL {{ mysql_ha }} 安装开始"
       shell: echo 'playbook mysql starts'
       check_mode: no
   roles:
@@ -38,5 +38,5 @@
       vars:
         bra: branch
   post_tasks:
-    - name: "{{ branch }} 环境，MySQL 安装完毕"
+    - name: "{{ branch }} 环境，MySQL {{ mysql_ha }} 安装完毕"
       shell: echo 'playbook mysql ends'

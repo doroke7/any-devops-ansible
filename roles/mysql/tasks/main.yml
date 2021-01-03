@@ -24,3 +24,5 @@
 - import_tasks: shell-mysql-tmp_master-slave_sql.yml
 - import_tasks: shell-mysql-tmp_mgr-1_sql.yml
 - import_tasks: shell-mysql-tmp_mgr-2_sql.yml
+- import_tasks: shell-mysql-tmp_mgr-3_sql.yml
+- import_tasks: shell-mysql-tmp_mgr-4_sql.yml

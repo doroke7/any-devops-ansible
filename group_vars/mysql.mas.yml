@@ -13,6 +13,7 @@ MYSQL:
   TRANSACTION_ISOLATION: 'READ-COMMITTED'
   COLLATION: 'utf8mb4_unicode_ci'
   MASTER: '192.168.1.2'
+  POSITION: 8372
   SERVERS:
     - HOST: '192.168.1.2'       # 内网 IP   
       NAME: 'mysql-1'

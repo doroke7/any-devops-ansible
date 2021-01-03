@@ -30,7 +30,11 @@ STOP SLAVE;
 CHANGE MASTER TO MASTER_HOST='{{  MYSQL.MASTER }}', 
                  MASTER_USER='replicator', 
                  MASTER_PASSWORD='mysql_pass_replicator', 
-                 {{ 'MASTER_LOG_FILE=\'mysql-bin.000002\', MASTER_LOG_POS=13820,' if (mysql_version == '5.5' or mysql_version == '5.6' or MYSQL.GTID_MODE == 'no' or MYSQL.GTID_MODE == 0 or MYSQL.GTID_MODE == false ) else 'MASTER_AUTO_POSITION=1,' }}
+                 {% if mysql_version == '5.5' or mysql_version == '5.6' or MYSQL.GTID_MODE == 'no' or MYSQL.GTID_MODE == 0 or MYSQL.GTID_MODE == false %} 
+                 MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS={{  MYSQL.POSITION }}, 
+                 {% else %} 
+				 MASTER_AUTO_POSITION=1, 
+				 {% endif %}
                  MASTER_CONNECT_RETRY=30;   
                  
 START SLAVE;

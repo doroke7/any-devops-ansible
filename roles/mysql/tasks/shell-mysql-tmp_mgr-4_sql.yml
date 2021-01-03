@@ -3,8 +3,8 @@
 #   command: mysql_upgrade --force -u root
 - name: (template) scp tmp/mgr-4.sql.j2 /tmp/mgr-4.sql
   template:
-    src: tmp/mgr-3.sql.j2
-    dest: /tmp/mgr-3.sql
+    src: tmp/mgr-4.sql.j2
+    dest: /tmp/mgr-4.sql
     owner: mysql
     group: mysql
     mode: 0777
