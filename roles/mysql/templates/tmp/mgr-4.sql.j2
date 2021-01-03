@@ -1,0 +1,26 @@
+{% set i =  groups['mysql'].index(inventory_hostname) %}
+
+
+# 我们的 i = {{i}}
+
+
+
+{% if i == 0 %} 
+
+# 随便选择某个MGR节点执行 (比如这里选择在MGR-node1节点):
+SET GLOBAL group_replication_bootstrap_group=ON;
+START GROUP_REPLICATION; 
+SET GLOBAL group_replication_bootstrap_group=OFF;
+
+{% endif %}
+
+
+{% if  i > 0 %}               
+
+# 然后在其他的MGR节点执行 (这里指MGR-node2和MGR-node3节点上执行):
+START GROUP_REPLICATION;
+ 
+SELECT * FROM performance_schema.replication_group_members;
+{% endif %}
+
+

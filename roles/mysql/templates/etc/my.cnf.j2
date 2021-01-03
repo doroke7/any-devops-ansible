@@ -400,7 +400,7 @@ loose_rpl_semi_sync_slave_enabled = 1                   # slave 使用 semisync_
 
 ############################ [mysqld] MGR 相关 - 主从问题 ############################
 
-{% elif mysql_ha == 'mgr' and ( mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
+{% elif (mysql_ha == 'mgr-primary' or mysql_ha == 'mgr-multiple') and ( mysql_version == '5.7' or mysql_version == '8.0' or mysql_version == '8.1') %}
 
 
 log-slave-updates = ON                                   # 到从服务器自己的二进制日志文件中 

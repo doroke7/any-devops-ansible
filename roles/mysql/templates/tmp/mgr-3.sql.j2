@@ -1,0 +1,11 @@
+{% set i =  groups['mysql'].index(inventory_hostname) %}
+
+
+# 我们的 i = {{i}}
+
+
+STOP group_replication;
+ 
+SET GLOBAL group_replication_single_primary_mode=OFF;
+ 
+SET GLOBAL group_replication_enforce_update_everywhere_checks=ON;

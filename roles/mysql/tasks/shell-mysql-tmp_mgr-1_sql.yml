@@ -10,4 +10,4 @@
     mode: 0777
 - name: (shell) mysql --force < /tmp/mgr-1.sql
   shell: mysql --force < /tmp/mgr-1.sql
-  when: mysql_ha == 'mgr'
+  when: mysql_ha == 'mgr-primary' or mysql_ha == 'mgr-multiple'
