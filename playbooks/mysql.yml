@@ -14,6 +14,14 @@
   vars_files:
     - ./../group_vars/mysql.{{ branch }}.yml
   pre_tasks:
+    - name: "錯誤! mysql {{ mysql_version }} 不支持 MGR"
+      shell: echo 'error'
+      check_mode: no
+
+    - name: "錯誤! mysql {{ mysql_version }} 不支持 MGR"
+      meta: end_play
+      when: (mysql_ha == 'mgr-primary' or mysql_ha == 'mgr-multiple') and (mysql_version == '5.6' or mysql_version == '5.5')
+
     - name: "inventory_file  = {{ inventory_file }}, inventory_file | regex_replace =  {{ inventory_file | regex_replace('([\\w\\-\\/])+.(\\w+)$', '\\2') }}, branch = {{ branch }}"
       shell: 'echo inventory_file'
       check_mode: no
