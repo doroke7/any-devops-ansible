@@ -53,6 +53,22 @@ ansible-playbook -i hosts/hosts.fea playbooks/golang.yml
 ansible-playbook -i hosts/shoushou_video.mas playbooks/shoushou_video.yml --tags "mysql" -e "mysql_version=8.0"
 `
 
+## 10. 
+`
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=5.5 mysql_ha=master-slave"
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=5.6 mysql_ha=master-slave"
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=5.7 mysql_ha=master-slave"
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=8.0 mysql_ha=master-slave"
+
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=5.7 mysql_ha=mgr-primary"
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=8.0 mysql_ha=mgr-primary"
+
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=5.7 mysql_ha=mgr-multiple"
+ansible-playbook -i hosts/hosts.fea playbooks/mysql.yml -e "mysql_version=8.0 mysql_ha=mgr-multiple"
+
+`
+
+
 
 ## 运维注意事项
 1. 本地环境使用 Vagrant + CentOS7
