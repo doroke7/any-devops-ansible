@@ -10,9 +10,7 @@ password = {{ MYSQL.SERVERS[i].CONNECTIONS[0]['PASSWORD'] }}
 [mysql]
 ######################### [mysql] 基本设置 #########################
 no-auto-rehash                                            # 仅允许使用键值的updates和deletes
-{% if mysql_version == '8.0' %}               
-default-time-zone='Asia/Shanghai'                         # MYSQL 建议 [改变 LINUX 时间] 来效正 时间, my.cnf 5.6 不兼容
-{% endif %}
+
 
 
 
