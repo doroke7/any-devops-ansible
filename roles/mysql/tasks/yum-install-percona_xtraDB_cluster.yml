@@ -1,0 +1,25 @@
+---
+
+- name: (yum) yum remove mysql* mysql-community* mysql-cluster-community* Percona-XtraDB-Cluster
+  yum: 
+    name:
+      - mysql*
+      - mysql-cluster-community*
+      - mysql-community*
+      - Percona-XtraDB-Cluster
+    state: absent
+  
+- name: (yum) yum insatll Percona-XtraDB-Cluster rpm
+  yum: 
+    name: https://downloads.percona.com/downloads/Percona-XtraDB-Cluster-LATEST/Percona-XtraDB-Cluster-8.0.21/binary/redhat/7/x86_64/percona-xtradb-cluster-full-8.0.21-12.1.el7.x86_64.rpm
+    allow_downgrade: True
+
+
+
+- name: (yum) yum install Percona-XtraDB-Cluster
+  yum: 
+    name:
+      - Percona-XtraDB-Cluster
+    state: latest
+    
+    
