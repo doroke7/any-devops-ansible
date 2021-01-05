@@ -29,10 +29,13 @@ STOP SLAVE;
 # mysql 5.6 一定得精準定位到 13820
 CHANGE MASTER TO MASTER_HOST='{{  MYSQL.MASTER }}', 
                  MASTER_USER='replicator', 
-                 MASTER_PASSWORD='mysql_pass_replicator', 
+                 MASTER_PASSWORD='mysql_pass_replicator',
+                 {% if mysql_version == '8.0' %}
+                 GET_MASTER_PUBLIC_KEY=1,
+                 {% endif %} 
                  {% if mysql_version == '5.5' or mysql_version == '5.6' or MYSQL.GTID_MODE == 'no' or MYSQL.GTID_MODE == 0 or MYSQL.GTID_MODE == false %} 
-                 MASTER_LOG_FILE='mysql-bin.000002', MASTER_LOG_POS=
-                 
+                 MASTER_LOG_FILE='mysql-bin.000002',
+                 MASTER_LOG_POS=
                  {% if mysql_version == '5.5' %}
                  {{ MYSQL.POSITION_55 }}
                  {% endif %}
@@ -41,8 +44,8 @@ CHANGE MASTER TO MASTER_HOST='{{  MYSQL.MASTER }}',
                  {% endif %},
 
                  {% else %} 
-				 MASTER_AUTO_POSITION=1, 
-				 {% endif %}
+	         MASTER_AUTO_POSITION=1, 
+	         {% endif %}
                  MASTER_CONNECT_RETRY=30;   
                  
 START SLAVE;

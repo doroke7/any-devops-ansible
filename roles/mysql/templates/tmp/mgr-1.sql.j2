@@ -8,15 +8,18 @@ INSTALL PLUGIN group_replication SONAME 'group_replication.so';
 
 SET SQL_LOG_BIN=0;
 
-#CREATE USER replicator@'%' IDENTIFIED BY 'mysql_pass_replicator';
-
-#GRANT REPLICATION SLAVE ON *.* TO replicator@'%';
 
 FLUSH PRIVILEGES;
 
 SET SQL_LOG_BIN=1;
 
-CHANGE MASTER TO MASTER_USER='replicator', MASTER_PASSWORD='mysql_pass_replicator' FOR CHANNEL 'group_replication_recovery';
+CHANGE MASTER TO MASTER_USER='replicator', 
+           {% if mysql_version == '8.0' %}
+           GET_MASTER_PUBLIC_KEY=1,
+           {% endif %}
+           MASTER_PASSWORD='mysql_pass_replicator' 
+
+           FOR CHANNEL 'group_replication_recovery';
 
 
 {% if i == 0 %} 
