@@ -153,7 +153,7 @@ SUPERVISOR:
           NUMPROCS: 1
           STDOUT_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-ffmpeg.stdout.log'
           STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_command-ffmpeg.stderr.log'
-      
+
         - NAME: 'shoushou_video_golang-dist_command-domain'
           DIRECTORY: '/var/www/shoushou_video_golang'
           COMMAND: '/var/www/shoushou_video_golang/dist/command -command=domain'
@@ -176,19 +176,19 @@ SUPERVISOR:
           STDERR_LOGFILE: '/var/www/shoushou_video_golang/.log/shoushou_video_golang-dist_index.stderr.log'
 
 
-mysql_version: '5.6'      
+mysql_version: '5.6'
 MYSQL:
   GTID_MODE: yes
   TRANSACTION_ISOLATION: 'READ-COMMITTED'
   CHARACTER_SET: 'utf8mb4'
   COLLATION: 'utf8mb4_unicode_ci'
   SERVERS:
-    - HOST: '127.0.0.1'       # 内网 IP   
+    - HOST: '127.0.0.1'       # 内网 IP
       ENGINE: 'InnoDB'
       CONNECTIONS:
         - drop_user: true                 # index = 5
           with_grant_option: false
-          GRANTS: 
+          GRANTS:
 
             - 'ALTER ROUTINE'
             - 'CREATE'
@@ -205,9 +205,9 @@ MYSQL:
             - 'TRIGGER'
             - 'UPDATE'
           USER: 'backend'
-          HOSTS: 
+          HOSTS:
             - 'localhost'
-            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
           PASSWORD: 'mysql_pass_backend'
           DATABASE: 'shoushou_video'
         - drop_user: true                 # index = 5
@@ -219,14 +219,14 @@ MYSQL:
             - 'SELECT'
             - 'UPDATE'
           USER: 'backend'
-          HOSTS: 
+          HOSTS:
             - 'localhost'
-            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
           PASSWORD: 'mysql_pass_qa'
           DATABASE: 'shoushou_video'
         - drop_user: true                 # index = 5
           with_grant_option: false
-          GRANTS: 
+          GRANTS:
 
             - 'ALTER ROUTINE'
             - 'CREATE'
@@ -243,14 +243,14 @@ MYSQL:
             - 'TRIGGER'
             - 'UPDATE'
           USER: 'backend'
-          HOSTS: 
+          HOSTS:
             - 'localhost'
-            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
           PASSWORD: 'mysql_pass_backend'
           DATABASE: 'shoushou_video'
         - drop_user: true                 # index = 5
           with_grant_option: false
-          GRANTS: 
+          GRANTS:
 
             - 'ALTER ROUTINE'
             - 'CREATE'
@@ -267,17 +267,17 @@ MYSQL:
             - 'TRIGGER'
             - 'UPDATE'
           USER: 'backend'
-          HOSTS: 
+          HOSTS:
             - 'localhost'
-            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+            - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
           PASSWORD: 'mysql_pass_backend'
           DATABASE: 'domain'
-    # - HOST: '10.0.0.181'       # 内网 IP   
+    # - HOST: '10.0.0.181'       # 内网 IP
     #   ENGINE: 'InnoDB'
     #   CONNECTIONS:
     #     - drop_user: true                 # index = 5
     #       with_grant_option: false
-    #       GRANTS: 
+    #       GRANTS:
 
     #         - 'ALTER ROUTINE'
     #         - 'CREATE'
@@ -294,14 +294,14 @@ MYSQL:
     #         - 'TRIGGER'
     #         - 'UPDATE'
     #       USER: 'backend'
-    #       HOSTS: 
+    #       HOSTS:
     #         - 'localhost'
-    #         - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+    #         - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
     #       PASSWORD: 'mysql_pass_backend'
     #       DATABASE: 'shoushou_video'
     #     - drop_user: true                 # index = 5
     #       with_grant_option: false
-    #       GRANTS: 
+    #       GRANTS:
 
     #         - 'DELETE'
     #         - 'EXECUTE'
@@ -309,14 +309,14 @@ MYSQL:
     #         - 'SELECT'
     #         - 'UPDATE'
     #       USER: 'backend'
-    #       HOSTS: 
+    #       HOSTS:
     #         - 'localhost'
-    #         - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost       
+    #         - '127.0.0.1'                # 提供 PHP GOLANG NODEJS 从 127.0.0.1 连取 127.0.0.1 ，在 VN localhost
     #       PASSWORD: 'mysql_pass_qa'
     #       DATABASE: 'shoushou_video'
 
 
 
-           
+
 
 

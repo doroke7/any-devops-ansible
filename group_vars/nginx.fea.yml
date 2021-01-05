@@ -4,4 +4,5 @@ NGINX:
   USER: 'nginx'
   WORKER_PROCESSES: 2
   USE: 'epoll'
+  SENDFILE: 'on'
   WORKER_CONNECTIONS: 1024  # 併發 = 4 X 1024

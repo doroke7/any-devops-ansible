@@ -1,0 +1,9 @@
+- name: (template) scp test.conf.j2 /test.conf
+  template:
+    src: test.conf.j2
+    dest: "/test.conf"
+    owner: root
+    group: root
+    mode: 0644
+    backup: no
+

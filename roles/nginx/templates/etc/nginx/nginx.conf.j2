@@ -48,7 +48,7 @@ http {
     access_log /var/log/nginx/$host.access.log;
     # error_log /var/log/nginx/error.log;  # $host will not work in error_log
 
-    sendfile              on;
+    sendfile             {{ NGINX['SENDFILE'] | default(on) }};
     tcp_nopush            on;
     tcp_nodelay           on;
     proxy_hide_header X-Powered-By;
