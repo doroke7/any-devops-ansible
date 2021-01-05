@@ -34,7 +34,13 @@ server {
     {% for ADD_HEADER in VHOST['ADD_HEADERS'] %}
     add_header {{ ADD_HEADER }} always;
     {% endfor %}
-    {% endif %}    
+    {% endif %}
+
+    {% if VHOST['TESTS'] is defined %}
+    {% for TEST in VHOST['TESTS'] %}
+    #test {{ TEST }} always;
+    {% endfor %}
+    {% endif %}
 
     # We can not wire mime types scope here becasue the local scope will overwrite the global scoce
 
