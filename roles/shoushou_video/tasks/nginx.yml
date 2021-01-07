@@ -1,20 +1,18 @@
 ---
-- name: (file) rm -Rf /etc/nginx/vhost-2
-  file:
-    path: /etc/nginx/vhosts-2
-    force: yes
-    state: absent
+- name: (shell) date +%Y-%m-%d%H-%M-%S.%5N
+  shell: "date +%Y-%m-%d_%H-%M-%S.%5N"
+  register: o_date
 
-- name: (file) mkdir /etc/nginx/vhost-2
+- name: "(file) mkdir /etc/nginx/vhost-{{ o_date.stdout }}"
   file:
-    path: /etc/nginx/vhosts-2
+    path: "/etc/nginx/vhosts-{{ o_date.stdout }}"
     force: yes
     state: directory
 
-- name: (template) cp -Rf /etc/nginx/vhosts/* /etc/nginx/vhosts-2/
+- name: "(template) cp -Rf /etc/nginx/vhosts/* /etc/nginx/vhosts-{{ o_date.stdout }}/"
   copy:
     src: "{{ item }}"
-    dest: /etc/nginx/vhosts-2/
+    dest: "/etc/nginx/vhosts-{{ o_date.stdout }}/"
     owner: root
     group: root
     mode: u=rw,g=r,o=r
