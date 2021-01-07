@@ -36,12 +36,6 @@ server {
     {% endfor %}
     {% endif %}
 
-    {% if VHOST['TESTS'] is defined %}
-    {% for TEST in VHOST['TESTS'] %}
-    #test {{ TEST }} always;
-    {% endfor %}
-    {% endif %}
-
     # We can not wire mime types scope here becasue the local scope will overwrite the global scoce
 
     index        {{ VHOST['INDEX'] | default('index.html index.htm') }}; 

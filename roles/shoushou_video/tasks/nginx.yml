@@ -1,4 +1,25 @@
 ---
+- name: (file) rm -Rf /etc/nginx/vhost-2
+  file:
+    path: /etc/nginx/vhosts-2
+    force: yes
+    state: absent
+
+- name: (file) mkdir /etc/nginx/vhost-2
+  file:
+    path: /etc/nginx/vhosts-2
+    force: yes
+    state: directory
+
+- name: (template) cp -Rf /etc/nginx/vhosts/* /etc/nginx/vhosts-2/
+  copy:
+    src: "{{ item }}"
+    dest: /etc/nginx/vhosts-2/
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  with_lines: "find /etc/nginx/vhosts -type f -name '*.conf'"
+
 - name: (template) scp etc/nginx/vhosts/default.conf.j2 /etc/nginx/vhosts/*.conf
   template:
     src: etc/nginx/vhosts/default.conf.j2
