@@ -2,12 +2,14 @@
 - name: (shell) date +%Y-%m-%d%H-%M-%S.%5N
   shell: "date +%Y-%m-%d_%H-%M-%S.%5N"
   register: o_date
+  when: (nginx is not undefined and nginx == 1)
 
 - name: "(file) mkdir /etc/nginx/vhost-{{ o_date.stdout }}"
   file:
     path: "/etc/nginx/vhosts-{{ o_date.stdout }}"
     force: yes
     state: directory
+  when: (nginx is not undefined and nginx == 1)
 
 - name: "(template) cp -Rf /etc/nginx/vhosts/* /etc/nginx/vhosts-{{ o_date.stdout }}/"
   copy:
@@ -17,8 +19,9 @@
     group: root
     mode: u=rw,g=r,o=r
   with_lines: "find /etc/nginx/vhosts -type f -name '*.conf'"
+  when: (nginx is not undefined and nginx == 1)
 
-- name: (template) scp etc/nginx/vhosts/default.conf.j2 /etc/nginx/vhosts/*.conf
+- name: "(template) scp etc/nginx/vhosts/default.conf.j2 /etc/nginx/vhosts/*.conf  nginx={{ nginx }}  ,nginx_restart={{ nginx_restart }}"
   template:
     src: etc/nginx/vhosts/default.conf.j2
     dest: "/etc/nginx/vhosts/{{ VHOST['SERVER_NAME'] | replace(' ', '_') }}.conf"
@@ -34,8 +37,8 @@
 
 
   
-- name: (service) service nginx restarted == 1
+- name: (service) service nginx restarted
   service:
     name: nginx
     state: restarted
-  when: (nginx is not undefined and nginx == 1) and (nginx_restart is not undefined and nginx_restart == 1)
+  when: (nginx is not undefined and nginx == 1) and (nginx_restart is not undefined and nginx_restart == '1')
