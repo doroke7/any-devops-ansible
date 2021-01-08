@@ -1,4 +1,29 @@
 ---
+- name: (shell) date +%Y-%m-%d%H-%M-%S.%5N
+  shell: "date +%Y-%m-%d_%H-%M-%S.%5N"
+  register: o_date
+  when: (supervisor is not undefined and supervisor == 1)
+
+
+- name: "(file) mkdir /etc/supervisord.d-{{ o_date.stdout }}"
+  file:
+    path: "/etc/supervisord.d-{{ o_date.stdout }}"
+    force: yes
+    state: directory
+  when: (supervisor is not undefined and supervisor == 1)
+
+
+- name: "(template) cp -Rf /etc/supervisord.d/* /etc/supervisord.d-{{ o_date.stdout }}/"
+  copy:
+    src: "{{ item }}"
+    dest: "/etc/supervisord.d-{{ o_date.stdout }}/"
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  with_lines: "find /etc/supervisord.d -type f -name '*.ini'"
+  when: (supervisor is not undefined and supervisor == 1)
+
+
 - name: (template) scp etc/supervisord.d/default.ini.j2 /etc/supervisord.d/{{ SUPERVISOR['NAME'] }}.ini
   template:
     src: etc/supervisord.d/default.ini.j2
@@ -7,7 +32,7 @@
     group: root
     mode: 0777
     backup: no
-  when: supervisor is not undefined and supervisor == 1
+  when: (supervisor is not undefined and supervisor == 1)
 
 
   
@@ -15,4 +40,4 @@
   service:
     name: supervisord
     state: restarted
-  when: supervisor is not undefined and supervisor == 1
+  when: (supervisor is not undefined and supervisor == 1) and (supervisor_restart is not undefined and supervisor_restart == '1')
