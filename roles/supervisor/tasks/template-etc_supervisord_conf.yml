@@ -1,5 +1,15 @@
 ---
 
+- name: (file) rm -Rf /etc/supervisord.conf
+  file:
+    path: /etc/supervisord.conf
+    state: absent
+
+- name: (file) rm -Rf /etc/supervisord.d
+  file:
+    path: /etc/supervisord.d
+    state: absent
+
 - name: (file) mkdir /etc/supervisord
   file:
     path: /etc/supervisord
