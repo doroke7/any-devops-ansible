@@ -5,22 +5,22 @@
   when: (supervisor is not undefined and supervisor == 1)
 
 
-- name: "(file) mkdir /etc/supervisord/supervisord-{{ o_date.stdout }}"
+- name: "(file) mkdir /etc/supervisord/supervisord.d_{{ o_date.stdout }}"
   file:
-    path: "/etc/supervisord/supervisord-{{ o_date.stdout }}"
+    path: "/etc/supervisord/supervisord.d_{{ o_date.stdout }}"
     force: yes
     state: directory
   when: (supervisor is not undefined and supervisor == 1)
 
 
-- name: "(template) cp -Rf /etc/supervisord/*.ini /etc/supervisord/supervisord-{{ o_date.stdout }}/"
+- name: "(template) cp -Rf /etc/supervisord/*.ini /etc/supervisord/supervisord.d_{{ o_date.stdout }}/"
   copy:
     src: "{{ item }}"
-    dest: "/etc/supervisord/supervisord-{{ o_date.stdout }}/"
+    dest: "/etc/supervisord/supervisord.d_{{ o_date.stdout }}/"
     owner: root
     group: root
     mode: u=rw,g=r,o=r
-  with_lines: "find /etc/supervisord -type f -name '*.ini'"
+  with_lines: "find /etc/supervisord/supervisord.d/ -type f -name '*.ini'"
   when: (supervisor is not undefined and supervisor == 1)
 
 
