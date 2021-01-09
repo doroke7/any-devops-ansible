@@ -1,6 +1,6 @@
 ---
 
-- name: (yum) yum remove mysql* mysql-community* mysql-cluster-community* Percona-XtraDB-Cluster
+- name: (yum) yum remove mysql* mysql-community* mysql-cluster-community* percona-server-server
   yum: 
     name:
       - mysql*
@@ -11,15 +11,17 @@
   
 - name: (yum) yum insatll Percona-XtraDB-Cluster rpm
   yum: 
-    name: https://downloads.percona.com/downloads/Percona-XtraDB-Cluster-LATEST/Percona-XtraDB-Cluster-8.0.21/binary/redhat/7/x86_64/percona-xtradb-cluster-full-8.0.21-12.1.el7.x86_64.rpm
+    name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
     allow_downgrade: True
 
+- name: "(command) sudo percona-release setup ps80"
+  command: "percona-release setup ps{{ mysql_version | default(5.6) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2') }}"
 
 
-- name: (yum) yum install Percona-XtraDB-Cluster
+- name: (yum) yum install percona-server-server
   yum: 
     name:
-      - Percona-XtraDB-Cluster
+      -  percona-server-server
     state: latest
     
     
