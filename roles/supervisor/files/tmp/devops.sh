@@ -11,6 +11,7 @@
 # Supervisor 体验并不好
 # Supervisor 体验并不好
 # 每次 supervisorctl start 之前 都要 sudo service supervisord restart
+sudo supervisorctl -c /etc/supervisord/supervisord.conf status
 
 
 sudo supervisorctl reload;
