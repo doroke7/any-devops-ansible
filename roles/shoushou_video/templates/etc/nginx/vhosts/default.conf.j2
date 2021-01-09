@@ -47,7 +47,6 @@ server {
 	
     error_page 404 /index.php;
 
-
     location ~* \.(m3u8|ts|mp4|avi|wmv|rm|rmvb|mkv|mp3|wma|wav|aac|txt|pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar)(\?.+)?$ {
         expires max;
         max_ranges 100; # cannot use 0
@@ -62,8 +61,6 @@ server {
     if ($request_method = 'OPTIONS' ) {
         return 204;
     }
-
-
 
     {% if VHOST['REDIRECT'] is defined and VHOST['REDIRECT'] == 1 %}
     set $s_condition '';
@@ -111,7 +108,6 @@ server {
 
     {% endif %}
 
-
     location {{ VHOST['LOCATION'] | default('/') }} {
 
         {% if VHOST['TRY_FILES'] is defined %}
@@ -128,20 +124,16 @@ server {
         }
         {% endif %}
 
-
         {% if VHOST['PROXY_PASS'] is defined %}
         proxy_pass {{ VHOST['PROXY_PASS'] }};
         include conf.d/proxy.conf;
         {% endif %}
-
     }
-
 
     {% if VHOST['PHP'] is defined %}
     location ~ \.php(.*)$ {
         fastcgi_pass   127.0.0.1:90{{ VHOST['PHP'] | default(7.3) | regex_replace('([0-9]+).([0-9]+)', '\\1\\2')}};
         include conf.d/php.conf;
-
     }
     {% endif %}
 
